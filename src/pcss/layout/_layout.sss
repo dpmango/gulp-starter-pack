@@ -1,0 +1,36 @@
+// layout
+
+$mobile: width <= 568px
+$mobile-from: width >= 568px
+$tablet: width <= 768px
+$tablet-from: width <= 768px
+$desktop: width <= 1000px
+$desktop-from: width >= 1000px
+$wide: width <= 1200px
+$wide-from: width >= 1200px
+$hd: width <= 1680px
+$hd-from: width >= 1680px
+
+// variables
+$fontColor: #333
+$colorGreen: #4ab68f
+$colorRed: #f45b63
+$colorYellow: #fda737
+$colorOrange: #f46d36
+$darkColor: #101226
+
+*
+  box-sizing: border-box
+
+a
+  color: inherit
+  &:hover, &:focus, &:visited
+    text-decoration: none
+
+body, html
+  background: white
+  color: $fontColor
+  font-family: Helvetica
+  font-size: 14px
+  max-width: 100%
+  overflow-x: hidden

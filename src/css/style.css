@@ -1,0 +1,62 @@
+/* 1. Layout */
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&subset=cyrillic');
+/* layout */
+/* variables */
+* {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box
+}
+a {
+    color: inherit
+}
+a:hover, a:focus, a:visited {
+    text-decoration: none
+}
+body, html {
+    overflow-x: hidden;
+    max-width: 100%;
+    background: white;
+    color: #333;
+    font-size: 14px;
+    font-family: Helvetica
+}
+/* Helpers */
+.mr1 {
+    margin-right: 1em
+}
+
+/* 2. Modules */
+@modules "modules/_header-mobile.sss";
+
+/* 3. Elements */
+/* ICONS */
+.ico {
+    display: inline-block;
+    content: ' ';
+    font-style: normal
+}
+/* mixin */
+/* buttons */
+.btn {}
+.btn:focus, .btn:active {
+    outline: none
+}
+/* generic modifiers */
+.btn--rounded {
+    border-radius: 50%
+}
+.btn--outline {
+    border: 1px solid transparent
+}
+.btn--outline:hover {}
+.btn--abosulte-ico .ico {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    bottom: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%)
+}
