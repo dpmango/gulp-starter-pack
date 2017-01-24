@@ -1,0 +1,52 @@
+// Styles for dialog window
+
+#small-dialog
+  background: white
+  padding: 20px 30px
+  text-align: left
+  max-width: 600px
+  margin: 40px auto
+  position: relative
+
+// Fade-zoom animation for first dialog
+
+.my-mfp-zoom-in
+  .zoom-anim-dialog
+    opacity: 0
+    transition: all 0.2s ease-in-out
+    transform: scale(0.8)
+  &.mfp-ready .zoom-anim-dialog
+    opacity: 1
+    transform: scale(1)
+  &.mfp-removing .zoom-anim-dialog
+    transform: scale(0.8)
+    opacity: 0
+  &.mfp-bg
+    opacity: 0
+    transition: opacity 0.3s ease-out
+  &.mfp-ready.mfp-bg
+    opacity: 0.8
+  &.mfp-removing.mfp-bg
+    opacity: 0
+
+
+// Fade-move animation
+
+.my-mfp-slide-bottom
+  .zoom-anim-dialog
+    opacity: 0
+    transition: all 0.2s ease-out
+    transform: translateY(-20px) perspective(600px) rotateX(10deg)
+  &.mfp-ready .zoom-anim-dialog
+    opacity: 1
+    transform: translateY(0) perspective(600px) rotateX(0)
+  &.mfp-removing .zoom-anim-dialog
+    opacity: 0
+    transform: translateY(-10px) perspective(600px) rotateX(10deg)
+  &.mfp-bg
+    opacity: 0
+    transition: opacity 0.3s ease-out
+  &.mfp-ready.mfp-bg
+    opacity: 0.8
+  &.mfp-removing.mfp-bg
+    opacity: 0

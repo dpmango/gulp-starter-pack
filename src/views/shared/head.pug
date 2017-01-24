@@ -3,15 +3,16 @@ head
   meta(charset="UTF-8")
   meta(name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no")
   title Site name
-  //build:js js/main.min.js
-  script(src="/js/lib/jquery-3.1.1.min.js")
-  script(src="/js/main.js")
+
+  //build:css css/styles.css
+  link(rel="stylesheet" href="css/bootstrap.css" type="text/css")
+  link(rel="stylesheet" href="components/magnific-popup/dist/magnific-popup.css" type="text/css")
+  link(rel="stylesheet" href="components/owl.carousel/dist/assets/owl.carousel.css" type="text/css")
+  link(rel="stylesheet" href="css/style.css" type="text/css")
   //endbuild
 
-  //build:css css/style.min.css
-  <link rel="stylesheet" href="css/style.css" type="text/css" />
-  //endbuild
+  meta(name="description" keywords="")
 
   <!--[if lt IE 9]>
-      <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+  script(src="components/html5shiv/dist/html5shiv.js")
   <![endif]-->
