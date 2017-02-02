@@ -13,6 +13,12 @@ var svginline     = require('postcss-inline-svg');
 var colorFunction = require("postcss-color-function");
 var mqpacker      = require('css-mqpacker');
 var pixrem        = require('pixrem');
+var rgba_fallback = require('postcss-color-rgba-fallback');
+var opacity       = require('postcss-opacity');
+var pseudoel      = require('postcss-pseudoelements');
+var vmin          = require('postcss-vmin');
+var will_change   = require('postcss-will-change');
+var flexbugs      = require('postcss-flexbugs-fixes');
 var cssnano       = require('cssnano');
 var sass          = require('gulp-sass');
 var sassGlob      = require('gulp-sass-glob');
@@ -65,8 +71,14 @@ var processors = [
     svginline(),
     autoprefixer({browsers: ['last 5 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4']}),
     sorting(),
+    pixrem(),
+    will_change(),
+    rgba_fallback(),
+    opacity(),
+    pseudoel(),
+    vmin(),
+    flexbugs()
     // mqpacker(),
-    pixrem()
 ];
 
 gulp.task('postcss', function() {
@@ -141,6 +153,7 @@ gulp.task('cssnano', function () {
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('dist/css'));;
 });
+
 gulp.task('images', function(){
   return gulp.src('./src/images/**/*.+(png|jpg|gif|svg)')
   .pipe(cache(imagemin({
