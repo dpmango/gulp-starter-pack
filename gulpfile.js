@@ -1,8 +1,10 @@
+// DECLARE VARIABLES
 var gulp          = require('gulp');
 var rename        = require('gulp-rename');
+var sourcemaps    = require('gulp-sourcemaps');
 var pug           = require('gulp-pug');
 var postcss       = require('gulp-postcss');
-var sourcemaps    = require('gulp-sourcemaps');
+var babel         = require('gulp-babel');
 var autoprefixer  = require('autoprefixer');
 var sugarss       = require('sugarss');
 var precss        = require('precss');
@@ -31,9 +33,10 @@ var del           = require('del');
 var runSequence   = require('run-sequence');
 var browserSync   = require('browser-sync').create();
 
-// default task
+
+// Default task
 gulp.task('default', function (callback) {
-  runSequence(['postcss', 'pug', 'browserSync'], 'watch',
+  runSequence(['postcss', 'pug', 'babel', 'browserSync'], 'watch',
     callback
   )
 })
@@ -45,6 +48,7 @@ gulp.task('watch', function(){
   gulp.watch('./src/pcss/**/*.+(sss|css)', ['postcss']);
   gulp.watch('./src/views/**/*.pug', ['pug']);
   gulp.watch('./src/*.html', browserSync.reload);
+  gulp.watch('./src/js/es2015/*.js', ['babel']);
   gulp.watch('./src/js/**/*.js', browserSync.reload);
 })
 
@@ -54,6 +58,7 @@ gulp.task('build', function (callback) {
     'clean:dist',
     'pug',
     'postcss',
+    'babel',
     ['useref', 'images', 'fonts'],
     'cssnano',
     callback
@@ -123,6 +128,17 @@ gulp.task('pug', function buildHTML() {
         pretty: true
       }))
       .pipe( gulp.dest('./src/') )
+      .pipe(browserSync.reload({
+        stream: true
+      }));
+});
+
+gulp.task('babel', function() {
+  return gulp.src('./src/js/es2015/*.js')
+      .pipe(babel({
+          presets: ['es2015']
+      }))
+      .pipe(gulp.dest('./src/js'))
       .pipe(browserSync.reload({
         stream: true
       }));
