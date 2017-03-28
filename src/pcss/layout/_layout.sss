@@ -1,29 +1,9 @@
-// LAYOUT
-
-$mobile: width <= 568px
-$mobile-from: width >= 568px
-$tablet: width <= 768px
-$tablet-from: width <= 768px
-$desktop: width <= 1000px
-$desktop-from: width >= 1000px
-$wide: width <= 1200px
-$wide-from: width >= 1200px
-$hd: width <= 1680px
-$hd-from: width >= 1680px
-
-// variables
-$fontColor: #333
-$colorGreen: #4ab68f
-$colorRed: #f45b63
-$colorYellow: #fda737
-$colorOrange: #f46d36
-$darkColor: #101226
-
 *
   box-sizing: border-box
 
 a
   color: inherit
+  text-decoration: none
   &:hover, &:focus, &:visited
     text-decoration: none
 
@@ -36,7 +16,27 @@ ul
 body, html
   background: white
   color: $fontColor
-  font-family: Helvetica
-  font-size: 14px
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-size: 16px
   max-width: 100%
   overflow-x: hidden
+  // -webkit-font-smoothing: antialiased
+  // -moz-osx-font-smoothing: grayscale
+
+.container
+  max-width: 1200px
+  margin-left: auto
+  margin-right: auto
+  padding-left: 20px
+  padding-right: 20px
+
+.page
+  position: relative
+  display: flex
+  flex-direction: column
+  min-height: 100vh
+  &__content
+    flex-grow: 1
+  &.lock
+    overflow-y: hidden
+    max-height: 100vh

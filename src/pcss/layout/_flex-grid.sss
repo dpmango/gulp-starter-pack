@@ -1,0 +1,166 @@
+// CUSTOM 6 COL FLEX GRID
+.row
+  display: flex
+  margin-left: -15px
+  margin-right: -15px
+  &--wrap
+    flex-wrap: wrap
+  &--column
+    flex-direction: column
+  &--aic
+    align-items: center
+  &--jcsb
+    justify-content: space-between
+  &--jcsa
+    justify-content: space-around
+  &--jcc
+    justify-content: center
+  &--jcfe
+    justify-content: flex-end
+  &--jcfs
+    justify-content: flex-start
+  &--condenced
+    .col
+      padding-left: 0
+      padding-right: 0
+    margin-left: 0
+    margin-right: 0
+  @media($desktop)
+    &--wrap--desktop
+      flex-wrap: wrap
+    &--column--desktop
+      flex-direction: column
+    &--aic--desktop
+      align-items: center
+    &--jcsb--desktop
+      justify-content: space-between
+    &--jcsa--desktop
+      justify-content: space-around
+    &--jcc--desktop
+      justify-content: center
+    &--jcfe--desktop
+      justify-content: flex-end
+    &--jcfs--desktop
+      justify-content: flex-start
+  @media($tablet)
+    &--wrap--tablet
+      flex-wrap: wrap
+    &--column--tablet
+      flex-direction: column
+    &--aic--tablet
+      align-items: center
+    &--jcsb--tablet
+      justify-content: space-between
+    &--jcsa--tablet
+      justify-content: space-around
+    &--jcc--tablet
+      justify-content: center
+    &--jcfe--tablet
+      justify-content: flex-end
+    &--jcfs--tablet
+      justify-content: flex-start
+  @media($mobile)
+    &--wrap--mobile
+      flex-wrap: wrap
+    &--column--mobile
+      flex-direction: column
+    &--aic--mobile
+      align-items: mobile
+    &--jcsb--mobile
+      justify-content: space-between
+    &--jcsa--mobile
+      justify-content: space-around
+    &--jcc--mobile
+      justify-content: center
+    &--jcfe--mobile
+      justify-content: flex-end
+    &--jcfs--mobile
+      justify-content: flex-start
+
+
+// Desktop first method
+.col
+  flex-grow: 0
+  flex-shrink: 1
+  padding-left: 15px
+  padding-right: 15px
+  &--1-6
+    flex-basis: 16.6%
+  &--2-6
+    flex-basis: 33.3%
+  &--3-6
+    flex-basis: 50%
+  &--4-6
+    flex-basis: 66.4%
+  &--5-6
+    flex-basis: 83%
+  &--full
+    flex-basis: 100%
+  &--1-4
+    flex-basis: 25%
+  &--3-4
+    flex-basis: 75%
+  &--auto
+    flex: 1 1 auto
+  &--grow
+    flex-grow: 1
+  &--no-shrink
+    flex-shrink: 0
+
+  @media($desktop)
+    &--full--desktop
+      flex-basis: 100%
+    &--auto--desktop
+      flex-basis: auto
+    &--grow--desktop
+      flex-grow: 1
+
+  @media($tablet)
+    &--full--tablet
+      flex-basis: 100%
+    &--auto--tablet
+      flex-basis: auto
+    &--grow--tablet
+      flex-grow: 1
+
+  @media($mobile)
+    &--full--mobile
+      flex-basismobile 100%
+    &--auto--tablet
+      flex-basis: auto
+    &--grow--mobile
+      flex-grow: 1
+
+// OFFSETS AND PADDINGS
+.offset
+  &--1-6
+    margin-left: 16.6%
+
+.no-pad
+  padding-left: 0
+  padding-right: 0
+
+.no-pad-l
+  padding-left: 0
+  @media($mobile)
+    padding-left: 15px
+
+.no-pad-r
+  padding-right: 0
+  @media($mobile)
+    padding-right: 15px
+
+.hidden--desktop
+  display: block
+  @media($desktop)
+    display: none
+
+.visible--desktop
+  display: none
+  @media($desktop)
+    display: block
+
+.visible--mobile
+  display: none
+  @media($mobile)
+    display: block
