@@ -90,8 +90,8 @@ gulp.task('postcss', function() {
   return gulp.src('./src/pcss/style.sss')
       .pipe( sourcemaps.init() )
       .pipe( postcss(processors, { parser: sugarss }) )
-      .pipe( sourcemaps.write('.') )
       .pipe(rename({ extname: '.css' }))
+      .pipe( sourcemaps.write('.') )
       .pipe( gulp.dest('./src/css') )
       .pipe(browserSync.reload({
         stream: true
