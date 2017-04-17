@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
   const _window = $(window);
+  const _document = $(document);
 
  	// Prevent # behavior
 	$('[href="#"]').click((e) => {
@@ -34,16 +35,27 @@ $(document).ready(function(){
   });
 
   // Magnific Popup
+  var startWindowScroll = 0;
   $('.popup-with-zoom-anim').magnificPopup({
     type: 'inline',
-    fixedContentPos: false,
+    fixedContentPos: true,
     fixedBgPos: true,
     overflowY: 'auto',
     closeBtnInside: true,
     preloader: false,
     midClick: true,
     removalDelay: 300,
-    mainClass: 'my-mfp-zoom-in'
+    mainClass: 'my-mfp-zoom-in',
+    callbacks: {
+      beforeOpen: function() {
+        startWindowScroll = _window.scrollTop();
+        $('html').addClass('mfp-helper');
+      },
+      close: function() {
+        $('html').removeClass('mfp-helper');
+        _window.scrollTop(startWindowScroll);
+      }
+    }
   });
 
   $('.popup-with-move-anim').magnificPopup({

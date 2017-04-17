@@ -1,17 +1,12 @@
 // buttons
-.btn
-  &:focus, &:active
+button
+  &:focus
     outline: none
 
-// generic modifiers
-.btn--rounded
-  border-radius: 50%
-
-.btn--outline
-  border: 1px solid transparent
-  &:hover
-
-.btn--abosulte-ico
-  .ico
-    position: absolute 50% 50%
-    transform: translate(-50%, -50%)
+.btn
+  display: inline-block
+  position: relative
+  text-align: center
+  transition: all $transitionSpeed ease-in-out
+  &:focus, &:active
+    outline: none
