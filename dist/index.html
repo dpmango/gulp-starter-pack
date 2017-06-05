@@ -1,63 +1,227 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- MADE WITH LOVE BY <> SERGEY KHMELEVSKOY </>-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Site name</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <meta name="description" keywords=""><!--[if lt IE 9]>
-    <script src="components/html5shiv/dist/html5shiv.js"></script><![endif]-->
+    <title>Project</title>
+    <style>
+    *{padding: 0;  margin: 0; -webkit-box-sizing: border-box; box-sizing: border-box;}
+    body{
+      font-family: "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+      font-size: 16px;
+      color: white;
+      min-height: 100vh;
+      height: auto;
+      background-color: #181B1E;
+      overflow-x: hidden;
+    }
+    .container{
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column;
+      -webkit-box-align: stretch;
+      -webkit-align-items: stretch;
+          -ms-flex-align: stretch;
+              align-items: stretch;
+      min-height: 400px;
+      height: 100vh;
+    }
+    a{color: inherit; text-decoration: none;}
+    h1{
+      margin: 5vh 3vw 0 3vw;
+      padding-bottom: 1vh;
+      color: white;
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .ico{
+      display: inline-block;
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      content: ' ';
+      font-style: normal;
+    }
+    .ico-status{
+      border-radius: 0;
+      transform: rotate(45deg);
+      width: 6px;
+      height: 6px;
+      margin-right: 5px;
+      vertical-align: 2px;
+    }
+    .ico-status--ready{
+      background: forestgreen;
+    }
+    .ico-status--no{
+      background: tomato;
+    }
+    .ico-status--done{
+      background: black;
+    }
+    .ico-logo{
+      margin: 5vh 3vw 0 3vw;
+      background-image: url(images/svg/logo.svg);
+      width: 207px;
+      height: 65px;
+    }
+    .links{
+       background-color: white;
+       border-radius: 10px;
+       margin: 5vh 2.5vw;
+       padding: 5vh 3vw;
+       width: 45vw;
+       flex: 1 1 40%
+       float: left;
+       color: rgba(0,0,0,.7);
+      }
+    .flex{
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .flexCenter{
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+    }
+    .content{
+      -webkit-box-flex: 1;
+      -webkit-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
+    }
+    .flexEnd{
+      -webkit-box-pack: end;
+      -webkit-justify-content: flex-end;
+          -ms-flex-pack: end;
+              justify-content: flex-end;;
+    }
+    ul{list-style: decimal-leading-zero;;}
+    ul li{
+      margin-left: 3vw;
+      color: #838B90;
+    }
+    ul li a{
+      display: block;
+      padding: 1.3vh 0vw 1.3vh 1vw;
+      width: 100%;
+      color: #181B1E;
+      border-left: 4px solid transparent;
+      border-bottom: 1px solid rgba(0,0,0,.2);
+      -webkit-transition: all .2s ease-in-out;
+      transition: all .2s ease-in-out;
+    }
+    ul li a span{
+      opacity: .5;
+      margin-left: .5em;
+      float: right;
+    }
+    ul li a:hover{
+      border-left: 4px solid #D2A36E;
+      /*background: rgba(0,0,0,.1);*/
+      color: #D2A36E;
+      border-bottom: 1px solid rgba(0,0,0,.4);
+    }
+    h2{
+      margin-bottom: 3vh;
+    }
+    .footer{
+      margin: 5vh 3vw 3vh 3vw;
+      border-top: 1px dotted rgba(255,255,255,.25);
+      padding-top: 2vh;
+      font-size: 0.825em;
+      color: #838B90;
+    }
+    .footer a{
+      color: white;
+    }
+    .flexWrap{
+      -webkit-flex-wrap: wrap;
+          -ms-flex-wrap: wrap;
+              flex-wrap: wrap;
+    }
+    @media(max-width: 700px){
+      h1{
+        font-size: 1.75em;
+      }
+      .container{
+        display: block;
+      }
+      .links{
+        width: 94vw;
+      }
+      ul li {
+        margin-left: 10vw;
+      }
+    }
+    </style>
   </head>
-  <body>
-    <!-- HEADER::START-->
-    <header class="header">
-      <div class="section">
-        <div class="row">
-          <div class="col-sm-12">
-            <ul>
-              <li>Uno</li>
-              <li>Dos</li>
-              <li>Tres</li>
-              <li>Cuatro</li>
-              <li>Cinco</li>
-              <li>Seis</li>
-            </ul>
-          </div>
+<body>
+  <div class="container">
+    <div class="fix">
+      <div class="flex flexCenter">
+        <h1>Project name - (html/css)</h1>
+        <i class="ico ico-logo"></i>
+      </div>
+    </div>
+    <div class="content">
+      <div class="flex flexWrap">
+        <div class="links">
+          <h2>Mainpages</h2>
+          <ul class="">
+            <li><a href="homepage.html" target="_blank">Homepage <span>(Главная)</span></a></li>
+            <li><a href="page.html" target="_blank">Page <span>(Страница)</span></a></li>
+          </ul>
+        </div>
+        <div class="links">
+          <h2>Info pages</h2>
+          <ul class="">
+
+          </ul>
         </div>
       </div>
-    </header>
-    <!-- SECTION::START-->
-    <section class="section"></section>
-    <!-- OWL::START-->
-    <section class="owl">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="owl-carousel" id="owlFirst"><img src="http://placehold.it/1200x300"><img src="http://placehold.it/1200x300"><img src="http://placehold.it/1200x300"></div>
-          </div>
+
+      <div class="flex flexWrap">
+        <div class="links">
+          <h2>Email</h2>
+          <ul class="">
+
+          </ul>
+        </div>
+        <div class="links">
+          <h2>Helpers</h2>
+          <ul class="">
+
+          </ul>
         </div>
       </div>
-    </section>
-    <!-- MAGNIFIC::START-->
-    <section class="magnific">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="popup-gallery"><a href="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_b.jpg" title="The Cleaner"><img src="http://farm9.staticflickr.com/8242/8558295633_f34a55c1c6_s.jpg" width="75" height="75"></a><a href="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_b.jpg" title="Winter Dance"><img src="http://farm9.staticflickr.com/8382/8558295631_0f56c1284f_s.jpg" width="75" height="75"></a><a href="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_b.jpg" title="The Uninvited Guest"><img src="http://farm9.staticflickr.com/8225/8558295635_b1c5ce2794_s.jpg" width="75" height="75"></a><a href="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_b.jpg" title="Oh no, not again!"><img src="http://farm9.staticflickr.com/8383/8563475581_df05e9906d_s.jpg" width="75" height="75"></a><a href="http://farm9.staticflickr.com/8235/8559402846_8b7f82e05d_b.jpg" title="Swan Lake"><img src="http://farm9.staticflickr.com/8235/8559402846_8b7f82e05d_s.jpg" width="75" height="75"></a><a href="http://farm9.staticflickr.com/8235/8558295467_e89e95e05a_b.jpg" title="The Shake"><img src="http://farm9.staticflickr.com/8235/8558295467_e89e95e05a_s.jpg" width="75" height="75"></a><a href="http://farm9.staticflickr.com/8378/8559402848_9fcd90d20b_b.jpg" title="Who's that, mommy?"><img src="http://farm9.staticflickr.com/8378/8559402848_9fcd90d20b_s.jpg" width="75" height="75"></a></div>
-          </div>
-        </div>
+
+
+    </div>
+    <div class="fix">
+      <div class="flex flexEnd">
+      <div class="footer">
+        Brought to you by <a href="http://f-end.ru/">@Sergey Khmelevskoy</a>
       </div>
-    </section>
-    <!-- FOOTER::START-->
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12"></div>
-        </div>
-      </div>
-    </footer>
-    <!-- SCRIPTS-->
-    <script src="js/scripts.min.js"></script>
-  </body>
+    </div>
+    </div>
+
+  </div>
+</body>
 </html>

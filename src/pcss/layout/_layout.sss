@@ -1,5 +1,6 @@
 *
   box-sizing: border-box
+  outline: none
 
 a
   color: inherit
@@ -18,10 +19,12 @@ body, html
   color: $fontColor
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif
   font-size: 16px
+  min-width: 320px
   max-width: 100%
+  margin: 0
   overflow-x: hidden
-  // -webkit-font-smoothing: antialiased
-  // -moz-osx-font-smoothing: grayscale
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
 
 .container
   max-width: 1200px
@@ -29,14 +32,3 @@ body, html
   margin-right: auto
   padding-left: 20px
   padding-right: 20px
-
-.page
-  position: relative
-  display: flex
-  flex-direction: column
-  min-height: 100vh
-  &__content
-    flex-grow: 1
-  &.lock
-    overflow-y: hidden
-    max-height: 100vh

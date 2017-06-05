@@ -1,0 +1,308 @@
+// SCROLLBAR BASE CSS
+
+.scroll-wrapper
+  overflow: hidden !important
+  padding: 0 !important
+  position: relative
+  > .scroll-content
+    border: none !important
+    box-sizing: content-box !important
+    height: auto
+    left: 0
+    margin: 0
+    max-height: none
+    max-width: none !important
+    overflow: scroll !important
+    padding: 0
+    position: relative !important
+    top: 0
+    width: auto !important
+    &::-webkit-scrollbar
+      height: 0
+      width: 0
+  &.scroll--rtl
+    direction: rtl
+
+.scroll-element
+  box-sizing: content-box
+  display: none
+  div
+    box-sizing: content-box
+  .scroll-bar, .scroll-arrow
+    cursor: default
+  &.scroll-x.scroll-scrollx_visible, &.scroll-y.scroll-scrolly_visible
+    display: block
+
+.scroll-textarea
+  border: 1px solid #cccccc
+  border-top-color: #999999
+  > .scroll-content
+    overflow: hidden !important
+    > textarea
+      border: none !important
+      box-sizing: border-box
+      height: 100% !important
+      margin: 0
+      max-height: none !important
+      max-width: none !important
+      overflow: scroll !important
+      outline: none
+      padding: 2px
+      position: relative !important
+      top: 0
+      width: 100% !important
+      &::-webkit-scrollbar
+        height: 0
+        width: 0
+
+//
+// // INNER
+// .scrollbar-inner > .scroll-element
+//   border: none
+//   margin: 0
+//   padding: 0
+//   position: absolute
+//   z-index: 10
+//   div
+//     border: none
+//     margin: 0
+//     padding: 0
+//     position: absolute
+//     z-index: 10
+//     display: block
+//     height: 100%
+//     left: 0
+//     top: 0
+//     width: 100%
+//   &.scroll-x
+//     bottom: 2px
+//     height: 8px
+//     left: 0
+//     width: 100%
+//   &.scroll-y
+//     height: 100%
+//     right: 2px
+//     top: 0
+//     width: 8px
+//   .scroll-element_outer
+//     overflow: hidden
+//     -webkit-border-radius: 8px
+//     -moz-border-radius: 8px
+//     border-radius: 8px
+//   .scroll-element_track, .scroll-bar
+//     -webkit-border-radius: 8px
+//     -moz-border-radius: 8px
+//     border-radius: 8px
+//   .scroll-element_track, .scroll-bar
+//     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"
+//     filter: alpha(opacity = 40)
+//     opacity: 0.4
+//   .scroll-element_track
+//     background-color: #e0e0e0
+//   .scroll-bar
+//     background-color: #c2c2c2
+//   &:hover .scroll-bar, &.scroll-draggable .scroll-bar
+//     background-color: #919191
+//   &.scroll-x.scroll-scrolly_visible .scroll-element_track
+//     left: -12px
+//   &.scroll-y.scroll-scrollx_visible .scroll-element_track
+//     top: -12px
+//   &.scroll-x.scroll-scrolly_visible .scroll-element_size
+//     left: -12px
+//   &.scroll-y.scroll-scrollx_visible .scroll-element_size
+//     top: -12px
+//
+//
+// // MAC
+// .scrollbar-macosx
+//   > .scroll-element
+//     background: none
+//     border: none
+//     margin: 0
+//     padding: 0
+//     position: absolute
+//     z-index: 10
+//     div
+//       background: none
+//       border: none
+//       margin: 0
+//       padding: 0
+//       position: absolute
+//       z-index: 10
+//       display: block
+//       height: 100%
+//       left: 0
+//       top: 0
+//       width: 100%
+//     .scroll-element_track
+//       display: none
+//     .scroll-bar
+//       background-color: #6C6E71
+//       display: block
+//       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"
+//       filter: alpha(opacity = 0)
+//       opacity: 0
+//       -webkit-border-radius: 7px
+//       -moz-border-radius: 7px
+//       border-radius: 7px
+//       -webkit-transition: opacity 0.2s linear
+//       -moz-transition: opacity 0.2s linear
+//       -o-transition: opacity 0.2s linear
+//       -ms-transition: opacity 0.2s linear
+//       transition: opacity 0.2s linear
+//   &:hover > .scroll-element .scroll-bar
+//     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"
+//     filter: alpha(opacity = 70)
+//     opacity: 0.7
+//   > .scroll-element
+//     &.scroll-draggable .scroll-bar
+//       -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"
+//       filter: alpha(opacity = 70)
+//       opacity: 0.7
+//     &.scroll-x
+//       bottom: 0px
+//       height: 0px
+//       left: 0
+//       min-width: 100%
+//       overflow: visible
+//       width: 100%
+//     &.scroll-y
+//       height: 100%
+//       min-height: 100%
+//       right: 0px
+//       top: 0
+//       width: 0px
+//     &.scroll-x .scroll-bar
+//       height: 7px
+//       min-width: 10px
+//       top: -9px
+//     &.scroll-y .scroll-bar
+//       left: -9px
+//       min-height: 10px
+//       width: 7px
+//     &.scroll-x
+//       .scroll-element_outer
+//         left: 2px
+//       .scroll-element_size
+//         left: -4px
+//     &.scroll-y
+//       .scroll-element_outer
+//         top: 2px
+//       .scroll-element_size
+//         top: -4px
+//     &.scroll-x.scroll-scrolly_visible .scroll-element_size
+//       left: -11px
+//     &.scroll-y.scroll-scrollx_visible .scroll-element_size
+//       top: -11px
+
+// DYNAMIC
+
+.scrollbar-dynamic > .scroll-element
+  background: none
+  border: none
+  margin: 0
+  padding: 0
+  position: absolute
+  z-index: 10
+  div
+    background: none
+    border: none
+    margin: 0
+    padding: 0
+    position: absolute
+    z-index: 10
+    display: block
+    height: 100%
+    left: 0
+    top: 0
+    width: 100%
+  &.scroll-x
+    bottom: 2px
+    height: 7px
+    left: 0
+    min-width: 100%
+    width: 100%
+  &.scroll-y
+    height: 100%
+    min-height: 100%
+    right: 2px
+    top: 0
+    width: 7px
+  .scroll-element_outer
+    opacity: 0.3
+    -webkit-border-radius: 12px
+    -moz-border-radius: 12px
+    border-radius: 12px
+  .scroll-element_size
+    background-color: #cccccc
+    opacity: 0
+    -webkit-border-radius: 12px
+    -moz-border-radius: 12px
+    border-radius: 12px
+    -webkit-transition: opacity 0.2s
+    -moz-transition: opacity 0.2s
+    -o-transition: opacity 0.2s
+    -ms-transition: opacity 0.2s
+    transition: opacity 0.2s
+  .scroll-bar
+    background-color: #6c6e71
+    -webkit-border-radius: 7px
+    -moz-border-radius: 7px
+    border-radius: 7px
+  &.scroll-x .scroll-bar
+    bottom: 0
+    height: 7px
+    min-width: 24px
+    top: auto
+  &.scroll-y .scroll-bar
+    left: auto
+    min-height: 24px
+    right: 0
+    width: 7px
+  &.scroll-x .scroll-element_outer
+    bottom: 0
+    top: auto
+    left: 2px
+    -webkit-transition: height 0.2s
+    -moz-transition: height 0.2s
+    -o-transition: height 0.2s
+    -ms-transition: height 0.2s
+    transition: height 0.2s
+  &.scroll-y .scroll-element_outer
+    left: auto
+    right: 0
+    top: 2px
+    -webkit-transition: width 0.2s
+    -moz-transition: width 0.2s
+    -o-transition: width 0.2s
+    -ms-transition: width 0.2s
+    transition: width 0.2s
+  &.scroll-x .scroll-element_size
+    left: -4px
+  &.scroll-y .scroll-element_size
+    top: -4px
+  &.scroll-x.scroll-scrolly_visible .scroll-element_size
+    left: -11px
+  &.scroll-y.scroll-scrollx_visible .scroll-element_size
+    top: -11px
+  &:hover .scroll-element_outer, &.scroll-draggable .scroll-element_outer
+    overflow: hidden
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"
+    filter: alpha(opacity = 70)
+    opacity: 0.7
+  &:hover .scroll-element_outer .scroll-element_size, &.scroll-draggable .scroll-element_outer .scroll-element_size
+    opacity: 1
+  &:hover .scroll-element_outer .scroll-bar, &.scroll-draggable .scroll-element_outer .scroll-bar
+    height: 100%
+    width: 100%
+    -webkit-border-radius: 12px
+    -moz-border-radius: 12px
+    border-radius: 12px
+  &.scroll-x
+    &:hover .scroll-element_outer, &.scroll-draggable .scroll-element_outer
+      height: 20px
+      min-height: 7px
+  &.scroll-y
+    &:hover .scroll-element_outer, &.scroll-draggable .scroll-element_outer
+      min-width: 7px
+      width: 20px
