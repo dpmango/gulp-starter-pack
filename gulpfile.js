@@ -1,5 +1,6 @@
 // DECLARE VARIABLES
 var gulp          = require('gulp');
+var async         = require('async');
 var rename        = require('gulp-rename');
 var sourcemaps    = require('gulp-sourcemaps');
 var pug           = require('gulp-pug');
@@ -28,6 +29,10 @@ var useref        = require('gulp-useref');
 var uglify        = require('gulp-uglify');
 var gulpIf        = require('gulp-if');
 var imagemin      = require('gulp-imagemin');
+var iconfont      = require('gulp-iconfont');
+var svgmin        = require('gulp-svgmin');
+var consolidate   = require('gulp-consolidate');
+var runTimestamp  = Math.round(Date.now()/1000);
 var cache         = require('gulp-cache');
 var del           = require('del');
 var runSequence   = require('run-sequence');
@@ -48,6 +53,7 @@ gulp.task('watch', function(){
   gulp.watch('./src/pcss/**/*.+(sss|css)', ['postcss']);
   gulp.watch('./src/views/**/*.pug', ['pug-watch']);
   gulp.watch('./src/js/es2015/*.js', ['babel']);
+  gulp.watch('src/images/svg/*.svg', {cwd:'./'}, ['iconfont']);
   gulp.watch('./src/js/**/*.js', browserSync.reload);
 })
 
@@ -146,6 +152,63 @@ gulp.task('babel', function() {
         stream: true
       }));
 });
+
+// minify svg
+gulp.task('svg-min', function () {
+  return gulp.src(['./src/images/svg/*.svg'])
+    .pipe(svgmin({
+        plugins: [{
+            removeDoctype: false
+        }, {
+            removeComments: false
+        }, {
+            cleanupNumericValues: {
+                floatPrecision: 2
+            }
+        }, {
+            convertColors: {
+                names2hex: false,
+                rgb2hex: false
+            }
+        }]
+    }))
+    .pipe(gulp.dest('./src/images/svg/min'));
+});
+
+// generate iconfont
+gulp.task('iconfont', function(done){
+  var iconStream = gulp.src(['./src/images/svg/min/*.svg'])
+      .pipe(iconfont({
+        fontName: 'IconFont',
+        prependUnicode: false,
+        normalize: true,
+        fontHeight: 1001,
+        formats: ['ttf', 'eot', 'woff', 'svg'],
+        timestamp: runTimestamp, // recommended to get consistent builds when watching files
+      }))
+
+  async.parallel([
+    function handleGlyphs (cb) {
+      iconStream.on('glyphs', function(glyphs, options) {
+        gulp.src('./src/pcss/tpl/_iconfont.sss')
+          .pipe(consolidate('lodash', {
+            glyphs: glyphs,
+            fontName: 'IconFont',
+            fontPath: '../fonts/',
+            className: 'icon'
+          }))
+          .pipe(gulp.dest('./src/pcss/elements'))
+          .on('finish', cb);
+      });
+    },
+    function handleFonts (cb) {
+      iconStream
+        .pipe(gulp.dest('./src/fonts/'))
+        .on('finish', cb);
+    }
+  ], done);
+});
+
 
 /////
 // OPTIMIZATION TASKS

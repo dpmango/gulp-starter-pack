@@ -18,30 +18,32 @@ html.mfp-helper
   margin: 40px auto
   position: relative
 
+
 // Fade-zoom animation for first dialog
 
-.my-mfp-zoom-in
-  .zoom-anim-dialog
+.popup-buble
+  .popup-dialog
     opacity: 0
     transition: all 0.2s ease-in-out
     transform: scale(0.8)
-  &.mfp-ready .zoom-anim-dialog
+  &.mfp-ready .popup-dialog
     opacity: 1
     transform: scale(1)
-  &.mfp-removing .zoom-anim-dialog
+  &.mfp-removing .popup-dialog
     transform: scale(0.8)
     opacity: 0
   &.mfp-bg
+    background: $colorGreen
     opacity: 0
-    transition: opacity 0.3s ease-out
+    transition: opacity 0.3s $ease
   &.mfp-ready.mfp-bg
-    opacity: 0.8
+    opacity: 1
   &.mfp-removing.mfp-bg
     opacity: 0
 
 
-// Fade-move animation
 
+// Fade-move animation
 .my-mfp-slide-bottom
   .zoom-anim-dialog
     opacity: 0
