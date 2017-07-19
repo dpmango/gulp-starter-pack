@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
   <meta charset="UTF-8">
-  <title>Project-name</title>
+  <title><%= pages.ProjectTitle %></title>
   <style>
     *{margin:0;padding: 0;box-sizing: border-box}
 
@@ -409,8 +409,15 @@
     <h1>
       <b style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-70%);">All TV</b>
     </h1>
-    
-    <div class="header__updated"><em>Project-name</em> updated 19.07.2017, 1 pages</div>
+    <%
+		date = new Date(_.now());
+		if(date.getMonth()+1<10){ month = '0' + (date.getMonth()+1);}
+		else{ month = date.getMonth()+1; }
+
+		if(date.getDate()<10){ day = '0' + (date.getDate());}
+		else{ day = date.getDate(); }
+    %>
+    <div class="header__updated"><em><%= pages.ProjectTitle %></em> updated <%= day %>.<%= month %>.<%= date.getFullYear() %>, <%= pages.PageList.length %> pages</div>
     <nav class="types">
       <button data-mode="mobile" data-width="320">
         <svg class="icon icon-mobile"><use xlink:href="#icon-mobile"></use></svg>
@@ -434,29 +441,29 @@
   </header>
   <section>
     <ol class="pagelist">
-      
-      
-          <li >
+      <% i = 0;%>
+      <% _.each(pages.PageList, function(page) { i++; %>
+          <li <% if(!page.ready) { %> class="is-notready" <% } %>>
 
-                <a class="pagelist__title  is-active " target="_blank" href="homepage.html"><span>1.</span><em>homepage</em></a>
-                <a href="homepage.html" class="pagelist__url">
+                <a class="pagelist__title <% if(i==1){ %> is-active <% } %>" target="_blank" href="<%= page.file %>"><span><%= i %>.</span><em><%= _.split(page.file, '.', 1) %></em></a>
+                <a href="<%= page.file %>" class="pagelist__url">
                   <svg class="icon icon-link"><use xlink:href="#icon-link"></use></svg>
                 </a>
 
                 <div class="pagelist__progress">
-                  
-                  <i style="width:100%"></i>
+                  <% if(!page.ready) page.ready = 0; %>
+                  <i style="width:<%= page.ready %>%"></i>
                 </div>
 
           </li>
-        
+        <% }) %>
 
     </ol>
   </section>
 
   <aside class="preview" id="preview-wrapper">
 
-    <iframe id="preview"  width="1600" height="600" src="homepage.html"  frameborder="0"></iframe>
+    <iframe id="preview"  width="1600" height="600" src="<%= pages.PageList[0].file %>"  frameborder="0"></iframe>
     <footer>
     </footer>
   </aside>
