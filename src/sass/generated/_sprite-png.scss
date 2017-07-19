@@ -1,22 +1,24 @@
-{
-	'functions': true
-}
-
 $sprite: (
-	{{#items}}
-	{{name}}: (
-		offset-x: {{px.offset_x}},
-		offset-y: {{px.offset_y}},
-		width: {{px.width}},
-		height: {{px.height}},
-		total-width: {{px.total_width}},
-		total-height: {{px.total_height}},
-		image: '{{{escaped_image}}}'
+	container: (
+		offset-x: 0px,
+		offset-y: -80px,
+		width: 40px,
+		height: 55px,
+		total-width: 300px,
+		total-height: 135px,
+		image: '../img/sprite.png'
 	),
-	{{/items}}
+	logo: (
+		offset-x: 0px,
+		offset-y: 0px,
+		width: 300px,
+		height: 70px,
+		total-width: 300px,
+		total-height: 135px,
+		image: '../img/sprite.png'
+	),
 );
 
-{{#options.functions}}
 
 @mixin sprite-size($image) {
 	background-size: map-get(map-get($sprite, $image), 'total-width') map-get(map-get($sprite, $image), 'total-height');
@@ -69,11 +71,11 @@ $sprite: (
 	}
 }
 
-{{/options.functions}}
 
 
-{{#items}}
-	.icon-{{name}} {
-		@include sprite({{name}})
+	.icon-container {
+		@include sprite(container)
 	}
-{{/items}}
+	.icon-logo {
+		@include sprite(logo)
+	}

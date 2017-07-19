@@ -22,7 +22,7 @@ function build(callback) {
     'pug',
     'javascript',
     'images',
-    'sprite:svg',
+    //'sprite:svg',
     'sprite:png',
     // 'svgo',
     'copy',
