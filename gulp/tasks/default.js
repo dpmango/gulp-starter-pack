@@ -22,9 +22,9 @@ gulp.task('watch',
   'pug:watch',
   'javascript:watch',
   'images:watch',
-  // 'sprite:svg:watch',
-  // 'sprite:png:watch',
+  'sprite:svg:watch',
+  'sprite:png:watch',
   // 'svgo:watch',
-  // 'list-pages:watch',
+  'list-pages:watch',
   // 'webpack:watch'
 ]);

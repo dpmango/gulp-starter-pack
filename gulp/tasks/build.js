@@ -18,15 +18,15 @@ gulp.task('build:development', function(callback) {
 function build(callback) {
   runSequence(
     'clean:dist',
-    // 'sprite:svg',
-    // 'sprite:png',
-    // 'svgo',
     'sass',
     'pug',
     'javascript',
-    // 'webpack',
-    'copy',
     'images',
+    'sprite:svg',
+    'sprite:png',
+    // 'svgo',
+    'copy',
+    // 'webpack',
     'list-pages',
     callback
   );

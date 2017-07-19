@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="49px" height="35px" viewBox="0 0 49 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45 (43475) - http://www.bohemiancoding.com/sketch -->
+    <title>email@2x</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="form-alternative" transform="translate(-852.000000, -263.000000)" fill="#FFFFFF">
+            <g id="email" transform="translate(852.000000, 263.000000)">
+                <path d="M44.4894054,0 C46.8278578,0 48.6205645,1.78118753 48.6205645,3.81337761 L48.6205645,5.08450348 L43.2182796,8.89788109 L24.1513915,21.9269212 L5.40228495,8.89788109 L5.40228495,34.9559614 L4.13115908,34.9559614 C1.79270675,34.9559614 0,33.1748117 0,31.1425838 L0,3.81337761 C-4.73439135e-16,1.7822468 1.79270675,0.00105926239 4.13115908,0 L24.1513915,14.935729 L44.4894054,0 L44.4894054,0 Z" id="Shape-Copy" fill-rule="nonzero"></path>
+                <path d="M48.6205645,5.08450348 L48.6205645,31.1425838 C48.5279658,33.8795998 47.3039474,34.9076554 43.2182796,34.9559614 L43.2182796,8.89788109 L48.6205645,5.08450348 L48.6205645,5.08450348 Z" id="Shape-Copy-2" fill-rule="nonzero"></path>
+                <rect id="Rectangle" x="3.81337761" y="0" width="40.7645404" height="5.46069779"></rect>
+                <polygon id="Rectangle-Copy" points="4.76672201 29.5536765 43.2182796 29.5536765 43.2182796 34.9559614 4.76672201 34.9559614"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
