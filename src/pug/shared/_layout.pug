@@ -1,0 +1,17 @@
+include _mixins
+doctype html
+html(lang="ru")
+  head
+    include _head
+
+  body(class=bodyClass)
+    // CONTENTS :: START
+    .page(class=outClass)
+      .page__content
+        block header
+          include ../components/_header
+        block content
+
+        block footer
+          include ../components/_footer
+    // CONTENTS :: END

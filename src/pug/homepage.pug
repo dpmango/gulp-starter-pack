@@ -1,0 +1,13 @@
+---
+title: Homepage title
+bodyClass: homepage
+---
+extends shared/_layout
+block content
+  .page
+    .page__content
+      // iteration example
+      - var socials = ['facebook','gplus','twitter','fav','link','bitly','telegram','ok','vk',]
+        each social in socials
+          a(class="social-share" href="#" role="button")
+            +icon('icon-social-'+social)

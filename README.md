@@ -1,25 +1,17 @@
 # Gulp Starter Pack
-Gulp starter package to use with PostCss or sass, pug, autoprefixer, babel, compile bootstrap, minify assets and perform other common front-end tasks.
+This package intended to solve common front-end development tasks.
 
-## Getting stated
-__Development:__
-- Install node.js and npm
-- Run `npm i`
-- Run `gulp` (default task)
-- Work with `/src` folder and get the processing result in /dist
 
-__Production__
-- Run `gulp build` to build minified assets ready to use in production
+## How to start
+* `npm install` or `yarn` - install all dependencies
+* `gulp` - run dev-server
+* `gulp build` - build project from sources
 
-## Tasks
-- `postcss` - including sass like plugins, autoprefixer, SugarSS
-- `sass` - compile .sass and .scss
-- `bootstrap` - compile custom bootstrap 4 alpha 5 file
-- `pug` - compile pug templates
-- `babel` - compile es2015 javascript code for older browsers
-- `useref` - optimize .css and .js
-- `cssnano` - minify css in dest folder
-- `images` - imagemin for graphics optimization
-- `fonts` - copy fonts to dist folder
-- `browserSync` - serve assets with hot reload from `./src` folder
-- `clean:dist` - clean dist folder to prevent conflicts before build
+
+# Setup
+`yarn add gulp require-dir run-sequence gulp-util gulp-notify gulp-cache del gulp-sass gulp-sourcemaps gulp-postcss autoprefixer cssnano postcss-short postcss-sorting postcss-pseudoelements gulp-rename gulp-imagemin gulp-pug gulp-front-matter gulp-plumber gulp-if browser-sync gulp-consolidate require-yaml`
+
+## Credits
+The idea of structure was originally developed by riverco.de studio. I took the best parts, redesigned the builder and adjust to my specific tasks.
+
+Original Gulp Starter Pack v.1 could be found of a separate branch
