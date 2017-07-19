@@ -23,6 +23,7 @@ function build(callback) {
     // 'svgo',
     'sass',
     'pug',
+    'javascript',
     // 'webpack',
     'copy',
     'images',

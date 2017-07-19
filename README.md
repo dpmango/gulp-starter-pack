@@ -8,8 +8,8 @@ This package intended to solve common front-end development tasks.
 * `gulp build` - build project from sources
 
 
-# Setup
-`yarn add gulp require-dir run-sequence gulp-util gulp-notify gulp-cache del gulp-sass gulp-sourcemaps gulp-postcss autoprefixer cssnano postcss-short postcss-sorting postcss-pseudoelements gulp-rename gulp-imagemin gulp-pug gulp-front-matter gulp-plumber gulp-if browser-sync gulp-consolidate require-yaml`
+### Setup + all packages
+`yarn add gulp require-dir run-sequence gulp-util gulp-notify gulp-cache del gulp-sass gulp-sourcemaps gulp-postcss autoprefixer cssnano postcss-short postcss-sorting postcss-pseudoelements gulp-rename gulp-imagemin gulp-pug gulp-front-matter gulp-plumber gulp-if browser-sync gulp-consolidate require-yaml gulp-concat gulp-uglify`
 
 ## Credits
 The idea of structure was originally developed by riverco.de studio. I took the best parts, redesigned the builder and adjust to my specific tasks.
