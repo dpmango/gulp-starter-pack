@@ -60,7 +60,7 @@ You can also use [npm scripts](https://docs.npmjs.com/misc/scripts):
 
 
 ### Setup + all packages
-`yarn add gulp require-dir run-sequence gulp-util gulp-notify gulp-cache del gulp-sass gulp-sourcemaps gulp-postcss autoprefixer cssnano postcss-short postcss-sorting postcss-pseudoelements gulp-rename gulp-imagemin gulp-pug gulp-front-matter gulp-plumber gulp-if browser-sync gulp-consolidate require-yaml gulp-concat gulp-uglify gulp-svgmin gulp-svgstore gulp-cheerio through2 gulp.spritesmith vinyl-buffer gulp-htmlhint gulp-sass-lint gulp-eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import`
+`yarn add gulp require-dir run-sequence gulp-util gulp-notify gulp-cache del gulp-sass gulp-sourcemaps gulp-postcss autoprefixer cssnano postcss-short postcss-sorting postcss-pseudoelements gulp-rename gulp-imagemin gulp-pug gulp-front-matter gulp-plumber gulp-if browser-sync gulp-consolidate require-yaml gulp-concat gulp-uglify gulp-svgmin gulp-svgstore gulp-cheerio through2 gulp.spritesmith vinyl-buffer gulp-htmlhint gulp-sass-lint gulp-eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import gulp-replace gulp-svg-sprites`
 
 ## Credits
 The idea of structure was originally developed by riverco.de studio. I took the best parts, redesigned the builder and adjust to my specific tasks.

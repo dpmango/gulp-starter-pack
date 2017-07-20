@@ -8,7 +8,7 @@ var through2    = require('through2');
 var consolidate = require('gulp-consolidate');
 var config      = require('../../config');
 
-gulp.task('sprite:svg', function() {
+gulp.task('s1prite:svg', function() {
   return gulp
     .src(config.src.iconsSvg + '/*.svg')
     .pipe(plumber({
@@ -68,6 +68,6 @@ gulp.task('sprite:svg', function() {
     .pipe(gulp.dest(config.dest.img));
 });
 
-gulp.task('sprite:svg:watch', function() {
+gulp.task('s1prite:svg:watch', function() {
   gulp.watch(config.src.iconsSvg + '/*.svg', ['sprite:svg']);
 });
