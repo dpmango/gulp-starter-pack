@@ -1,5 +1,5 @@
 # Gulp Starter Pack
-This package intended to solve common front-end development tasks.
+This package intended to solve common front-end development tasks. Works best for psd/sketch to html projects and save you a lot of time setting up local environment
 
 
 ## How to start
@@ -7,8 +7,6 @@ This package intended to solve common front-end development tasks.
 * `gulp` - run dev-server
 * `gulp build` - build project from sources
 
-
---
 ## List of Gulp tasks
 
 To run separate task type in command line `gulp [task_name]`.
@@ -24,27 +22,20 @@ Task name          | Description
 ### Other tasks
 Task name          | Description                                                      
 :------------------|:----------------------------------
-`sass` 	         | compile .sass/.scss to .css. We also use [postcss](https://github.com/postcss/postcss) for [autoprefixer](https://github.com/postcss/autoprefixer) and [Lost](https://github.com/peterramsing/lost), so feel free to include other awesome postcss [plugins](https://github.com/postcss/postcss#plugins) when needed
-`webpack`          | compile .js sources into bundle file
-`copy`             | copy common files from `./src` path to `./dist` path
-`swig`             | compile [swig](http://paularmstrong.github.io/swig/)  templates
-`nunjucks`         | compile Mozilla's awesome [nunjucks](https://mozilla.github.io/nunjucks/) templates
-`jade`             | compile [jade](http://jade-lang.com/) templates
-`svgo`             | optimize svg files with [svgo](https://github.com/svg/svgo)
-`iconfont`         | compile iconfonts from svg sources
-`sprite:svg`       | create svg symbol sprites ([css-tricks](https://css-tricks.com/svg-sprites-use-better-icon-fonts/))
+`sass` 	         | compile .sass/.scss to .css. Included [postcss](https://github.com/postcss/postcss) for [autoprefixer](https://github.com/postcss/autoprefixer), flexbugs and other cool [plugins](https://github.com/postcss/postcss#plugins) you might add
+`pug`              | compile [pug](http://pug-js.com/) templates
+`javascript`       | combines vendor files and custom .js code into separate files
+`sprite:svg`       | create svg symbol sprites
 `sprite:png`       | create png sprites
+`images`           | optimize, minify and clone images
 `server`           | run dev-server powered by [BrowserSync](https://www.browsersync.io/)
 `clean`            | remove `./dist` folder
+`copy`             | copy common files from `./src` path to `./dist` path
 `list-pages`       | create index file with links to all project pages
 
-_This is a full list of tasks, that we use in our projects, but not all of them should be available in current project.
-All available tasks are placed in a folder `./gulp/tasks` as separate *.js files. Usually, file name = task name._
-
+All available tasks are placed in a folder `./gulp/tasks` as separate *.js files.
 
 ## Flags
-
-We have several useful flags.
 
 * `gulp --open` or `gulp server --open` - run dev server and then open preview in browser
 * `gulp --tunnel=[name]` or `gulp server --tunnel [name]` - runs dev server and allows you to easily share a web service on your local development machine (powered by [localtunnel.me](https://localtunnel.me/)). Your local site will be available at `[name].localtunnel.me`.
@@ -58,11 +49,7 @@ You can also use [npm scripts](https://docs.npmjs.com/misc/scripts):
 * `npm run ghpages` to push only `./dist` folder to **gh-pages** branch on github (very useful for previews).
 
 
-
-### Setup + all packages
-`yarn add gulp require-dir run-sequence gulp-util gulp-notify gulp-cache del gulp-sass gulp-sourcemaps gulp-postcss autoprefixer cssnano postcss-short postcss-sorting postcss-pseudoelements gulp-rename gulp-imagemin gulp-pug gulp-front-matter gulp-plumber gulp-if browser-sync gulp-consolidate require-yaml gulp-concat gulp-uglify gulp-svgmin gulp-svgstore gulp-cheerio through2 gulp.spritesmith vinyl-buffer gulp-htmlhint gulp-sass-lint gulp-eslint eslint-config-airbnb eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-import gulp-replace gulp-svg-sprites`
-
 ## Credits
-The idea of structure was originally developed by riverco.de studio. I took the best parts, redesigned the builder and adjust to my specific tasks.
+The idea of structure was originally developed by [riverco.de](https::/riverco.de) studio. The best parts was taken, redesigned and adjusted to specific needs.
 
 Original Gulp Starter Pack v.1 could be found of a separate branch

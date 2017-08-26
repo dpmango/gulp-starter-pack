@@ -4,12 +4,11 @@ bodyClass: homepage
 ---
 extends shared/_layout
 block content
-  .page
-    .page__content
-      i.icon.icon-logo
-      i.icon.icon-container
-      // iteration example
-      - var socials = ['facebook','gplus','twitter','fav','link','bitly','telegram','ok','vk',]
-        each social in socials
-          a(class="social-share" href="#" role="button")
-            +icon('icon-social-'+social)
+  i.icon.icon-logo
+  i.icon.icon-container
+  // iteration example
+  .socials
+    - var socials = ['email','fb-messenger','skype','telegram','viber','whatup']
+      each social in socials
+        a(class="social-share" href="#" role="button")
+          +icon('ico-'+social)

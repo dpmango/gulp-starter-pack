@@ -1,13 +1,6 @@
-.icon {
-	display: inline-block;
-	width: 1em;
-	height: 1em;
-	fill: currentColor;
+<% _.each(symbols, function(symbol) { %>.<%= symbol.name %> {
+  width: <%= symbol.ratio %>em;
+  height: 1em;
+  fill: <%= symbol.fill %>;
 }
-
-{{#shapes}}
-.icon-{{base}} {
-	font-size:({{height.inner}}/10)*1rem;
-	width:({{width.inner}}/{{height.inner}})*1em;
-}
-{{/shapes}}
+<% }); %>

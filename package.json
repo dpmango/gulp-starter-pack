@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "gulp",
+    "build": "gulp build --production",
+    "lint": "eslint --ignore-pattern 'src/js/lib/' --cache --format=node_modules/eslint-formatter-pretty src/js/",
+    "surge": "surge --domain xxx.surge.sh"
   },
-  "author": "",
+  "author": "Sergey Khmelevskoy <sergey@khmelevskoy.co>",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^7.1.2",
     "browser-sync": "^2.18.12",
+    "cheerio": "^1.0.0-rc.2",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
     "eslint-config-airbnb": "^15.0.2",

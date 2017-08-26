@@ -24,9 +24,7 @@ function build(callback) {
     'images',
     'sprite:svg',
     'sprite:png',
-    // 'svgo',
     'copy',
-    // 'webpack',
     'list-pages',
     callback
   );

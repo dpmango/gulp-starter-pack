@@ -3,12 +3,13 @@ var plumber     = require('gulp-plumber');
 var svgmin      = require('gulp-svgmin');
 var svgStore    = require('gulp-svgstore');
 var rename      = require('gulp-rename');
-var cheerio     = require('gulp-cheerio');
+var cheerio     = require('cheerio');
+var gCheerio    = require('gulp-cheerio');
 var through2    = require('through2');
 var consolidate = require('gulp-consolidate');
 var config      = require('../../config');
 
-gulp.task('s1prite:svg', function() {
+gulp.task('sprite:svg', function() {
   return gulp
     .src(config.src.iconsSvg + '/*.svg')
     .pipe(plumber({
@@ -26,10 +27,10 @@ gulp.task('s1prite:svg', function() {
             mergePaths: false
         }]
     }))
-    .pipe(rename({ prefix: 'icon-' }))
+    .pipe(rename({ prefix: 'ico-' }))
     .pipe(svgStore({ inlineSvg: false }))
     .pipe(through2.obj(function(file, encoding, cb) {
-        var $ = file.cheerio;
+        var $ = cheerio.load(file.contents.toString(), {xmlMode: true});
         var data = $('svg > symbol').map(function() {
             var $this  = $(this);
             var size   = $this.attr('viewBox').split(' ').splice(2);
@@ -50,17 +51,18 @@ gulp.task('s1prite:svg', function() {
                 symbols: data
             }))
             .pipe(gulp.dest(config.src.sassGen));
-        gulp.src(__dirname + '/sprite.html')
-            .pipe(consolidate('lodash', {
-                symbols: data
-            }))
-            .pipe(gulp.dest(config.src.root));
+        // gulp.src(__dirname + '/sprite.html')
+        //     .pipe(consolidate('lodash', {
+        //         symbols: data
+        //     }))
+        //     .pipe(gulp.dest(config.src.root));
         cb();
     }))
-    .pipe(cheerio({
+    .pipe(gCheerio({
         run: function($, file) {
             $('[fill]:not([fill="currentColor"])').removeAttr('fill');
             $('[stroke]').removeAttr('stroke');
+            $('[style]').removeAttr('style');
         },
         parserOptions: { xmlMode: true }
     }))
@@ -68,6 +70,6 @@ gulp.task('s1prite:svg', function() {
     .pipe(gulp.dest(config.dest.img));
 });
 
-gulp.task('s1prite:svg:watch', function() {
-  gulp.watch(config.src.iconsSvg + '/*.svg', ['sprite:svg']);
+gulp.task('sprite:svg:watch', function() {
+    gulp.watch(config.src.iconsSvg + '/*.svg', ['sprite:svg']);
 });
