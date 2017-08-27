@@ -5,10 +5,10 @@ bodyClass: homepage
 extends shared/_layout
 block content
   i.icon.icon-logo
-  i.icon.icon-container
+    
   // iteration example
   .socials
-    - var socials = ['email','fb-messenger','skype','telegram','viber','whatup']
+    - var socials = ['email']
       each social in socials
         a(class="social-share" href="#" role="button")
           +icon('ico-'+social)

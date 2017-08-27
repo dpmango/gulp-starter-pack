@@ -1,5 +1,6 @@
 var gulp     = require('gulp');
 var cache    = require('gulp-cache');
+var util     = require('gulp-util');
 var imagemin = require('gulp-imagemin');
 var config   = require('../config.js');
 
@@ -10,9 +11,7 @@ gulp.task('images', function(){
       config.src.img + '**/*.{jpg,png,jpeg,svg,gif}',
       '!' + config.src.img + '/svgo/**/*.*'
     ])
-    .pipe(cache(imagemin({
-        interlaced: true
-      })))
+    .pipe(config.production ? cache(imagemin({interlaced: true})) : util.noop())
     .pipe(gulp.dest(config.dest.img))
 });
 

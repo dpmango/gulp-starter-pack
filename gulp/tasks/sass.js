@@ -49,11 +49,11 @@ gulp.task('sass', function() {
     }))
     .on('error', config.errorHandler)
     .pipe(postcss(processors))
+    .pipe(sourcemaps.write('.'))
     .pipe(config.production ? postcss([cssnano(cssNanoParams)]) : util.noop())
     .pipe(plumber({
       errorHandler: config.errorHandler
     }))
-    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.dest.css))
 });
 
