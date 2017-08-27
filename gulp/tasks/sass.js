@@ -9,14 +9,32 @@ var svginline    = require('postcss-inline-svg');
 var sorting      = require('postcss-sorting');
 var pseudoel     = require('postcss-pseudoelements');
 var flexbugs     = require('postcss-flexbugs-fixes');
+var animations   = require('postcss-animation');
+var respType     = require('postcss-responsive-type');
+var focus        = require('postcss-focus');
+var easings      = require('postcss-easings');
 var cssnano      = require('cssnano');
 var plumber      = require('gulp-plumber');
 var config       = require('../config');
 
 // PostCSS Processors
+// short - shorthands -- https://github.com/jonathantneal/postcss-short
+// svginline - work with svg -- https://github.com/TrySound/postcss-inline-svg
+// animations - get animate.css keframes -- https://github.com/zhouwenbin/postcss-animation
+// sorting - keeps rules in order -- https://github.com/hudochenkov/postcss-sorting
+// pseudoel - adds semicollumns -- https://github.com/axa-ch/postcss-pseudoelements
+// flexbugs - fix flex issues -- https://github.com/luisrudge/postcss-flexbugs-fixes
+// respType - responsive type -- https://github.com/seaneking/postcss-responsive-type
+// focus - adds focus to hover el -- https://github.com/postcss/postcss-focus
+// easings - gets easings.net -- https://github.com/postcss/postcss-easings
+
 var processors = [
   short(),
   svginline(),
+  animations(),
+  respType(),
+  focus(),
+  easings(),
   autoprefixer({
     browsers: ['last 10 versions'],
     remove: true, // remove outdated prefixes?
