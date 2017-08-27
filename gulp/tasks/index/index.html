@@ -2,6 +2,7 @@
 <html>
 <head lang="en">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><%= pages.ProjectTitle %></title>
   <style>
     *{margin:0;padding: 0;box-sizing: border-box}
@@ -21,6 +22,7 @@
         font-weight: normal;
         font-style: normal;
     }
+
     :root{
     	--main-color: #f9e900;
     }
@@ -50,17 +52,16 @@
       right: 42px;
       top: 120px;
       left: 355px;
-      bottom: 120px;
+      bottom: 40px;
 
     }
     iframe{
-		opacity: 1;
-		box-shadow: 0 0 8px rgba(#000,.5);
-		margin: 0 auto;
-		transform-origin: 0 0;
-		box-shadow: 0 0 20px rgba(0,0,0,.6);
+  		opacity: 1;
+  		box-shadow: 0 0 8px rgba(#000,.5);
+  		margin: 0 auto;
+  		transform-origin: 0 0;
+  		box-shadow: 0 0 20px rgba(0,0,0,.6);
     }
-
 
     .preview footer{
       position: absolute;
@@ -101,7 +102,6 @@
       text-decoration: none;
       padding: 5px 8px 5px 3px;
       position: relative;
-      left: -3px;
     }
     .is-notready .pagelist__title{
       color: #aaaaaa;
@@ -131,27 +131,29 @@
       color: #fff;
     }
     .pagelist__url{
+      float: right;
       width: 24px;
       height: 24px;
-      border-radius: 4px;
-      background: #f9e900;
-      background: var(--main-color);
       display: inline-block;
       position: relative;
       vertical-align: middle;
-      margin-left: 4px;
+      margin-left: 5px;
+      margin-top: 4px;
+    }
+    .pagelist__url:hover .icon{
+      fill: #555;
     }
     .is-notready .pagelist__url{
-      background: #eeeeee;
       pointer-events: none;
     }
     .pagelist__url .icon{
-      fill: #000;
-      font-size: 10px;
+      fill: #333;
+      font-size: 20px;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%,-50%);
+      transition: all .2s ease;
     }
     .is-notready .pagelist__url .icon{
       fill:#aaaaaa;
@@ -164,8 +166,7 @@
     .pagelist__progress i{
       height: 4px;
       display: block;
-      background: #f9e900;
-      background: var(--main-color);
+      background: #2ECC71;
     }
 
 
@@ -173,7 +174,6 @@
     header{
       overflow: hidden;
       line-height: 1;
-      /*height: 100px;*/
       height: 90px;
       position: fixed;
       top: 0;
@@ -203,12 +203,12 @@
       transform: rotate(38deg);
       transform-origin: 100% 100%;
     }
-    header h1 a{
+    header h1 span{
       display: block;
       position: absolute;
+      z-index: 2;
       left: 42px;
       top: 22px;
-
     }
     header h1 .icon{
       font-size: 47px;
@@ -244,6 +244,11 @@
       padding-left: 38px;
       position: relative;
       outline: none;
+      cursor: pointer;
+      transition: all .25s ease-in-out;
+    }
+    .types button:hover{
+      background: #eee;
     }
     .types strong{
       font-weight: normal;
@@ -271,13 +276,6 @@
     .types span{
       display: block;
     }
-    footer{
-      font-size: 15px;
-      text-align: center;
-      padding: 20px 50px;
-      text-align: left;
-      margin-top: 100px;
-    }
     @media (max-width: 1200px){
       .header__updated{
         position: absolute;
@@ -300,12 +298,6 @@
       	position: static;
       	text-align: center;
       }
-      .preview footer{
-      	position: static;
-      	text-align: center;
-      	margin: 0;
-      	padding: 0 0 20px 0;
-      }
       header{
         position: relative;
         height: auto;
@@ -317,7 +309,7 @@
         height: auto;
         padding: 20px 0 30px;
       }
-      header h1 a{
+      header h1 span{
         position: static;
       }
       header .icon{
@@ -351,63 +343,51 @@
   </style>
 </head>
 <body>
-<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
-<symbol id="icon-desktop" viewBox="0 0 24 17">
-    <title>
-        Shape
-    </title>
-    <path d="M20 15c1.1 0 1.99-.9 1.99-2L22 2c0-1.1-.9-2-2-2H4C2.9 0 2 .9 2 2v11c0 1.1.9 2 2 2H0c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2h-4zM4 2h16v11H4V2zm8 14c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z" fill-rule="evenodd"/>
-</symbol><symbol id="icon-link" viewBox="0 0 20 10">
-    <title>
-        Shape
-    </title>
-    <path d="M1.9 5c0-1.71 1.39-3.1 3.1-3.1h4V0H5C2.24 0 0 2.24 0 5s2.24 5 5 5h4V8.1H5C3.29 8.1 1.9 6.71 1.9 5zM6 6h8V4H6v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1 0 1.71-1.39 3.1-3.1 3.1h-4V10h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" fill-rule="evenodd"/>
-</symbol><symbol id="icon-logo" viewBox="0 0 172 47">
-    <title>
-        Page 1
-    </title>
-    <path d="M18.1 25c0 2.8-2 4.5-4.7 5.3-2.3.6-6.1.6-8.3 0-2.8-.7-4.9-2.5-5-5.3V6.4C.1 3.3 2.7 1.5 5.8.9c2.3-.4 5.7-.4 7.9.3C16.2 2 18 3.7 18 6.4h-2c0-1.6-1.2-2.6-2.8-3.2-2-.6-4.9-.6-6.9-.3-2.2.4-4 1.6-4 3.4v18.6c0 1.7 1.5 2.8 3.4 3.3 2 .5 5.2.5 7.2 0 1.8-.5 3.2-1.6 3.2-3.2h2z"/>
-    <path d="M22.2 6.2c0-7.6 17.9-7.6 17.9 0v18.9c0 7.7-17.9 7.7-17.9 0V6.2zM38 25V6.3c0-5-13.7-5-13.7 0V25c0 .6 0 .9.1 1.1 1.3 3.7 12.1 3.7 13.3 0 .3-.2.3-.6.3-1.1z"/>
-    <path d="M44.5 30.6V.8h10.3c3.4 0 7.7 1.7 7.7 5.7v18.3c0 4.1-4.4 5.8-8 5.8h-10zm15.9-24C60.4 4.1 57 3 54.8 3h-8.1v25.5h7.9c2 0 5-.7 5.7-2.7.2-.9.1-15.6.1-19.2z"/>
-    <path d="M69 14.7h13.7v2.2H69c0 1.4-.1 8.1.2 9 .7 2 3.7 2.7 5.6 2.7h7.9v2.2h-7.9c-3.6 0-7.9-1.7-7.9-5.7v-24h15.8V3H69v11.7z"/>
-    <path d="M89 19.2v11.4h-2.1V.9h8c1 0 7.9.1 7.9 5.7v7.1c0 2.3-1.7 4.2-4 4.7 2.2.5 4 2.3 4 4.6v7.6h-2.1V23c0-2.9-3.8-3.8-5.9-3.8H89zm11.7-12.6c0-2.7-3.6-3.8-5.8-3.8H89v14.6h5.7c2.3 0 5.9-.7 5.9-3.7V6.6z"/>
-    <path d="M109.4.8v29.8h-2.1V.8h2.1z"/>
-    <g>
-        <path d="M122.4 31l-6.8-6c-1.3-1.1-1.6-2.3-1.6-3.9V.8h2.2v20.3c0 1.1 0 1.4.8 2.2l5.9 5.3 5.9-5.3c.8-.8.8-1.1.8-2.2V.8h2.2V21c0 1.6-.3 2.7-1.6 3.9l-6.8 6h-1z"/>
-        <path d="M138.1 14.7h13.7v2.2h-13.7c0 1.4-.1 8.1.2 9 .7 2 3.7 2.7 5.7 2.7h7.9v2.2H144c-3.6 0-7.9-1.7-7.9-5.7v-24h15.8V3h-13.7v11.7z"/>
-        <path d="M158.2 19.2v11.4h-2.1V.9h8c1 0 7.9.1 7.9 5.7v7.1c0 2.3-1.7 4.2-4 4.7 2.2.5 4 2.3 4 4.6v7.6h-2.1V23c0-2.9-3.8-3.8-5.9-3.8h-5.8zm11.6-12.6c0-2.7-3.6-3.8-5.8-3.8h-5.9v14.6h5.7c2.3 0 5.9-.7 5.9-3.7V6.6z"/>
-    </g>
-    <path d="M6.6 46.2l-5-5.1C.3 39.7 0 39 0 37.6h2c0 .8.1 1.1.7 1.7L7 43.8l4.2-4.4c.6-.6.7-.9.7-1.7h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2.1c0 1.4-.3 2.1-1.6 3.4l-5 5.1h-.8l-5.5-5.9-5.5 5.9h-.8z"/>
-    <path d="M30.5 46.2l-5-5.1c-1.3-1.3-1.6-2.1-1.6-3.4H26c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2c0 1.4-.3 2.1-1.6 3.4l-5 5.1h-.8l-5.5-5.9-5.5 5.9h-.7z"/>
-    <path d="M54.3 46.2l-5-5.1c-1.3-1.3-1.6-2.1-1.6-3.4h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2c0 1.4-.3 2.1-1.6 3.4l-5 5.1h-.8l-5.5-5.9-5.5 5.9h-.6z"/>
-    <path d="M78.2 46.2l-5-5.1c-1.3-1.3-1.6-2.1-1.6-3.4h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2.1c0 1.4-.3 2.1-1.6 3.4l-5 5.1H90l-5.5-5.9-5.5 5.9h-.8z"/>
-    <path d="M102 46.2L97 41c-1.3-1.3-1.6-2.1-1.6-3.4h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2.1c0 1.4-.3 2.1-1.6 3.4l-5 5.1h-.8l-5.5-5.9-5.5 5.9h-.7z"/>
-    <path d="M125.9 46.2l-5-5.1c-1.3-1.3-1.6-2.1-1.6-3.4h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2.1c0 1.4-.3 2.1-1.6 3.4l-5 5.1h-.8l-5.5-5.9-5.5 5.9h-.7z"/>
-    <path d="M149.7 46.2l-5-5.1c-1.3-1.3-1.6-2.1-1.6-3.4h2.1c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2c0 .8.1 1.1.7 1.7l4.2 4.4 4.2-4.4c.6-.6.7-.9.7-1.7h2c0 1.4-.3 2.1-1.6 3.4l-5 5.1h-.8l-5.5-5.9-5.5 5.9h-.7z"/>
-</symbol><symbol id="icon-mobile" viewBox="0 0 13 22">
-    <title>
-        Shape
-    </title>
-    <path d="M10.5 0h-8A2.5 2.5 0 0 0 0 2.5v17A2.5 2.5 0 0 0 2.5 22h8a2.5 2.5 0 0 0 2.5-2.5v-17A2.5 2.5 0 0 0 10.5 0zm-4 21c-.83 0-1.5-.67-1.5-1.5S5.67 18 6.5 18s1.5.67 1.5 1.5S7.33 21 6.5 21zm4.5-4H2V3h9v14z" fill-rule="evenodd"/>
-</symbol><symbol id="icon-tablet" viewBox="0 0 19 24">
-    <title>
-        Shape
-    </title>
-    <path d="M16.5 0h-14A2.5 2.5 0 0 0 0 2.5v19A2.5 2.5 0 0 0 2.5 24h14a2.5 2.5 0 0 0 2.5-2.5v-19A2.5 2.5 0 0 0 16.5 0zm-7 23c-.83 0-1.5-.67-1.5-1.5S8.67 20 9.5 20s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7.5-4H2V3h15v16z" fill-rule="evenodd"/>
-</symbol><symbol id="icon-watch" viewBox="0 0 16 24">
-    <title>
-        Shape
-    </title>
-    <path d="M16 12c0-2.54-1.19-4.81-3.04-6.27L12 0H4l-.95 5.73A7.94 7.94 0 0 0 0 12a7.94 7.94 0 0 0 3.05 6.27L4 24h8l.96-5.73A7.976 7.976 0 0 0 16 12zM2 12c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6-6-2.69-6-6z" fill-rule="evenodd"/>
-</symbol><symbol id="icon-wide" viewBox="0 0 22 20">
-    <title>
-        Shape
-    </title>
-    <path d="M20 0H2C.9 0 0 .9 0 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2zm0 12H2V2h18v10z" fill-rule="evenodd"/>
-</symbol></svg>
+  <!-- sprite -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+   <symbol id="icon-desktop" viewbox="0 0 24 17">
+     <title>
+       Shape
+     </title>
+     <path d="M20 15c1.1 0 1.99-.9 1.99-2L22 2c0-1.1-.9-2-2-2H4C2.9 0 2 .9 2 2v11c0 1.1.9 2 2 2H0c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2h-4zM4 2h16v11H4V2zm8 14c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z" fill-rule="evenodd"></path>
+   </symbol>
+   <symbol id="icon-link" viewbox="0 0 24.684 24.684">
+     <title>
+       Shape
+     </title>
+      <path d="M2.166,3.406H0.418C0.188,3.406,0,3.594,0,3.826v20.438c0,0.232,0.188,0.42,0.418,0.42h20.439 c0.232,0,0.422-0.188,0.422-0.42v-1.75c0-0.23-0.189-0.418-0.422-0.418H2.586V3.826C2.586,3.594,2.398,3.406,2.166,3.406z"/>
+      <path d="M3.406,0.416v20.441c0,0.234,0.188,0.418,0.42,0.418h20.441c0.229,0,0.416-0.184,0.416-0.418V0.416 C24.684,0.182,24.496,0,24.268,0H3.826C3.594,0,3.406,0.182,3.406,0.416z M18.818,6.705l-0.615,6.945 c-0.045,0.506-0.377,0.627-0.736,0.266l-1.662-1.662c-0.18-0.18-0.42-0.418-0.656-0.658l-3.547,3.549 c-0.361,0.361-0.947,0.361-1.307,0l-0.76-0.76c-0.357-0.357-0.357-0.943,0-1.307l3.549-3.545c-0.238-0.238-0.475-0.477-0.658-0.654 l-1.66-1.664c-0.359-0.363-0.24-0.691,0.266-0.736l6.947-0.613C18.482,5.818,18.861,6.195,18.818,6.705z"/>
+   </symbol>
+   <symbol id="icon-mobile" viewbox="0 0 13 22">
+     <title>
+       Shape
+     </title>
+     <path d="M10.5 0h-8A2.5 2.5 0 0 0 0 2.5v17A2.5 2.5 0 0 0 2.5 22h8a2.5 2.5 0 0 0 2.5-2.5v-17A2.5 2.5 0 0 0 10.5 0zm-4 21c-.83 0-1.5-.67-1.5-1.5S5.67 18 6.5 18s1.5.67 1.5 1.5S7.33 21 6.5 21zm4.5-4H2V3h9v14z" fill-rule="evenodd"></path>
+   </symbol>
+   <symbol id="icon-tablet" viewbox="0 0 19 24">
+     <title>
+       Shape
+     </title>
+     <path d="M16.5 0h-14A2.5 2.5 0 0 0 0 2.5v19A2.5 2.5 0 0 0 2.5 24h14a2.5 2.5 0 0 0 2.5-2.5v-19A2.5 2.5 0 0 0 16.5 0zm-7 23c-.83 0-1.5-.67-1.5-1.5S8.67 20 9.5 20s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7.5-4H2V3h15v16z" fill-rule="evenodd"></path>
+   </symbol>
+   <symbol id="icon-watch" viewbox="0 0 16 24">
+     <title>
+       Shape
+     </title>
+     <path d="M16 12c0-2.54-1.19-4.81-3.04-6.27L12 0H4l-.95 5.73A7.94 7.94 0 0 0 0 12a7.94 7.94 0 0 0 3.05 6.27L4 24h8l.96-5.73A7.976 7.976 0 0 0 16 12zM2 12c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6-6-2.69-6-6z" fill-rule="evenodd"></path>
+   </symbol>
+   <symbol id="icon-wide" viewbox="0 0 22 20">
+     <title>
+       Shape
+     </title>
+     <path d="M20 0H2C.9 0 0 .9 0 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2zm0 12H2V2h18v10z" fill-rule="evenodd"></path>
+   </symbol>
+   </svg>
+
+  <!-- content -->
   <header class="header">
     <h1>
-      <b style="position: absolute;top: 50%;left: 50%;transform: translate(-50%,-70%);">All TV</b>
+      <span><%= pages.ProjectTitle %></span>
     </h1>
     <%
 		date = new Date(_.now());
@@ -419,23 +399,23 @@
     %>
     <div class="header__updated"><em><%= pages.ProjectTitle %></em> updated <%= day %>.<%= month %>.<%= date.getFullYear() %>, <%= pages.PageList.length %> pages</div>
     <nav class="types">
-      <button data-mode="mobile" data-width="320">
+      <button data-mode="mobile" data-width="375">
         <svg class="icon icon-mobile"><use xlink:href="#icon-mobile"></use></svg>
         <strong>Mobile</strong>
-        <span>320px</span>
+        <span>375px</span>
       </button>
-      <button data-mode="ipad" data-width="900">
+      <button data-mode="ipad" data-width="768">
         <svg class="icon icon-tablet"><use xlink:href="#icon-tablet"></use></svg>
         <strong>Tablet</strong>
-        <span>900px</span></button>
+        <span>768px</span></button>
       <button data-mode="desktop" data-width="1024">
         <svg class="icon icon-desktop"><use xlink:href="#icon-desktop"></use></svg>
         <strong>Desktop</strong>
         <span>1024px</span></button>
-      <button data-mode="wide" class="is-active" data-width="1600">
+      <button data-mode="wide" class="is-active" data-width="1400">
         <svg class="icon icon-wide"><use xlink:href="#icon-wide"></use></svg>
         <strong>Desktop HD</strong>
-        <span>1600px</span>
+        <span>1400px</span>
       </button>
     </nav>
   </header>
@@ -446,7 +426,7 @@
           <li <% if(!page.ready) { %> class="is-notready" <% } %>>
 
                 <a class="pagelist__title <% if(i==1){ %> is-active <% } %>" target="_blank" href="<%= page.file %>"><span><%= i %>.</span><em><%= _.split(page.file, '.', 1) %></em></a>
-                <a href="<%= page.file %>" class="pagelist__url">
+                <a href="<%= page.file %>" class="pagelist__url" target="_blank">
                   <svg class="icon icon-link"><use xlink:href="#icon-link"></use></svg>
                 </a>
 
@@ -457,15 +437,11 @@
 
           </li>
         <% }) %>
-
     </ol>
   </section>
 
   <aside class="preview" id="preview-wrapper">
-
-    <iframe id="preview"  width="1600" height="600" src="<%= pages.PageList[0].file %>"  frameborder="0"></iframe>
-    <footer>
-    </footer>
+    <iframe id="preview"  width="1400" height="600" src="<%= pages.PageList[0].file %>"  frameborder="0"></iframe>
   </aside>
 
 
@@ -475,19 +451,6 @@
     var previewButtons = document.querySelectorAll('.pagelist__title');
     var iframe = document.getElementById('preview');
     var previewWrapper = document.getElementById('preview-wrapper');
-    // colors
-    var colors = ['#f9e900','#ddd','#afd702','#add8e6','#f03a96'];
-
-    if(localStorage.getItem('main-color')){
-    	document.documentElement.style.setProperty(`--main-color`, localStorage.getItem('main-color'));
-    }
-
-    body.addEventListener('dblclick', function(event) {
-    	colors = colors.concat(colors.splice(0,1));
-    	document.documentElement.style.setProperty(`--main-color`, colors[0]);
-    	localStorage.setItem('main-color', colors[0]);
-    });
-    // end colors
 
     function removeActive(){
       [].forEach.call(previewButtons, function(button) {
@@ -583,9 +546,6 @@
           iframe.style.transform = 'scale('+ scaleV +')';
         }
 
-
-
-        console.log(scaleV,scaleH);
       }
 
       setIframeWidth();

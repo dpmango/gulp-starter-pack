@@ -3,3 +3,5 @@ ProjectTitle: Project-name
 PageList:
 - file: homepage.html
   ready: 100
+- file: page.html
+  ready: 0
