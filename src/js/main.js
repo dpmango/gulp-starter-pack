@@ -4,8 +4,8 @@ $(document).ready(function(){
   // Global variables
   //////////
 
-  const _window = $(window);
-  const _document = $(document);
+  var _window = $(window);
+  var _document = $(document);
 
   function isRetinaDisplay() {
     if (window.matchMedia) {
@@ -157,19 +157,6 @@ $(document).ready(function(){
     }
   });
 
-
-  // $('.popup-with-move-anim').magnificPopup({
-  //   type: 'inline',
-  //   fixedContentPos: false,
-  //   fixedBgPos: true,
-  //   overflowY: 'auto',
-  //   closeBtnInside: true,
-  //   preloader: false,
-  //   midClick: true,
-  //   removalDelay: 300,
-  //   mainClass: 'my-mfp-slide-bottom'
-  // });
-  //
   // $('.popup-gallery').magnificPopup({
 	// 	delegate: 'a',
 	// 	type: 'image',
@@ -251,12 +238,8 @@ $(document).ready(function(){
     }
   });
 
-
   // Masked input
-  $(".js-dateMask").mask("99.99.9999",{placeholder:"__ __ ____"});
-  $(".js-dateMask2").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});
-  $(".js-indexMask").mask("999 999",{placeholder:"000 000"});
+  $(".js-dateMask").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});
   $("input[type='tel']").mask("+7 (000) 000-0000", {placeholder: "+7 (___) ___-____"});
-
 
 });

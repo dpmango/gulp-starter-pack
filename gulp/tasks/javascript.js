@@ -15,9 +15,9 @@ gulp.task('javascript:vendor', function() {
       path.resolve('bower_components', 'jquery-mask-plugin/dist/jquery.mask.min.js'),
       config.src.js + '/vendor/**/*.js'
      ])
-    .pipe(config.production ? uglifyJs() : util.noop())
     .pipe(plumber({ errorHandler: config.errorHandler }))
     .pipe(concat('vendor.js'))
+    .pipe(config.production ? uglifyJs() : util.noop())
     .pipe(gulp.dest(config.dest.js));
 });
 
@@ -25,9 +25,9 @@ gulp.task('javascript:app', function() {
   return gulp.src([
       config.src.js + '/*.js'
      ])
-    .pipe(config.production ? uglifyJs() : util.noop())
     .pipe(plumber({ errorHandler: config.errorHandler }))
     .pipe(concat('app.js'))
+    .pipe(config.production ? uglifyJs() : util.noop())
     .pipe(gulp.dest(config.dest.js));
 });
 
