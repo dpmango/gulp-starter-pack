@@ -63,6 +63,8 @@ gulp.task('sprite:svg', function() {
             $('[fill]:not([fill="currentColor"])').removeAttr('fill');
             $('[stroke]').removeAttr('stroke');
             $('[style]').removeAttr('style');
+            $('[opacity]').removeAttr('opacity');
+            $('[fill-opacity]').removeAttr('fill-opacity');
         },
         parserOptions: { xmlMode: true }
     }))
