@@ -8,7 +8,7 @@ var config   = require('../config.js');
 gulp.task('images', function(){
   return gulp
     .src([
-      config.src.img + '**/*.{jpg,png,jpeg,svg,gif}',
+      config.src.img + '/**/*.{jpg,png,jpeg,svg,gif}',
       '!' + config.src.img + '/svgo/**/*.*'
     ])
     .pipe(config.production ? cache(imagemin({interlaced: true})) : util.noop())
@@ -16,5 +16,5 @@ gulp.task('images', function(){
 });
 
 gulp.task('images:watch', function() {
-  gulp.watch(config.src.img + '**/*.{jpg,png,jpeg,svg,gif}', ['images']);
+  gulp.watch(config.src.img + '/**/*.{jpg,png,jpeg,svg,gif}', ['images']);
 });
