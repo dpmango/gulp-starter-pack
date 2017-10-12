@@ -3,7 +3,7 @@ This package intended to solve common front-end development tasks. Works best fo
 
 
 ## How to start
-* `npm install` or `yarn` - install npm dependencies
+* `yarn` - install npm dependencies
 * `bower install` - install bower packages
 * `gulp` - run dev-server
 * `gulp build` - build project from sources
@@ -48,9 +48,3 @@ You can also use [npm scripts](https://docs.npmjs.com/misc/scripts):
 * `npm run start` - same as `gulp default`.
 * `npm run build` - same as `gulp build`.
 * `npm run ghpages` to push only `./dist` folder to **gh-pages** branch on github (very useful for previews).
-
-
-## Credits
-The idea of structure was originally developed by [riverco.de](https::/riverco.de) studio. The best parts was taken, redesigned and adjusted to specific needs.
-
-Original Gulp Starter Pack v.1 could be found of a separate branch
