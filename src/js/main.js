@@ -28,6 +28,9 @@ $(document).ready(function(){
   // COMMON
   //////////
 
+  // svg support for laggy browsers
+  svg4everybody();
+
  	// Prevent # behavior
 	$('[href="#"]').click(function(e) {
 		e.preventDefault();
