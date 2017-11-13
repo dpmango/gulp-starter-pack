@@ -24,12 +24,36 @@ $(document).ready(function(){
     }
   }
 
+  function msieversion() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  if ( msieversion() ){
+    $('body').addClass('is-ie');
+  }
+
   //////////
   // COMMON
   //////////
 
   // svg support for laggy browsers
   svg4everybody();
+
+  // Viewport units buggyfill
+  window.viewportUnitsBuggyfill.init({
+    force: true,
+    hacks: window.viewportUnitsBuggyfillHacks,
+    refreshDebounceWait: 250,
+    appendToBody: true
+  });
+
 
  	// Prevent # behavior
 	$('[href="#"]').click(function(e) {
@@ -43,6 +67,34 @@ $(document).ready(function(){
             scrollTop: $(el).offset().top}, 1000);
         return false;
 	});
+
+  // FOOTER REVEAL
+  function revealFooter() {
+    var footer = $('[js-reveal-footer]');
+    if (footer.length > 0) {
+      var footerHeight = footer.outerHeight();
+      var maxHeight = _window.height() - footerHeight > 100;
+      if (maxHeight && !msieversion() ) {
+        $('body').css({
+          'margin-bottom': footerHeight
+        });
+        footer.css({
+          'position': 'fixed',
+          'z-index': -10
+        });
+      } else {
+        $('body').css({
+          'margin-bottom': 0
+        });
+        footer.css({
+          'position': 'static',
+          'z-index': 10
+        });
+      }
+    }
+  }
+  revealFooter();
+  _window.resized(100, revealFooter);
 
   // HEADER SCROLL
   // add .header-static for .page or body
