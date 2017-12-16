@@ -39,6 +39,55 @@ $(document).ready(function(){
     $('body').addClass('is-ie');
   }
 
+  // BREAKPOINT SETTINGS
+  var bp = {
+    mobileS: 375,
+    mobile: 568,
+    tablet: 768,
+    desktop: 1024,
+    wide: 1336,
+    hd: 1680
+  }
+
+  //////////
+  // DEVELOPMENT HELPER
+  //////////
+  function setBreakpoint(){
+    var wWidth = _window.width();
+
+    var content = "<div class='dev-bp-debug'>"+wWidth+"</div>";
+
+    $('.page').append(content);
+    setTimeout(function(){
+      $('.dev-bp-debug').fadeOut();
+    },1000);
+    setTimeout(function(){
+      $('.dev-bp-debug').remove();
+    },1500)
+  }
+
+  _window.on('resize', debounce(setBreakpoint, 200))
+
+  ////////////
+  // READY - triggered when PJAX DONE
+  ////////////
+  function pageReady(){
+    initPopups();
+    initSliders();
+    runScrollMonitor();
+
+    initMasks();
+
+    revealFooter();
+    _window.on('resize', throttle(revealFooter, 100));
+
+    // temp - developer
+    _window.on('resize', debounce(setBreakpoint, 200))
+  }
+
+  pageReady();
+
+
   //////////
   // COMMON
   //////////
@@ -93,14 +142,12 @@ $(document).ready(function(){
       }
     }
   }
-  revealFooter();
-  _window.resized(100, revealFooter);
 
   // HEADER SCROLL
   // add .header-static for .page or body
   // to disable sticky header
   if ( $('.header-static').length == 0 ){
-    _window.scrolled(10, function() { // scrolled is a constructor for scroll delay listener
+    _window.on('scroll', throttle(function() {
       var vScroll = _window.scrollTop();
       var header = $('.header').not('.header--static');
       var headerHeight = header.height();
@@ -117,11 +164,11 @@ $(document).ready(function(){
       } else {
         header.removeClass('header--fixed');
       }
-    });
+    }), 10);
   }
 
   // HAMBURGER TOGGLER
-  $('.hamburger').on('click', function(){
+  $('[js-hamburger]').on('click', function(){
     $('.hamburger').toggleClass('active');
     $('.mobile-navi').toggleClass('active');
   });
@@ -149,83 +196,63 @@ $(document).ready(function(){
   // SLIDERS
   //////////
 
-  $('.trending__wrapper').slick({
-    autoplay: true,
-    dots: false,
-    arrows: false,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 1,
-    centerMode: true,
-    variableWidth: true
-  });
+  function initSliders(){
+    $('.trending__wrapper').slick({
+      autoplay: true,
+      dots: false,
+      arrows: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      centerMode: true,
+      variableWidth: true
+    });
+  }
 
   //////////
   // MODALS
   //////////
-  // Custom modals
-  // $('*[data-modal]').on('click', function(){
-  //   // remove all active first
-  //   $('.modal').removeClass('opened');
-  //
-  //   // find by id
-  //   var target = $(this).data('modal');
-  //   $('#'+target).addClass('opened');
-  //
-  //   window.location.hash = target;
-  // });
-  //
-  // $('.modal__close').on('click', function(){
-  //   $(this).closest('.modal').removeClass('opened');
-  //   window.location.hash = "";
-  // });
-  //
-  // // CHECK SAVED STATE
-  // if(window.location.hash) {
-  //   var hash = window.location.hash.substring(1);
-  //   $('#'+hash).addClass('opened');
-  // }
-  //
 
-
-  // Magnific Popup
-  // var startWindowScroll = 0;
-  $('.js-popup').magnificPopup({
-    type: 'inline',
-    fixedContentPos: true,
-    fixedBgPos: true,
-    overflowY: 'auto',
-    closeBtnInside: true,
-    preloader: false,
-    midClick: true,
-    removalDelay: 300,
-    mainClass: 'popup-buble',
-    callbacks: {
-      beforeOpen: function() {
-        // startWindowScroll = _window.scrollTop();
-        // $('html').addClass('mfp-helper');
-      },
-      close: function() {
-        // $('html').removeClass('mfp-helper');
-        // _window.scrollTop(startWindowScroll);
+  function initPopups(){
+    // Magnific Popup
+    // var startWindowScroll = 0;
+    $('.js-popup').magnificPopup({
+      type: 'inline',
+      fixedContentPos: true,
+      fixedBgPos: true,
+      overflowY: 'auto',
+      closeBtnInside: true,
+      preloader: false,
+      midClick: true,
+      removalDelay: 300,
+      mainClass: 'popup-buble',
+      callbacks: {
+        beforeOpen: function() {
+          // startWindowScroll = _window.scrollTop();
+          // $('html').addClass('mfp-helper');
+        },
+        close: function() {
+          // $('html').removeClass('mfp-helper');
+          // _window.scrollTop(startWindowScroll);
+        }
       }
-    }
-  });
+    });
 
-  // $('.popup-gallery').magnificPopup({
-	// 	delegate: 'a',
-	// 	type: 'image',
-	// 	tLoading: 'Loading image #%curr%...',
-	// 	mainClass: 'mfp-img-mobile',
-	// 	gallery: {
-	// 		enabled: true,
-	// 		navigateByImgClick: true,
-	// 		preload: [0,1]
-	// 	},
-	// 	image: {
-	// 		tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
-	// 	}
-	// });
+    $('[js-popup-gallery]').magnificPopup({
+  		delegate: 'a',
+  		type: 'image',
+  		tLoading: 'Загрузка #%curr%...',
+  		mainClass: 'popup-buble',
+  		gallery: {
+  			enabled: true,
+  			navigateByImgClick: true,
+  			preload: [0,1]
+  		},
+  		image: {
+  			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.'
+  		}
+  	});
+  }
 
 
   ////////////
@@ -293,17 +320,34 @@ $(document).ready(function(){
     }
   });
 
-  // Masked input
-  $(".js-dateMask").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});
-  $("input[type='tel']").mask("+7 (000) 000-0000", {placeholder: "+7 (___) ___-____"});
+  // textarea autoExpand
+  $(document)
+    .one('focus.autoExpand', 'textarea.autoExpand', function(){
+        var savedValue = this.value;
+        this.value = '';
+        this.baseScrollHeight = this.scrollHeight;
+        this.value = savedValue;
+    })
+    .on('input.autoExpand', 'textarea.autoExpand', function(){
+        var minRows = this.getAttribute('data-min-rows')|0, rows;
+        this.rows = minRows;
+        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
+        this.rows = minRows + rows;
+    });
 
+
+  // Masked input
+  function initMasks(){
+    $(".js-dateMask").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});
+    $("input[type='tel']").mask("+7 (000) 000-0000", {placeholder: "+7 (___) ___-____"});
+  }
 
   ////////////
   // SCROLLMONITOR - WOW LIKE
   ////////////
 
   var monitorActive = false;
-  window.runScrollMonitor = function(){
+  function runScrollMonitor(){
     setTimeout(function(){
 
       // require
@@ -360,6 +404,57 @@ $(document).ready(function(){
     },300);
   }
 
-  runScrollMonitor();
+  //////////
+  // BARBA PJAX
+  //////////
+
+  Barba.Pjax.Dom.containerClass = "page";
+
+  var FadeTransition = Barba.BaseTransition.extend({
+    start: function() {
+      Promise
+        .all([this.newContainerLoading, this.fadeOut()])
+        .then(this.fadeIn.bind(this));
+    },
+
+    fadeOut: function() {
+      return $(this.oldContainer).animate({ opacity: .5 }, 200).promise();
+    },
+
+    fadeIn: function() {
+      var _this = this;
+      var $el = $(this.newContainer);
+
+      $(this.oldContainer).hide();
+
+      $el.css({
+        visibility : 'visible',
+        opacity : .5
+      });
+
+      $el.animate({ opacity: 1 }, 200, function() {
+        document.body.scrollTop = 0;
+        _this.done();
+      });
+    }
+  });
+
+  Barba.Pjax.getTransition = function() {
+    return FadeTransition;
+  };
+
+  Barba.Prefetch.init();
+  Barba.Pjax.start();
+
+  Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container, newPageRawHTML) {
+
+    pageReady();
+
+    // close mobile menu
+    if ( _window.width() < bp.mobile ){
+      closeMobileMenu();
+    }
+  });
+
 
 });

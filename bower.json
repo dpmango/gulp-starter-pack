@@ -22,6 +22,7 @@
     "magnific-popup": "^1.1.0",
     "svg4everybody": "^2.1.9",
     "viewport-units-buggyfill": "^0.6.2",
-    "scrollMonitor": "^1.2.4"
+    "scrollMonitor": "^1.2.4",
+    "barba.js": "luruke/barba.js#^1.0.0"
   }
 }
