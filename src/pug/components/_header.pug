@@ -2,16 +2,21 @@
 header.header
   .container
     .header__wrapper
-      .header__logo
-        a.logo(href="/homepage.pug")
-          +icon('icon-viber')
-      .header__menu
-        ul.header__menu__list
-          - var list = ["Point 1", "Point 2", "Point 3"]
-            each item in list
-              li
-                a.header__menu__link(href="#")=item
+      a(href="#").header__logo
+        +icon('ico-email')
+      ul.header__menu
+        - var list = ["Homepage", "Shop", "Blog", "Lorem"]
+          each item in list
+            li
+              a.header__menu-link(href="#")=item
       
       .header__cta
+        .header__cart
+          +icon('ico-email')
+      
+      .header__hamburger
+        .hamburger.hamburger--squeeze(js-hamburger)
+          .hamburger-box
+            .hamburger-inner
         
 // HEADER :: END

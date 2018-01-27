@@ -4,11 +4,28 @@ bodyClass: homepage
 ---
 extends shared/_layout
 block content
-  i.icon.icon-logo
+  
+  // dummy contents & instructions
+  .container
+  
+    h2 PNG icons
+    p For png icons use i.icon.icon-name . Png icons should be regular icon and @2x postfix
+    p Folder: /src/icons
+    i.icon.icon-logo
+      
+    div(style="margin-top: 50px")
+    h2 SVG icons
+    p For svg icons use pug mixin +icon . You can customize it as it would be regular font. font-size property should be set as icon height
+    p Please keep in mind exoprting svg. 
+      | Sketch is good in all cases. 
+      | Photoshop + illustrator - use quick export function (CC2017+) with ctrl+c ctrl+v of layers
+      | You will need viewBox property and icon should be bounded to artboard. Otherwise it will be as small as artboard differance relative to icon size
+    p Folder: /src/icons
     
-  // iteration example
-  .socials
-    - var socials = ['email']
-      each social in socials
-        a(class="social-share" href="#" role="button")
-          +icon('ico-'+social)
+    div(style="color: rebeccapurple; font-size: 20px")
+      +icon('ico-email')
+    
+    div(style="margin-top: 50px")
+    h2 JS and barba
+    p please use _document.on('click', 'el_selector', function ... ) for barba.js bindings
+    

@@ -72,10 +72,15 @@ $(document).ready(function(){
   // READY - triggered when PJAX DONE
   ////////////
   function pageReady(){
+    legacySupport();
+    initBuggifill();
+
+    updateHeaderActiveClass();
+    initHeaderScroll();
+
     initPopups();
     initSliders();
     runScrollMonitor();
-
     initMasks();
 
     revealFooter();
@@ -85,37 +90,39 @@ $(document).ready(function(){
     _window.on('resize', debounce(setBreakpoint, 200))
   }
 
-  pageReady();
+  // pageReady();
 
 
   //////////
   // COMMON
   //////////
 
-  // svg support for laggy browsers
-  svg4everybody();
+  function legacySupport(){
+    // svg support for laggy browsers
+    svg4everybody();
+  }
 
-  // Viewport units buggyfill
-  window.viewportUnitsBuggyfill.init({
-    force: true,
-    hacks: window.viewportUnitsBuggyfillHacks,
-    refreshDebounceWait: 250,
-    appendToBody: true
-  });
+  function initBuggifill(){
+    // Viewport units buggyfill
+    window.viewportUnitsBuggyfill.init({
+      force: false,
+      refreshDebounceWait: 150,
+      appendToBody: true
+    });
+  }
 
 
- 	// Prevent # behavior
-	$('[href="#"]').click(function(e) {
-		e.preventDefault();
-	});
-
-	// Smoth scroll
-	$('a[href^="#section"]').click( function() {
-        var el = $(this).attr('href');
-        $('body, html').animate({
-            scrollTop: $(el).offset().top}, 1000);
-        return false;
-	});
+  // Prevent # behavior
+	_document
+    .on('click', '[href="#"]', function(e) {
+  		e.preventDefault();
+  	})
+    .on('click', 'a[href^="#section"]', function() { // section scroll
+      var el = $(this).attr('href');
+      $('body, html').animate({
+          scrollTop: $(el).offset().top}, 1000);
+      return false;
+    })
 
   // FOOTER REVEAL
   function revealFooter() {
@@ -146,47 +153,61 @@ $(document).ready(function(){
   // HEADER SCROLL
   // add .header-static for .page or body
   // to disable sticky header
-  if ( $('.header-static').length == 0 ){
-    _window.on('scroll', throttle(function() {
-      var vScroll = _window.scrollTop();
-      var header = $('.header').not('.header--static');
-      var headerHeight = header.height();
-      var heroHeight = $('.hero').outerHeight() - headerHeight;
+  function initHeaderScroll(){
+    if ( $('.header-static').length == 0 ){
+      _window.on('scroll', throttle(function() {
+        var vScroll = _window.scrollTop();
+        var header = $('.header').not('.header--static');
+        var headerHeight = header.height();
+        var heroHeight = $('.hero').outerHeight() - headerHeight;
+        // probably should be found as a first child of page contents
 
-      if ( vScroll > headerHeight ){
-        header.addClass('header--transformed');
-      } else {
-        header.removeClass('header--transformed');
-      }
+        if ( vScroll > headerHeight ){
+          header.addClass('header--transformed');
+        } else {
+          header.removeClass('header--transformed');
+        }
 
-      if ( vScroll > heroHeight ){
-        header.addClass('header--fixed');
-      } else {
-        header.removeClass('header--fixed');
-      }
-    }), 10);
+        if ( vScroll > heroHeight ){
+          header.addClass('header--fixed');
+        } else {
+          header.removeClass('header--fixed');
+        }
+      }, 10));
+    }
   }
 
   // HAMBURGER TOGGLER
-  $('[js-hamburger]').on('click', function(){
-    $('.hamburger').toggleClass('active');
-    $('.mobile-navi').toggleClass('active');
+  _document.on('click', '[js-hamburger]', function(){
+    $(this).toggleClass('is-active');
+    $('.header').toggleClass('is-menu-opened')
+    $('[js-header-menu]').toggleClass('is-active');
+    $('.mobile-navi').toggleClass('is-active');
   });
+
+  function closeMobileMenu(){
+    $('[js-hamburger]').removeClass('is-active');
+    $('.header').removeClass('is-menu-opened')
+    $('[js-header-menu]').removeClass('is-active');
+    $('.mobile-navi').removeClass('is-active');
+  }
 
   // SET ACTIVE CLASS IN HEADER
   // * could be removed in production and server side rendering
   // user .active for li instead
-  $('.header__menu li').each(function(i,val){
-    if ( $(val).find('a').attr('href') == window.location.pathname.split('/').pop() ){
-      $(val).addClass('active');
-    } else {
-      $(val).removeClass('active')
-    }
-  });
+  function updateHeaderActiveClass(){
+    $('.header__menu li').each(function(i,val){
+      if ( $(val).find('a').attr('href') == window.location.pathname.split('/').pop() ){
+        $(val).addClass('is-active');
+      } else {
+        $(val).removeClass('is-active')
+      }
+    });
+  }
 
 
   // VIDEO PLAY
-  $('.promo-video .icon').on('click', function(){
+  _document.on('click', '.promo-video .icon', function(){
     $(this).closest('.promo-video').toggleClass('playing');
     $(this).closest('.promo-video').find('iframe').attr("src", $("iframe").attr("src").replace("autoplay=0", "autoplay=1"));
   });
@@ -197,16 +218,81 @@ $(document).ready(function(){
   //////////
 
   function initSliders(){
-    $('.trending__wrapper').slick({
-      autoplay: true,
-      dots: false,
-      arrows: false,
-      infinite: true,
-      speed: 300,
-      slidesToShow: 1,
-      centerMode: true,
-      variableWidth: true
-    });
+    var slickNextArrow = '<div class="slick-prev"><svg class="ico ico-back-arrow"><use xlink:href="img/sprite.svg#ico-back-arrow"></use></svg></div>';
+    var slickPrevArrow = '<div class="slick-next"><svg class="ico ico-next-arrow"><use xlink:href="img/sprite.svg#ico-next-arrow"></use></svg></div>'
+
+    // General purpose sliders
+    $('[js-slider]').each(function(i, slider){
+      var self = $(slider);
+
+      // set data attributes on slick instance to control
+      if (self && self !== undefined) {
+        self.slick({
+          autoplay: self.data('slick-autoplay') !== undefined ? true : false,
+          dots: self.data('slick-dots') !== undefined ? true : false,
+          arrows: self.data('slick-arrows') !== undefined ? true : false,
+          prevArrow: slickNextArrow,
+          nextArrow: slickPrevArrow,
+          infinite: self.data('slick-infinite') !== undefined ? true : true,
+          speed: 300,
+          slidesToShow: 1,
+          accessibility: false,
+          adaptiveHeight: true,
+          draggable: self.data('slick-no-controls') !== undefined ? false : true,
+          swipe: self.data('slick-no-controls') !== undefined ? false : true,
+          swipeToSlide: self.data('slick-no-controls') !== undefined ? false : true,
+          touchMove: self.data('slick-no-controls') !== undefined ? false : true
+        });
+      }
+
+    })
+
+    // other individual sliders goes here
+
+    // SLICK - UNSLICK EXAMPLE
+    // used when slick should be disabled on certain breakpoints
+
+    // var _socialsSlickMobile = $('.socials__wrapper');
+    // var socialsSlickMobileOptions = {
+    //   mobileFirst: true,
+    //   dots: true,
+    //   responsive: [
+    //     {
+    //       breakpoint: 0,
+    //       settings: {
+    //         slidesToShow: 1,
+    //         slidesToScroll: 1,
+    //       }
+    //     },
+    //     {
+    //       breakpoint: 568,
+    //       settings: {
+    //         slidesToShow: 2,
+    //         slidesToScroll: 2,
+    //       }
+    //
+    //     },
+    //     {
+    //       breakpoint: 992,
+    //       settings: "unslick"
+    //     }
+    //
+    //   ]
+    // }
+    // _socialsSlickMobile.slick(socialsSlickMobileOptions);
+    //
+    // _window.on('resize', debounce(function(e){
+    //   if ( _window.width() > 992 ) {
+    //     if (_socialsSlickMobile.hasClass('slick-initialized')) {
+    //       _socialsSlickMobile.slick('unslick');
+    //     }
+    //     return
+    //   }
+    //   if (!_socialsSlickMobile.hasClass('slick-initialized')) {
+    //     return _socialsSlickMobile.slick(socialsSlickMobileOptions);
+    //   }
+    // }, 300));
+
   }
 
   //////////
@@ -215,8 +301,8 @@ $(document).ready(function(){
 
   function initPopups(){
     // Magnific Popup
-    // var startWindowScroll = 0;
-    $('.js-popup').magnificPopup({
+    var startWindowScroll = 0;
+    $('[js-popup]').magnificPopup({
       type: 'inline',
       fixedContentPos: true,
       fixedBgPos: true,
@@ -228,12 +314,12 @@ $(document).ready(function(){
       mainClass: 'popup-buble',
       callbacks: {
         beforeOpen: function() {
-          // startWindowScroll = _window.scrollTop();
+          startWindowScroll = _window.scrollTop();
           // $('html').addClass('mfp-helper');
         },
         close: function() {
           // $('html').removeClass('mfp-helper');
-          // _window.scrollTop(startWindowScroll);
+          _window.scrollTop(startWindowScroll);
         }
       }
     });
@@ -254,6 +340,11 @@ $(document).ready(function(){
   	});
   }
 
+  function closeMfp(){
+    if ( _window.width() < bp.desktop ){
+      $.magnificPopup.close();
+    }
+  }
 
   ////////////
   // UI
@@ -321,20 +412,19 @@ $(document).ready(function(){
   });
 
   // textarea autoExpand
-  $(document)
-    .one('focus.autoExpand', 'textarea.autoExpand', function(){
+  _document
+    .one('focus.autoExpand', '.ui-group textarea', function(){
         var savedValue = this.value;
         this.value = '';
         this.baseScrollHeight = this.scrollHeight;
         this.value = savedValue;
     })
-    .on('input.autoExpand', 'textarea.autoExpand', function(){
+    .on('input.autoExpand', '.ui-group textarea', function(){
         var minRows = this.getAttribute('data-min-rows')|0, rows;
         this.rows = minRows;
         rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 17);
         this.rows = minRows + rows;
     });
-
 
   // Masked input
   function initMasks(){
@@ -345,63 +435,54 @@ $(document).ready(function(){
   ////////////
   // SCROLLMONITOR - WOW LIKE
   ////////////
-
-  var monitorActive = false;
   function runScrollMonitor(){
-    setTimeout(function(){
+    $('.wow').each(function(i, el){
 
-      // require
-      if ( !monitorActive ){
-        monitorActive = true;
-        $('.wow').each(function(i, el){
+      var elWatcher = scrollMonitor.create( $(el) );
 
-          var elWatcher = scrollMonitor.create( $(el) );
-
-          var delay;
-          if ( $(window).width() < 768 ){
-            delay = 0
-          } else {
-            delay = $(el).data('animation-delay');
-          }
-
-          var animationClass
-
-          if ( $(el).data('animation-class') ){
-            animationClass = $(el).data('animation-class');
-          } else {
-            animationClass = "wowFadeUp"
-          }
-
-          var animationName
-
-          if ( $(el).data('animation-name') ){
-            animationName = $(el).data('animation-name');
-          } else {
-            animationName = "wowFade"
-          }
-
-          elWatcher.enterViewport(throttle(function() {
-            $(el).addClass(animationClass);
-            $(el).css({
-              'animation-name': animationName,
-              'animation-delay': delay,
-              'visibility': 'visible'
-            });
-          }, 100, {
-            'leading': true
-          }));
-          elWatcher.exitViewport(throttle(function() {
-            $(el).removeClass(animationClass);
-            $(el).css({
-              'animation-name': 'none',
-              'animation-delay': 0,
-              'visibility': 'hidden'
-            });
-          }, 100));
-        });
+      var delay;
+      if ( $(window).width() < 768 ){
+        delay = 0
+      } else {
+        delay = $(el).data('animation-delay');
       }
 
-    },300);
+      var animationClass
+
+      if ( $(el).data('animation-class') ){
+        animationClass = $(el).data('animation-class');
+      } else {
+        animationClass = "wowFadeUp"
+      }
+
+      var animationName
+
+      if ( $(el).data('animation-name') ){
+        animationName = $(el).data('animation-name');
+      } else {
+        animationName = "wowFade"
+      }
+
+      elWatcher.enterViewport(throttle(function() {
+        $(el).addClass(animationClass);
+        $(el).css({
+          'animation-name': animationName,
+          'animation-delay': delay,
+          'visibility': 'visible'
+        });
+      }, 100, {
+        'leading': true
+      }));
+      elWatcher.exitViewport(throttle(function() {
+        $(el).removeClass(animationClass);
+        $(el).css({
+          'animation-name': 'none',
+          'animation-delay': 0,
+          'visibility': 'hidden'
+        });
+      }, 100));
+    });
+
   }
 
   //////////
