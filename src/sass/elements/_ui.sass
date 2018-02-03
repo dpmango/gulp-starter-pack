@@ -1,16 +1,24 @@
 // UI
 
 
-// THIS IS REGULAR CLASS MODIFIER FOR THE INPUT IT
-.ui-input
-  display: block
-  width: 100%
-  -webkit-appearance: none
-  background: white
-  color: $grayColor
-  border: 1px solid $borderColor
-  border-radius: 4px
-  padding: 12px 15px
+// WORKS KIND OF bootstrap - group have label and input
+.ui-group
+  position: relative
+  margin-bottom: 20px
+  label
+    display: block
+    margin-bottom: 10px
+  input, textarea
+    display: block
+    width: 100%
+    -webkit-appearance: none
+    background: white
+    color: $grayColor
+    border: 1px solid $borderColor
+    border-radius: 4px
+    padding: 12px 15px
+  textarea
+    resize: vertical
 
 
 // Checkbox
@@ -51,15 +59,17 @@
       transition: all $transitionSpeed ease-in-out
     &::after
       position: absolute
-      left: 1px
+      left: 6px
       top: 50%
       transform: translateY(-50%) scale(0)
       display: inline-block
       content: ' '
-      size: 20px
-      background-image: svg-load('../../images/svg/checkbox.svg')
-      background-repeat: no-repeat
-      background-position: center
+      size: 10px
+      background: $colorGreen
+      border-radius: 50%
+      // background-image: svg-load('../../images/svg/checkbox.svg')
+      // background-repeat: no-repeat
+      // background-position: center
       transition: transform .2s ease
     span
       display: inline-block

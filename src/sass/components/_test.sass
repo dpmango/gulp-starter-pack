@@ -1,0 +1,60 @@
+/* TEST
+
+.test
+  section
+    margin-top: 50px
+  h1
+    text-align: center
+    a
+      position: relative
+      color: blue
+      &::after
+        display: block
+        content: ' '
+        position: absolute
+        bottom: -5px
+        background: currentColor
+        height: 2px
+        left: 0
+        right: 0
+        transition: .25s $ease
+      &:hover
+        &::after
+          right: 100%
+
+
++r($mobile)
+  .test
+    section
+      margin-bottom: 30px
+
+.test-easing
+  margin: 20px 0
+  span
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+    size: 120px 80px
+    font-size: 14px
+    +text-overflow
+    background: #d5d5dd
+    pointer-events: none
+    will-change: transform
+    transition-property: transform
+    transition-duration: .6s
+  &--easeInOutQuint
+    span
+      transition-timing-function: easeInOutQuint
+  &--easeInCubic
+    span
+      transition-timing-function: easeInCubic
+  &--easeOutCirc
+    span
+      transition-timing-function: easeOutCirc
+  &--easeInOutBack
+    span
+      transition-timing-function: easeInOutBack
+  &:hover
+    span
+      transform: translate3d(300%,0,0)

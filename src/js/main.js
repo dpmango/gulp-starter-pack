@@ -7,6 +7,7 @@ $(document).ready(function(){
   var _window = $(window);
   var _document = $(document);
 
+  // detectors
   function isRetinaDisplay() {
     if (window.matchMedia) {
         var mq = window.matchMedia("only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen  and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx)");
@@ -14,8 +15,6 @@ $(document).ready(function(){
     }
   }
 
-  var _mobileDevice = isMobile();
-  // detect mobile devices
   function isMobile(){
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
       return true
@@ -39,6 +38,11 @@ $(document).ready(function(){
     $('body').addClass('is-ie');
   }
 
+  if ( isMobile() ){
+    $('body').addClass('is-mobile');
+  }
+
+
   // BREAKPOINT SETTINGS
   var bp = {
     mobileS: 375,
@@ -53,44 +57,47 @@ $(document).ready(function(){
   // DEVELOPMENT HELPER
   //////////
   function setBreakpoint(){
-    var wWidth = _window.width();
+    var wHost = window.location.host.toLowerCase()
+    var displayCondition = wHost.indexOf("localhost") >= 0 || wHost.indexOf("surge") >= 0
+    if (displayCondition){
+      console.log(displayCondition)
+      var wWidth = _window.width();
 
-    var content = "<div class='dev-bp-debug'>"+wWidth+"</div>";
+      var content = "<div class='dev-bp-debug'>"+wWidth+"</div>";
 
-    $('.page').append(content);
-    setTimeout(function(){
-      $('.dev-bp-debug').fadeOut();
-    },1000);
-    setTimeout(function(){
-      $('.dev-bp-debug').remove();
-    },1500)
+      $('.page').append(content);
+      setTimeout(function(){
+        $('.dev-bp-debug').fadeOut();
+      },1000);
+      setTimeout(function(){
+        $('.dev-bp-debug').remove();
+      },1500)
+    }
   }
-
-  _window.on('resize', debounce(setBreakpoint, 200))
 
   ////////////
   // READY - triggered when PJAX DONE
   ////////////
   function pageReady(){
     legacySupport();
-    initBuggifill();
 
     updateHeaderActiveClass();
     initHeaderScroll();
 
     initPopups();
     initSliders();
-    runScrollMonitor();
+    initScrollMonitor();
     initMasks();
+    initTeleport();
 
     revealFooter();
     _window.on('resize', throttle(revealFooter, 100));
 
-    // temp - developer
+    // development helper
     _window.on('resize', debounce(setBreakpoint, 200))
   }
 
-  // pageReady();
+  pageReady();
 
 
   //////////
@@ -100,16 +107,15 @@ $(document).ready(function(){
   function legacySupport(){
     // svg support for laggy browsers
     svg4everybody();
-  }
 
-  function initBuggifill(){
     // Viewport units buggyfill
     window.viewportUnitsBuggyfill.init({
-      force: false,
+      force: true,
       refreshDebounceWait: 150,
       appendToBody: true
     });
   }
+
 
 
   // Prevent # behavior
@@ -341,9 +347,7 @@ $(document).ready(function(){
   }
 
   function closeMfp(){
-    if ( _window.width() < bp.desktop ){
-      $.magnificPopup.close();
-    }
+    $.magnificPopup.close();
   }
 
   ////////////
@@ -351,7 +355,7 @@ $(document).ready(function(){
   ////////////
 
   // custom selects
-  $('.ui-select__visible').on('click', function(e){
+  _document.on('click', '.ui-select__visible', function(e){
     var that = this
     // hide parents
     $(this).parent().parent().parent().find('.ui-select__visible').each(function(i,val){
@@ -363,7 +367,7 @@ $(document).ready(function(){
     $(this).parent().toggleClass('active');
   });
 
-  $('.ui-select__dropdown span').on('click', function(){
+  _document.on('click', '.ui-select__dropdown span', function(){
     // parse value and toggle active
     var value = $(this).data('val');
     if (value){
@@ -377,38 +381,6 @@ $(document).ready(function(){
       $(this).closest('.ui-select').find('.ui-select__visible span').text(value);
     }
 
-  });
-
-  // handle outside click
-  $(document).click(function (e) {
-    var container = new Array();
-    container.push($('.ui-select'));
-
-    $.each(container, function(key, value) {
-        if (!$(value).is(e.target) && $(value).has(e.target).length === 0) {
-            $(value).removeClass('active');
-        }
-    });
-  });
-
-  // numeric input
-  $('.ui-number span').on('click', function(e){
-    var element = $(this).parent().find('input');
-    var currentValue = parseInt($(this).parent().find('input').val()) || 0;
-
-    if( $(this).data('action') == 'minus' ){
-      if(currentValue <= 1){
-        return false;
-      }else{
-        element.val( currentValue - 1 );
-      }
-    } else if( $(this).data('action') == 'plus' ){
-      if(currentValue >= 99){
-        return false;
-      } else{
-        element.val( currentValue + 1 );
-      }
-    }
   });
 
   // textarea autoExpand
@@ -428,14 +400,54 @@ $(document).ready(function(){
 
   // Masked input
   function initMasks(){
-    $(".js-dateMask").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});
+    $("[js-dateMask]").mask("99.99.99",{placeholder:"ДД.ММ.ГГ"});
     $("input[type='tel']").mask("+7 (000) 000-0000", {placeholder: "+7 (___) ___-____"});
+  }
+
+
+  ////////////
+  // TELEPORT PLUGIN
+  ////////////
+  function initTeleport(){
+    $('[js-teleport]').each(function (i, val) {
+      var self = $(val)
+      var objHtml = $(val).html();
+      var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
+      var conditionMedia = $(val).data('teleport-condition').substring(1);
+      var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
+
+      if (target && objHtml && conditionPosition) {
+
+        function teleport() {
+          var condition;
+
+          if (conditionPosition === "<") {
+            condition = _window.width() < conditionMedia;
+          } else if (conditionPosition === ">") {
+            condition = _window.width() > conditionMedia;
+          }
+
+          if (condition) {
+            target.html(objHtml)
+            self.html('')
+          } else {
+            self.html(objHtml)
+            target.html("")
+          }
+        }
+
+        teleport();
+        _window.on('resize', debounce(teleport, 100));
+
+
+      }
+    })
   }
 
   ////////////
   // SCROLLMONITOR - WOW LIKE
   ////////////
-  function runScrollMonitor(){
+  function initScrollMonitor(){
     $('.wow').each(function(i, el){
 
       var elWatcher = scrollMonitor.create( $(el) );
@@ -447,21 +459,9 @@ $(document).ready(function(){
         delay = $(el).data('animation-delay');
       }
 
-      var animationClass
+      var animationClass = $(el).data('animation-class') || "wowFadeUp"
 
-      if ( $(el).data('animation-class') ){
-        animationClass = $(el).data('animation-class');
-      } else {
-        animationClass = "wowFadeUp"
-      }
-
-      var animationName
-
-      if ( $(el).data('animation-name') ){
-        animationName = $(el).data('animation-name');
-      } else {
-        animationName = "wowFade"
-      }
+      var animationName = $(el).data('animation-name') || "wowFade"
 
       elWatcher.enterViewport(throttle(function() {
         $(el).addClass(animationClass);
@@ -530,11 +530,8 @@ $(document).ready(function(){
   Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container, newPageRawHTML) {
 
     pageReady();
+    closeMobileMenu();
 
-    // close mobile menu
-    if ( _window.width() < bp.mobile ){
-      closeMobileMenu();
-    }
   });
 
 
