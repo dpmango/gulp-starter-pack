@@ -1,6 +1,8 @@
 # Gulp Starter Pack
 This package intended to solve common front-end development tasks. Works best for psd/sketch to html projects and save you a lot of time setting up local environment
 
+## Demo page
+https://projectname.surge.sh
 
 ## How to start
 * `yarn` - install npm dependencies
@@ -8,8 +10,15 @@ This package intended to solve common front-end development tasks. Works best fo
 * `gulp` - run dev-server
 * `gulp build` - build project from sources
 
-## List of Gulp tasks
+### Build fails using npm ?
+It's known bug that build fails on list-pages task using *npm*. You should use *yarn* instead or disable list-pages task.
 
+* Install yarn - Follow instructions on https://yarnpkg.com/en/docs/install
+* Remove node_modules folder `rm -rf node_modules`
+* Reinstall packages with yarn - `yarn`
+* Start `gulp` or `gulp build`
+
+## List of Gulp tasks
 To run separate task type in command line `gulp [task_name]`.
 Almost all tasks also have watch mode - `gulp [task_name]:watch`, but you don't need to use it directly.
 
@@ -34,7 +43,7 @@ Task name          | Description
 `copy`             | copy common files from `./src` path to `./dist` path
 `list-pages`       | create index file with links to all project pages
 
-All available tasks are placed in a folder `./gulp/tasks` as separate *.js files.
+All available tasks are placed in a folder `./gulp/tasks` as separate *.js* files.
 
 ## Flags
 
@@ -42,9 +51,22 @@ All available tasks are placed in a folder `./gulp/tasks` as separate *.js files
 * `gulp --tunnel=[name]` or `gulp server --tunnel [name]` - runs dev server and allows you to easily share a web service on your local development machine (powered by [localtunnel.me](https://localtunnel.me/)). Your local site will be available at `[name].localtunnel.me`.
 * `gulp [task_name] --prod` or `gulp [task_name] --production` - run task in production mode. Some of the tasks (like, sass or js compilation) have additional settings for production mode (such as code minification), so with this flag you can force production mode. `gulp build` uses this mode by default.
 
-##Other
+
+## Deploy
+There are git hooks for [surge](https://surhe.sh) deploy. Every push will execute deploy to specific surge domain of *./dist* folder 
+
+Exmaple:
+`surge --project ./dist --domain khmelevskoy.surge.sh`
+
+If it's not working correctly, try installing git-scripts manually:
+`yarn add git-scripts --save`
+
+use `yarn surge` to do the same, but it will run `gulp build firts` and deploy production version of build (mostly about minified assets)
+
+
+## Other
 You can also use [npm scripts](https://docs.npmjs.com/misc/scripts):
 
-* `npm run start` - same as `gulp default`.
-* `npm run build` - same as `gulp build`.
-* `npm run ghpages` to push only `./dist` folder to **gh-pages** branch on github (very useful for previews).
+* `yarn start` - same as `gulp default`.
+* `yarn build` - same as `gulp build`.
+* `yarn surge` - deploy `./dist` folder to **surge** (used for previews). Request deploy rights from owner (surge --add friend@email.co)
