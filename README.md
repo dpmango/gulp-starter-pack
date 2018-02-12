@@ -11,7 +11,7 @@ https://projectname.surge.sh
 * `gulp build` - build project from sources
 
 ### Build fails using npm ?
-It's known bug that build fails on list-pages task using *npm*. You should use *yarn* instead or disable list-pages task.
+It's known bug that build fails on list-pages task using **npm**. You should use **yarn** instead or disable list-pages task.
 
 * Install yarn - Follow instructions on https://yarnpkg.com/en/docs/install
 * Remove node_modules folder `rm -rf node_modules`
@@ -43,7 +43,7 @@ Task name          | Description
 `copy`             | copy common files from `./src` path to `./dist` path
 `list-pages`       | create index file with links to all project pages
 
-All available tasks are placed in a folder `./gulp/tasks` as separate *.js* files.
+All available tasks are placed in a folder `./gulp/tasks` as separate **.js** files.
 
 ## Flags
 
@@ -53,7 +53,7 @@ All available tasks are placed in a folder `./gulp/tasks` as separate *.js* file
 
 
 ## Deploy
-There are git hooks for [surge](https://surhe.sh) deploy. Every push will execute deploy to specific surge domain of *./dist* folder 
+There are git hooks for [surge](https://surhe.sh) deploy. Every push will execute deploy to specific surge domain of **./dist** folder
 
 Exmaple:
 `surge --project ./dist --domain khmelevskoy.surge.sh`
@@ -61,7 +61,7 @@ Exmaple:
 If it's not working correctly, try installing git-scripts manually:
 `yarn add git-scripts --save`
 
-use `yarn surge` to do the same, but it will run `gulp build firts` and deploy production version of build (mostly about minified assets)
+use `yarn surge` to do the same, but it will run `gulp build` first and deploy production version of build (mostly about minified assets)
 
 
 ## Other
