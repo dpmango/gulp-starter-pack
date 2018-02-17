@@ -7,80 +7,23 @@ $(document).ready(function(){
   var _window = $(window);
   var _document = $(document);
 
-  // detectors
-  function isRetinaDisplay() {
-    if (window.matchMedia) {
-        var mq = window.matchMedia("only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen  and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx)");
-        return (mq && mq.matches || (window.devicePixelRatio > 1));
-    }
-  }
-
-  function isMobile(){
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  function msieversion() {
-    var ua = window.navigator.userAgent;
-    var msie = ua.indexOf("MSIE ");
-
-    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  if ( msieversion() ){
-    $('body').addClass('is-ie');
-  }
-
-  if ( isMobile() ){
-    $('body').addClass('is-mobile');
-  }
-
-
   // BREAKPOINT SETTINGS
   var bp = {
     mobileS: 375,
     mobile: 568,
     tablet: 768,
-    desktop: 1024,
+    desktop: 992,
     wide: 1336,
     hd: 1680
   }
 
-  //////////
-  // DEVELOPMENT HELPER
-  //////////
-  function setBreakpoint(){
-    var wHost = window.location.host.toLowerCase()
-    var displayCondition = wHost.indexOf("localhost") >= 0 || wHost.indexOf("surge") >= 0
-    if (displayCondition){
-      console.log(displayCondition)
-      var wWidth = _window.width();
-
-      var content = "<div class='dev-bp-debug'>"+wWidth+"</div>";
-
-      $('.page').append(content);
-      setTimeout(function(){
-        $('.dev-bp-debug').fadeOut();
-      },1000);
-      setTimeout(function(){
-        $('.dev-bp-debug').remove();
-      },1500)
-    }
-  }
+  var easingSwing = [.02, .01, .47, 1]; // default jQuery easing for anime.js
 
   ////////////
   // READY - triggered when PJAX DONE
   ////////////
   function pageReady(){
     legacySupport();
-
     updateHeaderActiveClass();
     initHeaderScroll();
 
@@ -88,16 +31,28 @@ $(document).ready(function(){
     initSliders();
     initScrollMonitor();
     initMasks();
-    initTeleport();
-
-    revealFooter();
-    _window.on('resize', throttle(revealFooter, 100));
+    initLazyLoad();
 
     // development helper
     _window.on('resize', debounce(setBreakpoint, 200))
+
+    // AVAILABLE in _components folder
+    // copy paste in main.js and initialize here
+
+    // initTeleport();
+    // parseSvg();
+    // revealFooter();
+    // _window.on('resize', throttle(revealFooter, 100));
   }
 
+  // this is a master function which should have all functionality
   pageReady();
+
+
+  // some plugins work best with onload triggers
+  _window.on('load', function(){
+    // your functions
+  })
 
 
   //////////
@@ -117,7 +72,6 @@ $(document).ready(function(){
   }
 
 
-
   // Prevent # behavior
 	_document
     .on('click', '[href="#"]', function(e) {
@@ -130,77 +84,47 @@ $(document).ready(function(){
       return false;
     })
 
-  // FOOTER REVEAL
-  function revealFooter() {
-    var footer = $('[js-reveal-footer]');
-    if (footer.length > 0) {
-      var footerHeight = footer.outerHeight();
-      var maxHeight = _window.height() - footerHeight > 100;
-      if (maxHeight && !msieversion() ) {
-        $('body').css({
-          'margin-bottom': footerHeight
-        });
-        footer.css({
-          'position': 'fixed',
-          'z-index': -10
-        });
-      } else {
-        $('body').css({
-          'margin-bottom': 0
-        });
-        footer.css({
-          'position': 'static',
-          'z-index': 10
-        });
-      }
-    }
-  }
 
   // HEADER SCROLL
   // add .header-static for .page or body
   // to disable sticky header
   function initHeaderScroll(){
-    if ( $('.header-static').length == 0 ){
-      _window.on('scroll', throttle(function() {
-        var vScroll = _window.scrollTop();
-        var header = $('.header').not('.header--static');
-        var headerHeight = header.height();
-        var heroHeight = $('.hero').outerHeight() - headerHeight;
-        // probably should be found as a first child of page contents
+    _window.on('scroll', throttle(function(e) {
+      var vScroll = _window.scrollTop();
+      var header = $('.header').not('.header--static');
+      var headerHeight = header.height();
+      var firstSection = _document.find('.page__content div:first-child()').height() - headerHeight;
+      var visibleWhen = Math.round(_document.height() / _window.height()) >  2.5
 
+      if (visibleWhen){
         if ( vScroll > headerHeight ){
-          header.addClass('header--transformed');
+          header.addClass('is-fixed');
         } else {
-          header.removeClass('header--transformed');
+          header.removeClass('is-fixed');
         }
-
-        if ( vScroll > heroHeight ){
-          header.addClass('header--fixed');
+        if ( vScroll > firstSection ){
+          header.addClass('is-fixed-visible');
         } else {
-          header.removeClass('header--fixed');
+          header.removeClass('is-fixed-visible');
         }
-      }, 10));
-    }
+      }
+    }, 10));
   }
+
 
   // HAMBURGER TOGGLER
   _document.on('click', '[js-hamburger]', function(){
     $(this).toggleClass('is-active');
-    $('.header').toggleClass('is-menu-opened')
-    $('[js-header-menu]').toggleClass('is-active');
     $('.mobile-navi').toggleClass('is-active');
   });
 
   function closeMobileMenu(){
     $('[js-hamburger]').removeClass('is-active');
-    $('.header').removeClass('is-menu-opened')
-    $('[js-header-menu]').removeClass('is-active');
     $('.mobile-navi').removeClass('is-active');
   }
 
   // SET ACTIVE CLASS IN HEADER
-  // * could be removed in production and server side rendering
-  // user .active for li instead
+  // * could be removed in production and server side rendering when header is inside barba-container
   function updateHeaderActiveClass(){
     $('.header__menu li').each(function(i,val){
       if ( $(val).find('a').attr('href') == window.location.pathname.split('/').pop() ){
@@ -210,14 +134,6 @@ $(document).ready(function(){
       }
     });
   }
-
-
-  // VIDEO PLAY
-  _document.on('click', '.promo-video .icon', function(){
-    $(this).closest('.promo-video').toggleClass('playing');
-    $(this).closest('.promo-video').find('iframe').attr("src", $("iframe").attr("src").replace("autoplay=0", "autoplay=1"));
-  });
-
 
   //////////
   // SLIDERS
@@ -254,50 +170,9 @@ $(document).ready(function(){
     })
 
     // other individual sliders goes here
+    $('[js-myCustomSlider]').slick({
 
-    // SLICK - UNSLICK EXAMPLE
-    // used when slick should be disabled on certain breakpoints
-
-    // var _socialsSlickMobile = $('.socials__wrapper');
-    // var socialsSlickMobileOptions = {
-    //   mobileFirst: true,
-    //   dots: true,
-    //   responsive: [
-    //     {
-    //       breakpoint: 0,
-    //       settings: {
-    //         slidesToShow: 1,
-    //         slidesToScroll: 1,
-    //       }
-    //     },
-    //     {
-    //       breakpoint: 568,
-    //       settings: {
-    //         slidesToShow: 2,
-    //         slidesToScroll: 2,
-    //       }
-    //
-    //     },
-    //     {
-    //       breakpoint: 992,
-    //       settings: "unslick"
-    //     }
-    //
-    //   ]
-    // }
-    // _socialsSlickMobile.slick(socialsSlickMobileOptions);
-    //
-    // _window.on('resize', debounce(function(e){
-    //   if ( _window.width() > 992 ) {
-    //     if (_socialsSlickMobile.hasClass('slick-initialized')) {
-    //       _socialsSlickMobile.slick('unslick');
-    //     }
-    //     return
-    //   }
-    //   if (!_socialsSlickMobile.hasClass('slick-initialized')) {
-    //     return _socialsSlickMobile.slick(socialsSlickMobileOptions);
-    //   }
-    // }, 300));
+    })
 
   }
 
@@ -354,35 +229,6 @@ $(document).ready(function(){
   // UI
   ////////////
 
-  // custom selects
-  _document.on('click', '.ui-select__visible', function(e){
-    var that = this
-    // hide parents
-    $(this).parent().parent().parent().find('.ui-select__visible').each(function(i,val){
-      if ( !$(val).is($(that)) ){
-        $(val).parent().removeClass('active')
-      }
-    });
-
-    $(this).parent().toggleClass('active');
-  });
-
-  _document.on('click', '.ui-select__dropdown span', function(){
-    // parse value and toggle active
-    var value = $(this).data('val');
-    if (value){
-      $(this).siblings().removeClass('active');
-      $(this).addClass('active');
-
-      // set visible
-      $(this).closest('.ui-select').removeClass('active');
-      $(this).closest('.ui-select').find('input').val(value);
-
-      $(this).closest('.ui-select').find('.ui-select__visible span').text(value);
-    }
-
-  });
-
   // textarea autoExpand
   _document
     .one('focus.autoExpand', '.ui-group textarea', function(){
@@ -404,45 +250,6 @@ $(document).ready(function(){
     $("input[type='tel']").mask("+7 (000) 000-0000", {placeholder: "+7 (___) ___-____"});
   }
 
-
-  ////////////
-  // TELEPORT PLUGIN
-  ////////////
-  function initTeleport(){
-    $('[js-teleport]').each(function (i, val) {
-      var self = $(val)
-      var objHtml = $(val).html();
-      var target = $('[data-teleport-target=' + $(val).data('teleport-to') + ']');
-      var conditionMedia = $(val).data('teleport-condition').substring(1);
-      var conditionPosition = $(val).data('teleport-condition').substring(0, 1);
-
-      if (target && objHtml && conditionPosition) {
-
-        function teleport() {
-          var condition;
-
-          if (conditionPosition === "<") {
-            condition = _window.width() < conditionMedia;
-          } else if (conditionPosition === ">") {
-            condition = _window.width() > conditionMedia;
-          }
-
-          if (condition) {
-            target.html(objHtml)
-            self.html('')
-          } else {
-            self.html(objHtml)
-            target.html("")
-          }
-        }
-
-        teleport();
-        _window.on('resize', debounce(teleport, 100));
-
-
-      }
-    })
-  }
 
   ////////////
   // SCROLLMONITOR - WOW LIKE
@@ -485,6 +292,29 @@ $(document).ready(function(){
 
   }
 
+
+  //////////
+  // LAZY LOAD
+  //////////
+  function initLazyLoad(){
+    _document.find('[js-lazy]').Lazy({
+      threshold: 500,
+      enableThrottle: true,
+      throttle: 100,
+      scrollDirection: 'vertical',
+      effect: 'fadeIn',
+      effectTime: 350,
+      // visibleOnly: true,
+      // placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7...",
+      onError: function(element) {
+          console.log('error loading ' + element.data('src'));
+      },
+      beforeLoad: function(element){
+        // element.attr('style', '')
+      }
+    });
+  }
+
   //////////
   // BARBA PJAX
   //////////
@@ -499,7 +329,19 @@ $(document).ready(function(){
     },
 
     fadeOut: function() {
-      return $(this.oldContainer).animate({ opacity: .5 }, 200).promise();
+      var deferred = Barba.Utils.deferred();
+
+      anime({
+        targets: this.oldContainer,
+        opacity : .5,
+        easing: easingSwing, // swing
+        duration: 300,
+        complete: function(anim){
+          deferred.resolve();
+        }
+      })
+
+      return deferred.promise
     },
 
     fadeIn: function() {
@@ -513,13 +355,27 @@ $(document).ready(function(){
         opacity : .5
       });
 
-      $el.animate({ opacity: 1 }, 200, function() {
-        document.body.scrollTop = 0;
-        _this.done();
+      anime({
+        targets: "html, body",
+        scrollTop: 0,
+        easing: easingSwing, // swing
+        duration: 150
+      });
+
+      anime({
+        targets: this.newContainer,
+        opacity: 1,
+        easing: easingSwing, // swing
+        duration: 300,
+        complete: function(anim) {
+          triggerBody()
+          _this.done();
+        }
       });
     }
   });
 
+  // set barba transition
   Barba.Pjax.getTransition = function() {
     return FadeTransition;
   };
@@ -534,5 +390,32 @@ $(document).ready(function(){
 
   });
 
+  // some plugins get bindings onNewPage only that way
+  function triggerBody(){
+    $(window).scroll();
+    $(window).resize();
+  }
+
+  //////////
+  // DEVELOPMENT HELPER
+  //////////
+  function setBreakpoint(){
+    var wHost = window.location.host.toLowerCase()
+    var displayCondition = wHost.indexOf("localhost") >= 0 || wHost.indexOf("surge") >= 0
+    if (displayCondition){
+      console.log(displayCondition)
+      var wWidth = _window.width();
+
+      var content = "<div class='dev-bp-debug'>"+wWidth+"</div>";
+
+      $('.page').append(content);
+      setTimeout(function(){
+        $('.dev-bp-debug').fadeOut();
+      },1000);
+      setTimeout(function(){
+        $('.dev-bp-debug').remove();
+      },1500)
+    }
+  }
 
 });

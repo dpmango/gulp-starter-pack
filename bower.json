@@ -6,7 +6,7 @@
     "Sergey Khmelevskoy <sergey@khmelevskoy.co>"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/dpmango/discount",
+  "homepage": "https://github.com/dpmango/gulp-starter-pack",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -15,7 +15,6 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "v4.0.0-alpha.6",
     "jquery-validation": "^1.17.0",
     "slick-carousel": "^1.7.1",
     "jquery-mask-plugin": "^1.14.11",
@@ -23,6 +22,8 @@
     "svg4everybody": "^2.1.9",
     "viewport-units-buggyfill": "^0.6.2",
     "scrollMonitor": "^1.2.4",
-    "barba.js": "luruke/barba.js#^1.0.0"
+    "barba.js": "luruke/barba.js#^1.0.0",
+    "jquery-lazy": "^1.7.7",
+    "animejs": "^2.2.0"
   }
 }
