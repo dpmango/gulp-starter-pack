@@ -66,6 +66,8 @@
     "require-dir": "^0.3.2",
     "require-yaml": "^0.0.1",
     "run-sequence": "^2.0.0",
+    "stylelint": "^9.0.0",
+    "stylelint-selector-bem-pattern": "^2.0.0",
     "surge": "^0.19.0",
     "through2": "^2.0.3",
     "vinyl-buffer": "^1.0.0"
