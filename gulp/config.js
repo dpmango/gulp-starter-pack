@@ -22,7 +22,9 @@ var config = {
     iconsSvg     : 'src/icons',
     iconsFont    : 'src/icons',
     fonts        : 'src/fonts',
-    vendor       : 'src/vendor'
+    vendor       : 'src/vendor',
+    php          : 'src/php',
+    json         : 'src/json'
   },
   dest: {
     root  : destPath,
@@ -31,7 +33,9 @@ var config = {
     js    : destPath + '/js',
     img   : destPath + '/img',
     fonts : destPath + '/fonts',
-    vendor: destPath + '/vendor'
+    vendor: destPath + '/vendor',
+    php   : destPath + '/php',
+    json  : destPath + '/json'
   },
 
   setEnv: function(env) {

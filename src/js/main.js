@@ -7,18 +7,6 @@ $(document).ready(function(){
   var _window = $(window);
   var _document = $(document);
 
-  // BREAKPOINT SETTINGS
-  var bp = {
-    mobileS: 375,
-    mobile: 568,
-    tablet: 768,
-    desktop: 992,
-    wide: 1336,
-    hd: 1680
-  }
-
-  var easingSwing = [.02, .01, .47, 1]; // default jQuery easing for anime.js
-
   ////////////
   // READY - triggered when PJAX DONE
   ////////////
@@ -31,14 +19,16 @@ $(document).ready(function(){
     initSliders();
     initScrollMonitor();
     initMasks();
-    initLazyLoad();
+    initSelectric();
+    initValidations();
 
     // development helper
     _window.on('resize', debounce(setBreakpoint, 200))
 
     // AVAILABLE in _components folder
     // copy paste in main.js and initialize here
-
+    // initPerfectScrollbar();
+    // initLazyLoad();
     // initTeleport();
     // parseSvg();
     // revealFooter();
@@ -65,7 +55,7 @@ $(document).ready(function(){
 
     // Viewport units buggyfill
     window.viewportUnitsBuggyfill.init({
-      force: true,
+      force: false,
       refreshDebounceWait: 150,
       appendToBody: true
     });
@@ -140,38 +130,35 @@ $(document).ready(function(){
   //////////
 
   function initSliders(){
-    var slickNextArrow = '<div class="slick-prev"><svg class="ico ico-back-arrow"><use xlink:href="img/sprite.svg#ico-back-arrow"></use></svg></div>';
-    var slickPrevArrow = '<div class="slick-next"><svg class="ico ico-next-arrow"><use xlink:href="img/sprite.svg#ico-next-arrow"></use></svg></div>'
 
-    // General purpose sliders
-    $('[js-slider]').each(function(i, slider){
-      var self = $(slider);
-
-      // set data attributes on slick instance to control
-      if (self && self !== undefined) {
-        self.slick({
-          autoplay: self.data('slick-autoplay') !== undefined ? true : false,
-          dots: self.data('slick-dots') !== undefined ? true : false,
-          arrows: self.data('slick-arrows') !== undefined ? true : false,
-          prevArrow: slickNextArrow,
-          nextArrow: slickPrevArrow,
-          infinite: self.data('slick-infinite') !== undefined ? true : true,
-          speed: 300,
-          slidesToShow: 1,
-          accessibility: false,
-          adaptiveHeight: true,
-          draggable: self.data('slick-no-controls') !== undefined ? false : true,
-          swipe: self.data('slick-no-controls') !== undefined ? false : true,
-          swipeToSlide: self.data('slick-no-controls') !== undefined ? false : true,
-          touchMove: self.data('slick-no-controls') !== undefined ? false : true
-        });
+    // EXAMPLE SWIPER
+    new Swiper('[js-slider]', {
+      wrapperClass: "swiper-wrapper",
+      slideClass: "example-slide",
+      direction: 'horizontal',
+      loop: false,
+      watchOverflow: true,
+      setWrapperSize: false,
+      spaceBetween: 0,
+      slidesPerView: 'auto',
+      // loop: true,
+      normalizeSlideIndex: true,
+      // centeredSlides: true,
+      freeMode: true,
+      // effect: 'fade',
+      autoplay: {
+        delay: 5000,
+      },
+      navigation: {
+        nextEl: '.example-next',
+        prevEl: '.example-prev',
+      },
+      breakpoints: {
+        // when window width is <= 992px
+        992: {
+          autoHeight: true
+        }
       }
-
-    })
-
-    // other individual sliders goes here
-    $('[js-myCustomSlider]').slick({
-
     })
 
   }
@@ -250,6 +237,32 @@ $(document).ready(function(){
     $("input[type='tel']").mask("+7 (000) 000-0000", {placeholder: "+7 (___) ___-____"});
   }
 
+  // selectric
+  function initSelectric(){
+    $('select').selectric({
+      maxHeight: 300,
+      arrowButtonMarkup: '<b class="button"><svg class="ico ico-select-down"><use xlink:href="img/sprite.svg#ico-select-down"></use></svg></b>',
+
+      onInit: function(element, data){
+        var $elm = $(element),
+            $wrapper = $elm.closest('.' + data.classes.wrapper);
+
+        $wrapper.find('.label').html($elm.attr('placeholder'));
+      },
+      onBeforeOpen: function(element, data){
+        var $elm = $(element),
+            $wrapper = $elm.closest('.' + data.classes.wrapper);
+
+        $wrapper.find('.label').data('value', $wrapper.find('.label').html()).html($elm.attr('placeholder'));
+      },
+      onBeforeClose: function(element, data){
+        var $elm = $(element),
+            $wrapper = $elm.closest('.' + data.classes.wrapper);
+
+        $wrapper.find('.label').html($wrapper.find('.label').data('value'));
+      }
+    });
+  }
 
   ////////////
   // SCROLLMONITOR - WOW LIKE
@@ -280,44 +293,117 @@ $(document).ready(function(){
       }, 100, {
         'leading': true
       }));
-      elWatcher.exitViewport(throttle(function() {
-        $(el).removeClass(animationClass);
-        $(el).css({
-          'animation-name': 'none',
-          'animation-delay': 0,
-          'visibility': 'hidden'
-        });
-      }, 100));
+      // elWatcher.exitViewport(throttle(function() {
+      //   $(el).removeClass(animationClass);
+      //   $(el).css({
+      //     'animation-name': 'none',
+      //     'animation-delay': 0,
+      //     'visibility': 'hidden'
+      //   });
+      // }, 100));
     });
 
   }
 
+  ////////////////
+  // FORM VALIDATIONS
+  ////////////////
 
-  //////////
-  // LAZY LOAD
-  //////////
-  function initLazyLoad(){
-    _document.find('[js-lazy]').Lazy({
-      threshold: 500,
-      enableThrottle: true,
-      throttle: 100,
-      scrollDirection: 'vertical',
-      effect: 'fadeIn',
-      effectTime: 350,
-      // visibleOnly: true,
-      // placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7...",
-      onError: function(element) {
-          console.log('error loading ' + element.data('src'));
+  // jQuery validate plugin
+  // https://jqueryvalidation.org
+  function initValidations(){
+    // GENERIC FUNCTIONS
+    var validateErrorPlacement = function(error, element) {
+      error.addClass('ui-input__validation');
+      error.appendTo(element.parent("div"));
+    }
+    var validateHighlight = function(element) {
+      $(element).parent('div').addClass("has-error");
+    }
+    var validateUnhighlight = function(element) {
+      $(element).parent('div').removeClass("has-error");
+    }
+    var validateSubmitHandler = function(form) {
+      $(form).addClass('loading');
+      $.ajax({
+        type: "POST",
+        url: $(form).attr('action'),
+        data: $(form).serialize(),
+        success: function(response) {
+          $(form).removeClass('loading');
+          var data = $.parseJSON(response);
+          if (data.status == 'success') {
+            // do something I can't test
+          } else {
+              $(form).find('[data-error]').html(data.message).show();
+          }
+        }
+      });
+    }
+
+    var validatePhone = {
+      required: true,
+      normalizer: function(value) {
+          var PHONE_MASK = '+X (XXX) XXX-XXXX';
+          if (!value || value === PHONE_MASK) {
+              return value;
+          } else {
+              return value.replace(/[^\d]/g, '');
+          }
       },
-      beforeLoad: function(element){
-        // element.attr('style', '')
+      minlength: 11,
+      digits: true
+    }
+
+    ////////
+    // FORMS
+
+
+    /////////////////////
+    // REGISTRATION FORM
+    ////////////////////
+    $(".js-registration-form").validate({
+      errorPlacement: validateErrorPlacement,
+      highlight: validateHighlight,
+      unhighlight: validateUnhighlight,
+      submitHandler: validateSubmitHandler,
+      rules: {
+        last_name: "required",
+        first_name: "required",
+        email: {
+          required: true,
+          email: true
+        },
+        password: {
+          required: true,
+          minlength: 6,
+        }
+        // phone: validatePhone
+      },
+      messages: {
+        last_name: "Заполните это поле",
+        first_name: "Заполните это поле",
+        email: {
+            required: "Заполните это поле",
+            email: "Email содержит неправильный формат"
+        },
+        password: {
+            required: "Заполните это поле",
+            email: "Пароль мимимум 6 символов"
+        },
+        // phone: {
+        //     required: "Заполните это поле",
+        //     minlength: "Введите корректный телефон"
+        // }
       }
     });
   }
 
+
   //////////
   // BARBA PJAX
   //////////
+  var easingSwing = [.02, .01, .47, 1]; // default jQuery easing for anime.js
 
   Barba.Pjax.Dom.containerClass = "page";
 
@@ -357,7 +443,7 @@ $(document).ready(function(){
 
       anime({
         targets: "html, body",
-        scrollTop: 0,
+        scrollTop: 1,
         easing: easingSwing, // swing
         duration: 150
       });
@@ -392,8 +478,26 @@ $(document).ready(function(){
 
   // some plugins get bindings onNewPage only that way
   function triggerBody(){
+    _window.scrollTop(0);
     $(window).scroll();
     $(window).resize();
+  }
+
+  //////////
+  // MEDIA Condition helper function
+  //////////
+  function mediaCondition(cond){
+    var disabledBp;
+    var conditionMedia = cond.substring(1);
+    var conditionPosition = cond.substring(0, 1);
+
+    if (conditionPosition === "<") {
+      disabledBp = _window.width() < conditionMedia;
+    } else if (conditionPosition === ">") {
+      disabledBp = _window.width() > conditionMedia;
+    }
+
+    return disabledBp
   }
 
   //////////
@@ -403,7 +507,6 @@ $(document).ready(function(){
     var wHost = window.location.host.toLowerCase()
     var displayCondition = wHost.indexOf("localhost") >= 0 || wHost.indexOf("surge") >= 0
     if (displayCondition){
-      console.log(displayCondition)
       var wWidth = _window.width();
 
       var content = "<div class='dev-bp-debug'>"+wWidth+"</div>";

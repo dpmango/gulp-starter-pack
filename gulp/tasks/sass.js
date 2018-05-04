@@ -36,7 +36,7 @@ var processors = [
   focus(),
   easings(),
   autoprefixer({
-    browsers: ['last 10 versions'],
+    browsers: ['last 5 versions'],
     remove: true, // remove outdated prefixes?
     // cascade: false
   }),

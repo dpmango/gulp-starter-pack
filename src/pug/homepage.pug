@@ -7,8 +7,7 @@ block content
   
   // dummy contents & instructions
   // REMOVE COMPLEATLY, it have nothing to do with project code - examples only
-  // and never again use inline styling :)
-  
+
   .container.test(style="margin-bottom: 100px")
     section
       h1 General instructions - <a href="https://github.com/dpmango/gulp-starter-pack" target="_blank">gulp starter pack</a>
@@ -39,21 +38,6 @@ block content
       p please use _document.on('click', 'el_selector', function ... ) for barba.js bindings
     
     // section
-    section.wow(data-animation-class="wowFadeLeft")
-      h2 TELEPORT
-      p should be used when dirty fixes with css whole sections gets .hidden-desktop and .visible-mobile kind of toggling
-        | <br> Only when css fixes not possible, such as: flex-direction: collumn-reverse, order: , etc..
-      
-      // .html(objHtml) takes all inner contents and past to data-telport-target
-      div(js-teleport data-teleport-to="example" data-teleport-condition="<768")
-        div(style="width: 200px; height: 200px; background: #ff5f5f; color: white; display: flex; align-items:center; justify-content: center") Some content
-      
-      p 
-        i Some dymmy content - block on the top would go bellow on mobile less 768px
-      
-      div(data-teleport-target="example")
-    
-    // section
     section.wow(style="margin-top: 50px; max-width: 400px;" data-animation-class="wowFadeRight")
       h2 UI
       form(js-validate)
@@ -71,6 +55,38 @@ block content
         
         button(type="submit").btn.btn-example Submit
     
+    // section
+    section.wow(data-animation-class="wowFadeDown")
+      h2 Swiper
+      
+      .swiper-container(js-slider)
+        .swiper-wrapper
+          .example-slide(style="flex: 0 0 250px;")
+            div(style="background: blue; height: 200px;")
+          .example-slide(style="flex: 0 0 250px; ")
+            div(style="background: tomato; height: 200px;")
+          .example-slide(style="flex: 0 0 250px; ")
+            div(style="background: forestgreen; height: 200px;")
+          .example-slide(style="flex: 0 0 250px;")
+            div(style="background: blue; height: 200px;")
+          .example-slide(style="flex: 0 0 250px; ")
+            div(style="background: tomato; height: 200px;")
+          .example-slide(style="flex: 0 0 250px; ")
+            div(style="background: forestgreen; height: 200px;")
+          .example-slide(style="flex: 0 0 250px;")
+            div(style="background: blue; height: 200px;")
+          .example-slide(style="flex: 0 0 250px; ")
+            div(style="background: tomato; height: 200px;")
+          .example-slide(style="flex: 0 0 250px; ")
+            div(style="background: forestgreen; height: 200px;")
+            
+        // navigation
+        .example-next
+          span >
+        
+        .example-prev
+          span <
+          
     // section
     section.wow(data-animation-class="wowFadeDown")
       h2 Easings
