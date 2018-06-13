@@ -2,21 +2,13 @@
 This package intended to solve common front-end development tasks. Works best for psd/sketch to html projects and save you a lot of time setting up local environment
 
 ## Demo page
-https://projectname.surge.sh
+https://projectname.surge.sh (change name in package.json)
 
 ## How to start
 * `yarn` - install npm dependencies
 * `bower install` - install bower packages
 * `gulp` - run dev-server
 * `gulp build` - build project from sources
-
-### Build fails using npm ?
-It's known bug that build fails on list-pages task using **npm**. You should use **yarn** instead or disable list-pages task.
-
-* Install yarn - Follow instructions on https://yarnpkg.com/en/docs/install
-* Remove node_modules folder `rm -rf node_modules`
-* Reinstall packages with yarn - `yarn`
-* Start `gulp` or `gulp build`
 
 ## List of Gulp tasks
 To run separate task type in command line `gulp [task_name]`.
@@ -56,7 +48,7 @@ All available tasks are placed in a folder `./gulp/tasks` as separate **.js** fi
 There are git hooks for [surge](https://surhe.sh) deploy. Every push will execute deploy to specific surge domain of **./dist** folder
 
 Exmaple:
-`surge --project ./dist --domain khmelevskoy.surge.sh`
+`surge --project ./dist --domain projectname.surge.sh`
 
 If it's not working correctly, try installing git-scripts manually:
 `yarn add git-scripts --save`
