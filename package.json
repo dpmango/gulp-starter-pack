@@ -1,13 +1,14 @@
 {
-  "name": "gulp-tpl",
-  "version": "2.0.0",
+  "name": "gulp-started-pack",
+  "version": "2.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "gulp",
     "build": "gulp build --production",
     "lint": "eslint --ignore-pattern 'src/js/lib/' --cache --format=node_modules/eslint-formatter-pretty src/js/",
-    "surge": "gulp build --production && surge --project ./dist --domain khmelevskoy.surge.sh"
+    "surge": "surge --project ./dist --domain dragons-team.surge.sh",
+    "deploy": "gulp build --production && surge --project ./dist --domain khmelevskoy.surge.sh"
   },
   "git": {
     "scripts": {

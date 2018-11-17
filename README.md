@@ -1,14 +1,12 @@
 # Gulp Starter Pack
 This package intended to solve common front-end development tasks. Works best for psd/sketch to html projects and save you a lot of time setting up local environment
 
-## Demo page
-https://projectname.surge.sh (change name in package.json)
-
 ## How to start
-* `yarn` - install npm dependencies
-* `bower install` - install bower packages
+* `yarn` or `npm i` - install npm dependencies
+* `bower i` - install bower packages
 * `gulp` - run dev-server
 * `gulp build` - build project from sources
+* `yarn deploy` or `npm run deploy` - run build and deploy to surge
 
 ## List of Gulp tasks
 To run separate task type in command line `gulp [task_name]`.
@@ -27,7 +25,7 @@ Task name          | Description
 `sass` 	         | compile .sass/.scss to .css. Included [postcss](https://github.com/postcss/postcss) for [autoprefixer](https://github.com/postcss/autoprefixer), flexbugs and other cool [plugins](https://github.com/postcss/postcss#plugins) you might add
 `pug`              | compile [pug](http://pug-js.com/) templates
 `javascript`       | combines vendor files and custom .js code into separate files
-`sprite:svg`       | create svg symbol sprites
+`sprite:svg`       | create svg symbol sprites (monocolor and multicolor)
 `sprite:png`       | create png sprites
 `images`           | optimize, minify and clone images
 `server`           | run dev-server powered by [BrowserSync](https://www.browsersync.io/)
@@ -53,12 +51,12 @@ Exmaple:
 If it's not working correctly, try installing git-scripts manually:
 `yarn add git-scripts --save`
 
-use `yarn surge` to do the same, but it will run `gulp build` first and deploy production version of build (mostly about minified assets)
+use `yarn surge` or `npm run surge` to do the same. `deploy` command will run `build` with production flag and upload to surge
 
 
 ## Other
 You can also use [npm scripts](https://docs.npmjs.com/misc/scripts):
 
-* `yarn start` - same as `gulp default`.
-* `yarn build` - same as `gulp build`.
-* `yarn surge` - deploy `./dist` folder to **surge** (used for previews). Request deploy rights from owner (surge --add friend@email.co)
+* `yarn start` or `npm start` - same as `gulp default`.
+* `yarn build` or `npm run build` - same as `gulp build`.
+* `yarn surge` or `npm run surge` - deploy `./dist` folder to **surge** (used for previews). Request deploy rights from owner (surge --add friend@email.co)
