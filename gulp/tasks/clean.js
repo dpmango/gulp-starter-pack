@@ -12,9 +12,6 @@ gulp.task('clean:dist', function() {
     '!' + config.dest.root + '/images',
     '!' + config.dest.root + '/images/**/*'
   ]);
-  // .then(function(paths) {
-  //   util.log('Deleted:', util.colors.magenta(paths.join('\n')));
-  // });
 })
 
 // Clear gulp cache

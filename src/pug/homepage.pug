@@ -22,7 +22,7 @@ block content
     // section
     section.wow(data-animation-delay=".3s")
       h2 SVG icons
-      p For svg icons use pug mixin +icon . You can customize it as it would be regular font. font-size property should be set as icon height
+      p For svg icons use pug mixin +svgMono(nameOfIcon) or +svgColor(nameOfIcon). You can customize it as it would be regular font. font-size property should be set as icon height
       p Please keep in mind exoprting svg. 
         | Sketch is good in all cases. 
         | Photoshop + illustrator - use quick export function (CC2017+) with ctrl+c ctrl+v of layers
@@ -30,8 +30,12 @@ block content
       p Folder: /src/icons
       
       div(style="color: rebeccapurple; font-size: 20px")
-        +icon('ico-email')
-    
+        +svgMono('email')
+      
+      // color will not be affected
+      div(style="color: rebeccapurple; font-size: 40px; margin-top: 10px")
+        +svgColor('example')
+          
     // section
     section.wow(data-animation-delay=".6s")
       h2 JS and barba

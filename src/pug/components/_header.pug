@@ -3,7 +3,7 @@ header.header
   .container
     .header__wrapper
       a(href="#").header__logo
-        +icon('ico-email')
+        +svgMono('email')
       ul.header__menu
         - var list = ["Homepage", "Shop", "Blog", "Lorem"]
           each item in list
@@ -12,7 +12,7 @@ header.header
       
       .header__cta
         .header__cart
-          +icon('ico-email')
+          +svgMono('email')
       
       .header__hamburger
         .hamburger.hamburger--squeeze(js-hamburger)
