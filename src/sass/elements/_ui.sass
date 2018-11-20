@@ -1,4 +1,4 @@
-// UI
+/* UI
 
 
 // WORKS KIND OF bootstrap - group have label and input
@@ -8,20 +8,29 @@
   label
     display: block
     margin-bottom: 10px
-  input, textarea
-    display: block
-    width: 100%
-    -webkit-appearance: none
-    background: white
-    color: $grayColor
-    border: 1px solid $borderColor
-    border-radius: 4px
-    padding: 12px 15px
-  textarea
-    resize: vertical
+
+// for input or textarea element
+.ui-input
+  -webkit-appearance: none
+  display: block
+  width: 100%
+  background: white
+  font-family: $systemFont
+  color: $fontColor50
+  border: 1px solid $borderColor
+  border-radius: 4px
+  padding: 12px 15px
+  &.has-error
+    color: $colorRed
+    &::placeholder
+      color: rgba($colorRed, .5)
+
+.ui-input textarea
+  resize: vertical
 
 
-// Checkbox
+
+/* Checkbox
 .ui-checkbox
   input
     display: none

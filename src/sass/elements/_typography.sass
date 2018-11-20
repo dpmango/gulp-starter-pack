@@ -1,0 +1,105 @@
+.h1-title
+  font-size: 72px
+  font-weight: 700
+  line-height: 1
+  letter-spacing: em(-1.22, 72)
+
+.h2-title
+  font-size: 48px
+  font-weight: 700
+  letter-spacing: em(-.33, 48)
+
+.h3-title
+  font-size: 28px
+  letter-spacing: em(-0.17, 28)
+  font-weight: 700
+
++r($lg)
+  .h1-title
+    font-size: 46px
+  .h2-title
+    font-size: 38px
+  .h3-title
+    font-size: 24px
+
++r($sm)
+  .h1-title
+    font-size: 36px
+  .h2-title
+    font-size: 34px
+  .h3-title
+    font-size: 20px
+
++r($mobile-s)
+  .h1-title
+    font-size: 32px
+  .h2-title
+    font-size: 26px
+  .h3-title
+    font-size: 18px
+
+.more-link
+  position: relative
+  z-index: 1
+  display: inline-flex
+  align-items: baseline
+  font-size: 0
+  color: $colorRed
+  padding-right: 10px
+  transition: .25s $ease
+  span
+    display: inline-block
+    font-size: 16px
+    text-transform: uppercase
+    font-weight: 700
+    letter-spacing: em(0.5, 16)
+  .ico
+    position: absolute
+    z-index: 1
+    top: 50%
+    right: 0
+    font-size: 13.5px
+    // dirty fix to align icon on font baseline (flex not helping)
+    transform: translate(0, -55%)
+    will-change: transform
+    transition: transform .25s $ease
+  &:hover
+    color: $colorRedHover
+    .ico
+      transform: translate(3px, -55%)
+
+  &--white
+    color: white
+    &:hover
+      color: $colorPrimary
+
++r($sm)
+  .more-link
+    span
+      font-size: 13px
+    .ico
+      font-size: 12px
+      transform: translate(0, -45%)
+    &:hover
+      .ico
+        transform: translate(3px, -45%)
+
+// little inline helpers
+.f-400
+  font-weight: normal
+
+.f-500
+  font-weight: 500
+
+.f-600
+  font-weight: 600
+
+.f-700
+  font-weight: 700
+
+.f-900
+  font-weight: 900
+
+
+.c-red
+  color: $colorRed

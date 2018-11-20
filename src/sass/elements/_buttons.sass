@@ -11,7 +11,8 @@ button
   display: inline-block
   position: relative
   text-align: center
-  transition: all $transitionSpeed ease-in-out
+  cursor: pointer
+  transition: all $transitionSpeed $ease
   &:focus, &:active
     outline: none
   &--block
@@ -20,7 +21,7 @@ button
 
   &-example
     // please use paddings instead of line-height to control btn height
-    background: $colorOrange
+    background: $colorPrimary
     font-size: 20px
     padding: 15px 30px
     color: white
@@ -30,5 +31,5 @@ button
     will-change: box-shadow, transform
     &:hover
       transform: scale(1.05) translateY(-5px)
-      background: rgba($colorOrange, .9)
+      background: rgba($colorPrimary, .9)
       box-shadow: 0 15px 10px -15px rgba($fontColor, .4)
