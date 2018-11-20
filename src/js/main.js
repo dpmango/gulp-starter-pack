@@ -6,34 +6,41 @@ $(document).ready(function(){
 
   var _window = $(window);
   var _document = $(document);
+  var lastScroll = 0;
 
   ////////////
-  // READY - triggered when PJAX DONE
+  // LIST OF FUNCTIONS
   ////////////
+
+  // some functions should be called once only
+  legacySupport();
+  initHeaderScroll();
+
+  // triggered when PJAX DONE
   function pageReady(){
-    legacySupport();
     updateHeaderActiveClass();
-    initHeaderScroll();
+    closeMobileMenu();
 
-    initPopups();
     initSliders();
-    initScrollMonitor();
+    initPopups();
     initMasks();
     initSelectric();
+    initScrollMonitor();
     initValidations();
-
-    // development helper
-    _window.on('resize', debounce(setBreakpoint, 200))
 
     // AVAILABLE in _components folder
     // copy paste in main.js and initialize here
+    // revealFooter();
     // initPerfectScrollbar();
+    // initCountDown();
     // initLazyLoad();
     // initTeleport();
     // parseSvg();
-    // revealFooter();
-    // _window.on('resize', throttle(revealFooter, 100));
   }
+
+  // scroll/resize listener
+  // _window.on('resize', throttle(revealFooter, 100));
+  _window.on('resize', debounce(setBreakpoint, 200))
 
   // this is a master function which should have all functionality
   pageReady();
@@ -65,8 +72,16 @@ $(document).ready(function(){
   // Prevent # behavior
 	_document
     .on('click', '[href="#"]', function(e) {
-  		e.preventDefault();
-  	})
+      e.preventDefault();
+    })
+    .on('click', '[js-link]', function(e){
+      var dataHref = $(this).data('href');
+      if (dataHref && dataHref !== "#"){
+        e.preventDefault();
+        e.stopPropagation();
+        Barba.Pjax.goTo(dataHref);
+      }
+    })
     .on('click', 'a[href^="#section"]', function() { // section scroll
       var el = $(this).attr('href');
       $('body, html').animate({
@@ -101,16 +116,50 @@ $(document).ready(function(){
     }, 10));
   }
 
-
+  ////////////////////
   // HAMBURGER TOGGLER
+  ////////////////////
+  // disable / enable scroll by setting negative margin to page-content eq. to prev. scroll
+  // this methods helps to prevent page-jumping on setting body height to 100%
+  function disableScroll() {
+    lastScroll = _window.scrollTop();
+    $('.page__content').css({
+      'margin-top': '-' + lastScroll + 'px'
+    });
+    $('body').addClass('body-lock');
+    $('.footer').addClass('is-hidden'); // if you use revealFooter()
+  }
+
+  function enableScroll() {
+    $('.page__content').css({
+      'margin-top': '-' + 0 + 'px'
+    });
+    $('body').removeClass('body-lock');
+    $('.footer').removeClass('is-hidden'); // if you use revealFooter()
+    _window.scrollTop(lastScroll)
+    lastScroll = 0;
+  }
+
+  function blockScroll() {
+    if ($('[js-hamburger]').is('.is-active')) {
+      disableScroll();
+    } else {
+      enableScroll();
+    }
+  };
+
   _document.on('click', '[js-hamburger]', function(){
     $(this).toggleClass('is-active');
     $('.mobile-navi').toggleClass('is-active');
+
+    blockScroll();
   });
 
   function closeMobileMenu(){
     $('[js-hamburger]').removeClass('is-active');
     $('.mobile-navi').removeClass('is-active');
+
+    blockScroll();
   }
 
   // SET ACTIVE CLASS IN HEADER
@@ -125,10 +174,26 @@ $(document).ready(function(){
     });
   }
 
+
+
+  /***************
+  * PAGE SPECIFIC *
+  ***************/
+
+  _document
+    .on('click', '[js-inner-page-btn]', function(){
+
+    })
+
+
+  /**********
+  * PLUGINS *
+  **********/
+
+
   //////////
   // SLIDERS
   //////////
-
   function initSliders(){
 
     // EXAMPLE SWIPER
@@ -318,10 +383,10 @@ $(document).ready(function(){
       error.appendTo(element.parent("div"));
     }
     var validateHighlight = function(element) {
-      $(element).parent('div').addClass("has-error");
+      $(element).addClass("has-error");
     }
     var validateUnhighlight = function(element) {
-      $(element).parent('div').removeClass("has-error");
+      $(element).removeClass("has-error");
     }
     var validateSubmitHandler = function(form) {
       $(form).addClass('loading');
@@ -354,10 +419,6 @@ $(document).ready(function(){
       minlength: 11,
       digits: true
     }
-
-    ////////
-    // FORMS
-
 
     /////////////////////
     // REGISTRATION FORM
@@ -397,8 +458,33 @@ $(document).ready(function(){
         // }
       }
     });
-  }
 
+    // when multiple forms share functionality
+
+    // var subscriptionValidationObject = {
+    //   errorPlacement: validateErrorPlacement,
+    //   highlight: validateHighlight,
+    //   unhighlight: validateUnhighlight,
+    //   submitHandler: validateSubmitHandler,
+    //   rules: {
+    //     email: {
+    //       required: true,
+    //       email: true
+    //     }
+    //   },
+    //   messages: {
+    //     email: {
+    //       required: "Fill this field",
+    //       email: "Email is invalid"
+    //     }
+    //   }
+    // }
+
+    // call/init
+    // $("[js-subscription-validation]").validate(subscriptionValidationObject);
+    // $("[js-subscription-validation-footer]").validate(subscriptionValidationObject);
+    // $("[js-subscription-validation-menu]").validate(subscriptionValidationObject);
+  }
 
   //////////
   // BARBA PJAX
@@ -470,10 +556,7 @@ $(document).ready(function(){
   Barba.Pjax.start();
 
   Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container, newPageRawHTML) {
-
     pageReady();
-    closeMobileMenu();
-
   });
 
   // some plugins get bindings onNewPage only that way
@@ -481,23 +564,6 @@ $(document).ready(function(){
     _window.scrollTop(0);
     $(window).scroll();
     $(window).resize();
-  }
-
-  //////////
-  // MEDIA Condition helper function
-  //////////
-  function mediaCondition(cond){
-    var disabledBp;
-    var conditionMedia = cond.substring(1);
-    var conditionPosition = cond.substring(0, 1);
-
-    if (conditionPosition === "<") {
-      disabledBp = _window.width() < conditionMedia;
-    } else if (conditionPosition === ">") {
-      disabledBp = _window.width() > conditionMedia;
-    }
-
-    return disabledBp
   }
 
   //////////
@@ -522,3 +588,8 @@ $(document).ready(function(){
   }
 
 });
+
+
+// HELPERS and PROTOTYPE FUNCTIONS
+
+// i.e. linear-normalization or Number.pad
