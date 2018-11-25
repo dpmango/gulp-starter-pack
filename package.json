@@ -73,5 +73,8 @@
     "surge": "^0.20.1",
     "through2": "^2.0.3",
     "vinyl-buffer": "^1.0.0"
+  },
+  "resolutions": {
+    "natives": "1.1.3"
   }
 }
