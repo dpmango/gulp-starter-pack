@@ -1,0 +1,45 @@
+.mobile-navi
+  display: none
+  position: fixed 0
+  z-index: 8
+  background: $colorBg
+  // display: flex
+  flex-direction: column
+  pointer-events: none
+  transform: translate3d(0,-100%,0)
+  transition: transform .3s $ease
+  &__wrapper
+    flex: 1 1 auto
+    display: flex
+    flex-direction: column
+    padding: 50px 25px 20px
+  &__menu
+    margin-top: auto
+    padding: 20px 0
+    list-style: none
+    text-align: center
+    li
+      display: block
+      font-size: 36px
+      margin-bottom: 30px
+      &:last-child
+        margin-bottom: 0
+    a
+      transition: .25s $ease
+      &:hover
+        color: $fontColor50
+  &__cta
+    text-align: center
+    margin-top: auto
+    a
+      transition: .25s $ease
+      &:hover
+        color: $fontColor50
+
+  &.is-active
+    pointer-events: all
+    transform: translate3d(0,0,0)
+
++r($md)
+  .mobile-navi
+    display: flex

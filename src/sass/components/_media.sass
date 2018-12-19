@@ -1,0 +1,30 @@
+// keep space for preloading images via AR set
+.scaler
+  display: block
+  position: relative
+  z-index: 1
+  font-size: 0
+  overflow: hidden
+  background-color: $colorBg
+  background-repeat: no-repeat
+  background-size: cover
+  background-position: center center
+  &[data-ar="16:9"]
+    padding-bottom: 56.25%
+  &[data-ar="1:1"]
+    padding-bottom: 100%
+  &[data-ar="4:3"]
+    padding-bottom: 75%
+  &[data-ar="21:9"]
+    padding-bottom: 42.85%
+  img
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    [js-lazy]
+      will-change: opacity
+      backface-visibility: hidden
+  &.is-loaded
+    &.no-bg-onload
+      background-image: none !important

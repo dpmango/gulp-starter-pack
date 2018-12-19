@@ -2,13 +2,15 @@
 header.header
   .container
     .header__wrapper
-      a(href="#").header__logo
+      a(href="homepage.html").header__logo
         +svgMono('email')
       ul.header__menu
-        - var list = ["Homepage", "Shop", "Blog", "Lorem"]
-          each item in list
-            li
-              a.header__menu-link(href="#")=item
+        li
+          a(href="homepage.html") Homepage
+        li
+          a(href="page.html") Shop
+        li
+          a(href="page.html") Lorem
       
       .header__cta
         .header__cart
@@ -18,5 +20,16 @@ header.header
         .hamburger.hamburger--squeeze(js-hamburger)
           .hamburger-box
             .hamburger-inner
-        
-// HEADER :: END
+    
+// MOBILE NAVI
+.mobile-navi
+  .mobile-navi__wrapper
+    ul.mobile-navi__menu
+      li
+        a(href="homepage.html") Homepage
+      li
+        a(href="page.html") Shop
+      li
+        a(href="page.html") Lorem
+    .mobile-navi__cta
+      a(href="mailto:sergey@khmelevskoy.co") sergey@khmelevskoy.co

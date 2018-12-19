@@ -7,7 +7,7 @@
     "start": "gulp",
     "build": "gulp build --production",
     "lint": "eslint --ignore-pattern 'src/js/lib/' --cache --format=node_modules/eslint-formatter-pretty src/js/",
-    "surge": "surge --project ./dist --domain dragons-team.surge.sh",
+    "surge": "surge --project ./dist --domain khmelevskoy.surge.sh",
     "deploy": "gulp build --production && surge --project ./dist --domain khmelevskoy.surge.sh"
   },
   "git": {
@@ -28,6 +28,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.1.0",
     "git-scripts": "^0.2.1",
+    "gsap": "^2.0.2",
     "gulp": "^3.9.1",
     "gulp-cache": "^1.0.2",
     "gulp-changed": "^3.1.0",

@@ -1,3 +1,14 @@
+// force scroll to top on initial load
+window.onbeforeunload = function(){
+  window.scrollTo(0,0)
+}
+
+$(window).on("load", function(){
+  $.ready.then(function(){
+    window.onLoadTrigger()
+  });
+})
+
 $(document).ready(function(){
 
   //////////
@@ -6,7 +17,31 @@ $(document).ready(function(){
 
   var _window = $(window);
   var _document = $(document);
-  var lastScroll = 0;
+  var lastScrollBodyLock = 0;
+  var lastScrollDir = 0;
+
+  var easingSwing = [.02, .01, .47, 1]; // default jQuery easing
+
+  var scroll = {
+    y: _window.scrollTop(),
+    direction: undefined,
+    blocked: false,
+    lastForBodyLock: 0,
+    lastForScrollDir: 0
+  }
+
+  var header = {
+    container: undefined,
+    bottomPoint: undefined
+  }
+
+  var browser = {
+    isRetinaDisplay: isRetinaDisplay(),
+    isIe: msieversion(),
+    isMobile: isMobile()
+  }
+
+  var sliders = [] // collection of all sliders
 
   ////////////
   // LIST OF FUNCTIONS
@@ -14,10 +49,11 @@ $(document).ready(function(){
 
   // some functions should be called once only
   legacySupport();
-  initHeaderScroll();
+  // preloaderDone();
 
-  // triggered when PJAX DONE
-  function pageReady(){
+  // The new container has been loaded and injected in the wrapper.
+  function pageReady(fromPjax){
+    getHeaderParams();
     updateHeaderActiveClass();
     closeMobileMenu();
 
@@ -38,23 +74,62 @@ $(document).ready(function(){
     // parseSvg();
   }
 
-  // scroll/resize listener
-  // _window.on('resize', throttle(revealFooter, 100));
-  _window.on('resize', debounce(setBreakpoint, 200))
+  // The transition has just finished and the old Container has been removed from the DOM.
+  function pageCompleated(fromPjax){
+    if ( fromPjax ){
+      window.onLoadTrigger()
+    }
+  }
+
+  // some plugins work best with onload triggers
+  window.onLoadTrigger = function onLoad(){
+    preloaderDone();
+    initLazyLoad();
+  }
 
   // this is a master function which should have all functionality
   pageReady();
+  pageCompleated();
 
+  // scroll/resize listeners
+  _window.on('scroll', getWindowScroll);
+  _window.on('scroll', scrollHeader);
+  // debounce/throttle examples
+  // _window.on('resize', throttle(revealFooter, 100));
+  _window.on('resize', debounce(setBreakpoint, 200))
 
-  // some plugins work best with onload triggers
-  _window.on('load', function(){
-    // your functions
-  })
 
 
   //////////
   // COMMON
   //////////
+
+  // detectors
+  function isRetinaDisplay() {
+    if (window.matchMedia) {
+        var mq = window.matchMedia("only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen  and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx)");
+        return (mq && mq.matches || (window.devicePixelRatio > 1));
+    }
+  }
+
+  function isMobile(){
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  function msieversion() {
+    var ua = window.navigator.userAgent;
+    var msie = ua.indexOf("MSIE ");
+
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   function legacySupport(){
     // svg support for laggy browsers
@@ -66,8 +141,24 @@ $(document).ready(function(){
       refreshDebounceWait: 150,
       appendToBody: true
     });
+
+    if ( browser.isIe ){
+      $('body').addClass('is-ie');
+
+      // ie pollyfil for picture tag
+      // (will be called on itialization - use as lazy load callback)
+      // picturefill(); 
+    }
+
+    if ( browser.isMobile ){
+      $('body').addClass('is-mobile');
+    }
   }
 
+  // preloader
+  function preloaderDone(){
+    $('#barba-wrapper').addClass('is-preloaded');
+  }
 
   // Prevent # behavior
 	_document
@@ -82,38 +173,82 @@ $(document).ready(function(){
         Barba.Pjax.goTo(dataHref);
       }
     })
+    // prevent going the same link (if barba is connected)
+    .on('click', 'a, [js-link]', function(e){
+      var href = $(this).data('href') || $(this).attr('href');
+      var path = window.location.pathname
+
+      if ( href === path.slice(1, path.length) ){
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    })
+    // scroll to section
     .on('click', 'a[href^="#section"]', function() { // section scroll
       var el = $(this).attr('href');
-      $('body, html').animate({
-          scrollTop: $(el).offset().top}, 1000);
+      var topTarget = $(el).offset().top
+
+      // $('body, html').animate({scrollTop: topTarget}, 1000);
+      TweenLite.to(window, 1, {
+        scrollTo: {y: $(el).offset().top, autoKill:false},
+        ease: easingSwing
+      });
+
       return false;
     })
 
+  // just store global variable with scroll distance
+  function getWindowScroll(){
+    if ( scroll.blocked ) return
+
+    var wScroll = _window.scrollTop()
+    scroll.y = wScroll
+    scroll.direction = wScroll > scroll.lastForScrollDir ? "down" : "up"
+
+    scroll.lastForScrollDir = wScroll <= 0 ? 0 : wScroll;
+  }
+
 
   // HEADER SCROLL
-  // add .header-static for .page or body
-  // to disable sticky header
-  function initHeaderScroll(){
-    _window.on('scroll', throttle(function(e) {
-      var vScroll = _window.scrollTop();
-      var header = $('.header').not('.header--static');
-      var headerHeight = header.height();
-      var firstSection = _document.find('.page__content div:first-child()').height() - headerHeight;
-      var visibleWhen = Math.round(_document.height() / _window.height()) >  2.5
+  function getHeaderParams(){
+    var $header = $('.header')
+    var headerOffsetTop = 0
+    var headerHeight = $header.outerHeight() + headerOffsetTop
 
-      if (visibleWhen){
-        if ( vScroll > headerHeight ){
-          header.addClass('is-fixed');
+    header = {
+      container: $header,
+      bottomPoint: headerHeight
+    }
+  }
+
+  function scrollHeader(){
+    if ( header.container !== undefined ){
+      var fixedClass = 'is-fixed';
+      var visibleClass = 'is-fixed-visible';
+
+      if ( scroll.blocked ) return
+
+      if ( scroll.y > header.bottomPoint ){
+        header.container.addClass(fixedClass);
+
+        if ( (scroll.y > header.bottomPoint * 2) && scroll.direction === "up" ){
+          header.container.addClass(visibleClass);
         } else {
-          header.removeClass('is-fixed');
+          header.container.removeClass(visibleClass);
         }
-        if ( vScroll > firstSection ){
-          header.addClass('is-fixed-visible');
-        } else {
-          header.removeClass('is-fixed-visible');
-        }
+      } else {
+        // emulate position absolute by giving negative transform on initial scroll
+        var normalized = Math.floor(normalize(scroll.y, header.bottomPoint, 0, 0, 100))
+        var reverseNormalized = (100 - normalized) * -1
+        reverseNormalized = reverseNormalized * 1.2 // a bit faster transition
+
+        header.container.css({
+          "transform": 'translate3d(0,'+ reverseNormalized +'%,0)',
+        })
+
+        header.container.removeClass(fixedClass);
       }
-    }, 10));
+    }
   }
 
   ////////////////////
@@ -122,25 +257,32 @@ $(document).ready(function(){
   // disable / enable scroll by setting negative margin to page-content eq. to prev. scroll
   // this methods helps to prevent page-jumping on setting body height to 100%
   function disableScroll() {
-    lastScroll = _window.scrollTop();
+    scroll.lastForBodyLock = _window.scrollTop();
+    scroll.blocked = true
     $('.page__content').css({
-      'margin-top': '-' + lastScroll + 'px'
+      'margin-top': '-' + scroll.lastForBodyLock + 'px'
     });
     $('body').addClass('body-lock');
-    $('.footer').addClass('is-hidden'); // if you use revealFooter()
   }
 
-  function enableScroll() {
+  function enableScroll(isOnload) {
+    scroll.blocked = false
+    scroll.direction = "up" // keeps header
     $('.page__content').css({
       'margin-top': '-' + 0 + 'px'
     });
     $('body').removeClass('body-lock');
-    $('.footer').removeClass('is-hidden'); // if you use revealFooter()
-    _window.scrollTop(lastScroll)
-    lastScroll = 0;
+    if ( !isOnload ){
+      _window.scrollTop(scroll.lastForBodyLock)
+      scroll.lastForBodyLock = 0;
+    }
   }
 
-  function blockScroll() {
+  function blockScroll(isOnload) {
+    if ( isOnload ){
+      enableScroll(isOnload)
+      return
+    }
     if ($('[js-hamburger]').is('.is-active')) {
       disableScroll();
     } else {
@@ -155,12 +297,13 @@ $(document).ready(function(){
     blockScroll();
   });
 
-  function closeMobileMenu(){
+  function closeMobileMenu(isOnload){
     $('[js-hamburger]').removeClass('is-active');
     $('.mobile-navi').removeClass('is-active');
 
-    blockScroll();
+    blockScroll(isOnload);
   }
+
 
   // SET ACTIVE CLASS IN HEADER
   // * could be removed in production and server side rendering when header is inside barba-container
@@ -304,7 +447,10 @@ $(document).ready(function(){
 
   // selectric
   function initSelectric(){
-    $('select').selectric({
+    var $select = $('[js-select]')
+    if ( $select.length === 0 ) return
+
+    $select.selectric({
       maxHeight: 300,
       arrowButtonMarkup: '<b class="button"><svg class="ico ico-select-down"><use xlink:href="img/sprite.svg#ico-select-down"></use></svg></b>',
 
@@ -338,7 +484,7 @@ $(document).ready(function(){
       var elWatcher = scrollMonitor.create( $(el) );
 
       var delay;
-      if ( $(window).width() < 768 ){
+      if ( getWindowWidth() <= 767 ){
         delay = 0
       } else {
         delay = $(el).data('animation-delay');
@@ -489,9 +635,9 @@ $(document).ready(function(){
   //////////
   // BARBA PJAX
   //////////
-  var easingSwing = [.02, .01, .47, 1]; // default jQuery easing for anime.js
 
   Barba.Pjax.Dom.containerClass = "page";
+  var transitionInitElement
 
   var FadeTransition = Barba.BaseTransition.extend({
     start: function() {
@@ -501,67 +647,83 @@ $(document).ready(function(){
     },
 
     fadeOut: function() {
+      var _this = this;
+      var $oldPage = $(this.oldContainer)
+      var $newPage = $(this.newContainer);
       var deferred = Barba.Utils.deferred();
 
-      anime({
-        targets: this.oldContainer,
-        opacity : .5,
-        easing: easingSwing, // swing
-        duration: 300,
-        complete: function(anim){
+      TweenLite.to($oldPage, .5, {
+        opacity: 0,
+        ease: Power1.easeIn,
+        onComplete: function() {
           deferred.resolve();
         }
-      })
+      });
 
       return deferred.promise
     },
 
     fadeIn: function() {
       var _this = this;
-      var $el = $(this.newContainer);
+      var $oldPage = $(this.oldContainer)
+      var $newPage = $(this.newContainer);
 
       $(this.oldContainer).hide();
 
-      $el.css({
+      $newPage.css({
         visibility : 'visible',
-        opacity : .5
+        opacity : 0
       });
 
-      anime({
-        targets: "html, body",
-        scrollTop: 1,
-        easing: easingSwing, // swing
-        duration: 150
+      TweenLite.to(window, .15, {
+        scrollTo: {y: 0, autoKill: false},
+        ease: easingSwing
       });
 
-      anime({
-        targets: this.newContainer,
+      TweenLite.to($newPage, .5, {
         opacity: 1,
-        easing: easingSwing, // swing
-        duration: 300,
-        complete: function(anim) {
+        ease: Power1.easeOut,
+        onComplete: function() {
           triggerBody()
           _this.done();
         }
       });
+
     }
   });
 
   // set barba transition
   Barba.Pjax.getTransition = function() {
+    if ( transitionInitElement.attr('data-transition') ){
+      var transition = transitionInitElement.data('transition');
+      // console.log(transition)
+      if ( transition === "project" ){
+        return ProjectTransition
+      }
+    }
     return FadeTransition;
   };
 
   Barba.Prefetch.init();
   Barba.Pjax.start();
 
+  // initialized transition
+  Barba.Dispatcher.on('linkClicked', function(el) {
+    transitionInitElement = el instanceof jQuery ? el : $(el)
+  });
+
+  // The new container has been loaded and injected in the wrapper.
   Barba.Dispatcher.on('newPageReady', function(currentStatus, oldStatus, container, newPageRawHTML) {
-    pageReady();
+    pageReady(true);
+  });
+
+  // The transition has just finished and the old Container has been removed from the DOM.
+  Barba.Dispatcher.on('transitionCompleted', function(currentStatus, oldStatus) {
+    pageCompleated(true);
   });
 
   // some plugins get bindings onNewPage only that way
   function triggerBody(){
-    _window.scrollTop(0);
     $(window).scroll();
     $(window).resize();
   }
@@ -573,9 +735,10 @@ $(document).ready(function(){
     var wHost = window.location.host.toLowerCase()
     var displayCondition = wHost.indexOf("localhost") >= 0 || wHost.indexOf("surge") >= 0
     if (displayCondition){
-      var wWidth = _window.width();
+      var wWidth = getWindowWidth();
+      var wHeight = _window.height()
 
-      var content = "<div class='dev-bp-debug'>"+wWidth+"</div>";
+      var content = "<div class='dev-bp-debug'>"+wWidth+" x "+wHeight+"</div>";
 
       $('.page').append(content);
       setTimeout(function(){
@@ -592,4 +755,18 @@ $(document).ready(function(){
 
 // HELPERS and PROTOTYPE FUNCTIONS
 
-// i.e. linear-normalization or Number.pad
+// LINEAR NORMALIZATION
+function normalize(value, fromMin, fromMax, toMin, toMax) {
+  var pct = (value - fromMin) / (fromMax - fromMin);
+  var normalized = pct * (toMax - toMin) + toMin;
+
+  //Cap output to min/max
+  if (normalized > toMax) return toMax;
+  if (normalized < toMin) return toMin;
+  return normalized;
+}
+
+// get window width (not to forget about ie, win, scrollbars, etc)
+function getWindowWidth(){
+  return window.innerWidth
+}

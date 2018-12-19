@@ -1,10 +1,14 @@
 /* HEADER
 .header
-  position: absolute
+  position: fixed
   top: 0
   right: 0
   left: 0
+  z-index: 9
   background: #f5f5f5
+  will-change: transform
+  backface-visibility: hidden
+  transform-style: preserve-3d
   &__wrapper
     display: flex
     align-items: center
@@ -37,6 +41,24 @@
   &__hamburger
     // display: none
     padding-left: 20px
+
+  &.is-fixed
+    // should be normalized to -100% scroll at this point
+    position: fixed
+    // visibility: hidden
+    transform: translate3d(0,-100%,0) !important
+    transition: transform .25s $ease
+    .header__wrapper
+      padding-top: 10px
+      padding-bottom: 10px
+
+  &.is-fixed-visible
+    // visibility: visible
+    transform: translate3d(0,0,0) !important
+
+  &.is-transitioning
+    transition: transform .25s $ease
+    transform: translate3d(0,-100%,0) !important
 
 
 +r($lg)

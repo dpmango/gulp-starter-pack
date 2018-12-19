@@ -10,6 +10,7 @@ gulp.task('javascript:vendor', function() {
   return gulp.src([
       path.resolve('bower_components', 'jquery/dist/jquery.min.js'),
       path.resolve('bower_components', 'svg4everybody/dist/svg4everybody.min.js'),
+      path.resolve('bower_components', 'picturefill/dist/picturefill.min.js'),
       path.resolve('bower_components', 'viewport-units-buggyfill/viewport-units-buggyfill.js'),
       path.resolve('bower_components', 'slick-carousel/slick/slick.min.js'),
       path.resolve('bower_components', 'swiper/dist/js/swiper.min.js'),
@@ -20,7 +21,10 @@ gulp.task('javascript:vendor', function() {
       path.resolve('bower_components', 'jquery-selectric/public/jquery.selectric.min.js'),
       path.resolve('bower_components', 'barba.js/dist/barba.min.js'),
       path.resolve('bower_components', 'jquery-lazy/jquery.lazy.min.js'),
-      path.resolve('bower_components', 'animejs/anime.min.js'),
+      path.resolve('bower_components', 'jquery-lazy/plugins/jquery.lazy.picture.min.js'),
+      // path.resolve('bower_components', 'animejs/anime.min.js'),
+      path.resolve('node_modules', 'gsap/src/minified/TweenMax.min.js'),
+      path.resolve('node_modules', 'gsap/src/minified/plugins/ScrollToPlugin.min.js'),
       config.src.js + '/vendor/**/*.js'
      ])
     .pipe(plumber({ errorHandler: config.errorHandler }))
