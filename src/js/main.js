@@ -147,7 +147,7 @@ $(document).ready(function(){
 
       // ie pollyfil for picture tag
       // (will be called on itialization - use as lazy load callback)
-      // picturefill(); 
+      // picturefill();
     }
 
     if ( browser.isMobile ){
@@ -694,14 +694,20 @@ $(document).ready(function(){
 
   // set barba transition
   Barba.Pjax.getTransition = function() {
-    if ( transitionInitElement.attr('data-transition') ){
-      var transition = transitionInitElement.data('transition');
-      // console.log(transition)
-      if ( transition === "project" ){
-        return ProjectTransition
-      }
-    }
     return FadeTransition;
+    // if ( transitionInitElement ){
+    //   if ( transitionInitElement.attr('data-transition') ){
+    //     var transition = transitionInitElement.data('transition');
+    //     // console.log(transition)
+    //     // if ( transition === "project" ){
+    //     //   return ProjectTransition
+    //     // }
+    //   }
+    //   return FadeTransition;
+    // } else {
+    //   // first visit + back button (history is blank)
+    //   window.location.href = Barba.HistoryManager.history[1].url
+    // }
   };
 
   Barba.Prefetch.init();
