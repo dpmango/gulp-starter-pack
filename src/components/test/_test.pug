@@ -1,0 +1,105 @@
+// dummy contents & instructions
+// REMOVE COMPLEATLY, it have nothing to do with project code - examples only
+
+.container.test(style="margin-bottom: 100px")
+  section
+    h1 General instructions - <a href="https://github.com/dpmango/gulp-starter-pack" target="_blank">gulp starter pack</a>
+    
+  // section
+  section.wow
+    h2 PNG icons
+    p For png icons use i.icon.icon-name . Png icons should be regular icon and @2x postfix
+    p Folder: /src/icons
+    i.icon.icon-logo
+  
+  // section
+  section.wow(data-animation-delay=".3s")
+    h2 SVG icons
+    p For svg icons use pug mixin +svgMono(nameOfIcon) or +svgColor(nameOfIcon). You can customize it as it would be regular font. font-size property should be set as icon height
+    p Please keep in mind exoprting svg. 
+      | Sketch is good in all cases. 
+      | Photoshop + illustrator - use quick export function (CC2017+) with ctrl+c ctrl+v of layers
+      | You will need viewBox property and icon should be bounded to artboard. Otherwise it will be as small as artboard differance relative to icon size
+    p Folder: /src/icons
+    
+    div(style="color: rebeccapurple; font-size: 20px")
+      +svgMono('email')
+    // color will not be affected
+    div(style="color: rebeccapurple; font-size: 40px; margin-top: 10px")
+      +svgColor('example')
+        
+  // section
+  section.wow(data-animation-delay=".6s")
+    h2 JS and barba
+    p please use _document.on('click', 'el_selector', function ... ) for barba.js bindings
+  
+  // section
+  section.wow(style="margin-top: 50px; max-width: 400px;" data-animation-class="wowFadeRight")
+    h2 UI
+    form(js-validate)
+      .ui-group
+        label Phone-mask
+        input(type="tel")
+      .ui-group
+        label Your message
+        textarea(placeholder="What's up?" rows="5" data-min-rows="5")
+      .ui-group
+        .ui-checkbox
+          input(type="checkbox" id="checkbox_1")
+          label(for="checkbox_1")
+            span I agree with <a href="#">Terms and conditions</a>
+      
+      button(type="submit").btn.btn-example Submit
+  
+  // section
+  section.wow(data-animation-class="wowFadeDown")
+    h2 Swiper
+    
+    .swiper-container(js-slider)
+      .swiper-wrapper
+        .example-slide(style="flex: 0 0 250px;")
+          div(style="background: blue; height: 200px;")
+        .example-slide(style="flex: 0 0 250px; ")
+          div(style="background: tomato; height: 200px;")
+        .example-slide(style="flex: 0 0 250px; ")
+          div(style="background: forestgreen; height: 200px;")
+        .example-slide(style="flex: 0 0 250px;")
+          div(style="background: blue; height: 200px;")
+        .example-slide(style="flex: 0 0 250px; ")
+          div(style="background: tomato; height: 200px;")
+        .example-slide(style="flex: 0 0 250px; ")
+          div(style="background: forestgreen; height: 200px;")
+        .example-slide(style="flex: 0 0 250px;")
+          div(style="background: blue; height: 200px;")
+        .example-slide(style="flex: 0 0 250px; ")
+          div(style="background: tomato; height: 200px;")
+        .example-slide(style="flex: 0 0 250px; ")
+          div(style="background: forestgreen; height: 200px;")
+          
+      // navigation
+      .example-next
+        span >
+      
+      .example-prev
+        span <
+        
+  // section
+  section.wow(data-animation-class="wowFadeDown")
+    h2 Easings
+    p Just type any css supported easing from <a href="http://easings.net/ru" target="_blank" style="color: blue">http://easings.net/ru</a> into .sass file and it will work
+    | <br> Check out /sass/components/test for test
+    
+    .test-easing.test-easing--easeInOutQuint
+      span easeInOutQuint
+    .test-easing.test-easing--easeInCubic
+      span easeInCubic
+    .test-easing.test-easing--easeOutCirc
+      span easeOutCirc
+    .test-easing.test-easing--easeInOutBack
+      span easeInOutBack
+                
+  // section
+  section.wow(data-animation-class="wowFadeDown")
+    h2 To be continued ..     
+        
+      

@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "jquery-validation": "^1.17.0",
-    "slick-carousel": "^1.7.1",
     "jquery-mask-plugin": "^1.14.11",
     "magnific-popup": "^1.1.0",
     "svg4everybody": "^2.1.9",

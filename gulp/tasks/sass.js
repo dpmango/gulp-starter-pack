@@ -1,6 +1,7 @@
 var gulp         = require('gulp');
 var util         = require('gulp-util');
 var sass         = require('gulp-sass');
+var globImporter = require('node-sass-glob-importer');
 var sourcemaps   = require('gulp-sourcemaps');
 var postcss      = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
@@ -11,7 +12,6 @@ var pseudoel     = require('postcss-pseudoelements');
 var flexbugs     = require('postcss-flexbugs-fixes');
 var animations   = require('postcss-animation');
 var respType     = require('postcss-responsive-type');
-var focus        = require('postcss-focus');
 var easings      = require('postcss-easings');
 var cssnano      = require('cssnano');
 var plumber      = require('gulp-plumber');
@@ -25,7 +25,6 @@ var config       = require('../config');
 // pseudoel - adds semicollumns -- https://github.com/axa-ch/postcss-pseudoelements
 // flexbugs - fix flex issues -- https://github.com/luisrudge/postcss-flexbugs-fixes
 // respType - responsive type -- https://github.com/seaneking/postcss-responsive-type
-// focus - adds focus to hover el -- https://github.com/postcss/postcss-focus
 // easings - gets easings.net -- https://github.com/postcss/postcss-easings
 
 var processors = [
@@ -33,7 +32,6 @@ var processors = [
   svginline(),
   animations(),
   respType(),
-  focus(),
   easings(),
   autoprefixer({
     browsers: ['last 5 versions'],
@@ -64,6 +62,7 @@ gulp.task('sass', function() {
       errorHandler: config.errorHandler
     }))
     .pipe(sass({
+        importer: globImporter(),
         outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
         precision: 5,
         includePaths : [config.src.sass]
