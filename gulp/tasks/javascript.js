@@ -34,7 +34,9 @@ gulp.task('javascript:vendor', function() {
 
 gulp.task('javascript:app', function() {
   return gulp.src([
-      config.src.js + '/*.js'
+      config.src.js + '/*.js',
+      config.src.js + '/modules/**/*.js',
+      config.src.components + '/**/*.js',
      ])
     .pipe(plumber({ errorHandler: config.errorHandler }))
     .pipe(concat('app.js'))
@@ -49,5 +51,9 @@ gulp.task('javascript', [
 
 gulp.task('javascript:watch', function() {
   gulp.watch(config.src.js + '/vendor/**/*.js', ['javascript:vendor']);
-  gulp.watch(config.src.js + '/*.js', ['javascript:app']);
+  gulp.watch([
+    config.src.components + '/**/*.js',
+    config.src.js + '/modules/**/*.js',
+    config.src.js + '/*.js'
+  ], ['javascript:app']);
 });
