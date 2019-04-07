@@ -18,6 +18,8 @@
   "author": "Sergey Khmelevskoy <sergey@khmelevskoy.co>",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "aos": "^2.3.4",
     "autoprefixer": "^8.6.2",
     "browser-sync": "^2.18.12",
@@ -31,6 +33,7 @@
     "git-scripts": "^0.2.1",
     "gsap": "^2.0.2",
     "gulp": "^3.9.1",
+    "gulp-babel": "^8.0.0",
     "gulp-cache": "^1.0.2",
     "gulp-changed": "^3.1.0",
     "gulp-cheerio": "^0.6.2",
