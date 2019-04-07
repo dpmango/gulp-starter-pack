@@ -1,5 +1,5 @@
 // PRE-initialization
-APP = window.APP || {};
+var APP = window.APP || {};
 APP.Dev = APP.Dev || {};
 APP.Browser = APP.Browser || {};
 APP.Modules = APP.Modules || {};
