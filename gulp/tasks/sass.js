@@ -1,21 +1,21 @@
-var gulp         = require('gulp');
-var util         = require('gulp-util');
-var sass         = require('gulp-sass');
+var gulp = require('gulp');
+var util = require('gulp-util');
+var sass = require('gulp-sass');
 var globImporter = require('node-sass-glob-importer');
-var sourcemaps   = require('gulp-sourcemaps');
-var postcss      = require('gulp-postcss');
+var sourcemaps = require('gulp-sourcemaps');
+var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
-var short        = require('postcss-short');
-var svginline    = require('postcss-inline-svg');
-var sorting      = require('postcss-sorting');
-var pseudoel     = require('postcss-pseudoelements');
-var flexbugs     = require('postcss-flexbugs-fixes');
-var animations   = require('postcss-animation');
-var respType     = require('postcss-responsive-type');
-var easings      = require('postcss-easings');
-var cssnano      = require('cssnano');
-var plumber      = require('gulp-plumber');
-var config       = require('../config');
+var short = require('postcss-short');
+var svginline = require('postcss-inline-svg');
+var sorting = require('postcss-sorting');
+var pseudoel = require('postcss-pseudoelements');
+var flexbugs = require('postcss-flexbugs-fixes');
+var animations = require('postcss-animation');
+var respType = require('postcss-responsive-type');
+var easings = require('postcss-easings');
+var cssnano = require('cssnano');
+var plumber = require('gulp-plumber');
+var config = require('../config');
 
 // PostCSS Processors
 // short - shorthands -- https://github.com/jonathantneal/postcss-short
@@ -40,40 +40,47 @@ var processors = [
   }),
   sorting(),
   pseudoel(),
-  flexbugs()
+  flexbugs(),
 ];
 
 var cssNanoParams = {
   autoprefixer: false,
   reduceIdents: {
-    keyframes: false
+    keyframes: false,
   },
   discardUnused: {
-    keyframes: false
-  }
-}
+    keyframes: false,
+  },
+};
 
 // Sass task
 gulp.task('sass', function() {
   return gulp
     .src(config.src.sass + '/*.{sass,scss}')
     .pipe(config.production ? util.noop() : sourcemaps.init())
-    .pipe(plumber({
-      errorHandler: config.errorHandler
-    }))
-    .pipe(sass({
+    .pipe(
+      plumber({
+        errorHandler: config.errorHandler,
+      }),
+    )
+    .pipe(
+      sass({
         importer: globImporter(),
         outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
         precision: 5,
-        includePaths : [config.src.sass]
-    }))
+        includePaths: [config.src.sass],
+      }),
+    )
     .on('error', config.errorHandler)
     .pipe(postcss(processors))
     .pipe(config.production ? util.noop() : sourcemaps.write('.'))
     .pipe(config.production ? postcss([cssnano(cssNanoParams)]) : util.noop())
-    .pipe(gulp.dest(config.dest.css))
+    .pipe(gulp.dest(config.dest.css));
 });
 
 gulp.task('sass:watch', function() {
-  gulp.watch(config.src.sass + '/**/*.{sass,scss}', ['sass']);
+  gulp.watch(
+    [config.src.sass + '/**/*.{sass,scss}', config.src.components + '/**/*.{sass,scss}'],
+    ['sass'],
+  );
 });
