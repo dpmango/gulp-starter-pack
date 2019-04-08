@@ -26,8 +26,8 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
     };
 
     app.onLoadTrigger = function() {
-      APP.Modules.Preloader.loaded();
-      APP.Modules.LazyLoadImages.init();
+      // APP.Modules.Preloader.loaded();
+      // APP.Modules.LazyLoadImages.init();
     };
 
     app.refresh = function() {

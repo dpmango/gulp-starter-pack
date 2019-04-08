@@ -2,6 +2,8 @@
   "name": "gulp-starter-pack",
   "version": "2.3.0",
   "description": "",
+  "license": "ISC",
+  "author": "Sergey Khmelevskoy <sergey@khmelevskoy.co>",
   "main": "index.js",
   "scripts": {
     "start": "gulp",
@@ -9,18 +11,33 @@
     "surge": "surge --project ./dist --domain khmelevskoy.surge.sh",
     "deploy": "gulp build --production && surge --project ./dist --domain khmelevskoy.surge.sh"
   },
-  "author": "Sergey Khmelevskoy <sergey@khmelevskoy.co>",
-  "license": "ISC",
   "dependencies": {
+    "aos": "^2.3.4",
+    "barba.js": "^1.0.0",
+    "gsap": "^2.0.2",
+    "jquery": "^3.3.1",
+    "jquery-lazy": "^1.7.10",
+    "jquery-mask-plugin": "^1.14.15",
+    "jquery-selectric": "^0.1.3",
+    "jquery-validation": "^1.19.0",
+    "lodash": "^4.17.10",
+    "magnific-popup": "^1.1.0",
+    "picturefill": "^3.0.3",
+    "scrollmonitor": "^1.2.4",
+    "surge": "^0.20.1",
+    "svg4everybody": "^2.1.9",
+    "swiper": "^4.5.0",
+    "viewport-units-buggyfill": "^0.6.2"
+  },
+  "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
-    "aos": "^2.3.4",
     "autoprefixer": "^8.6.2",
     "browser-sync": "^2.18.12",
     "cheerio": "^1.0.0-rc.2",
     "cssnano": "^3.10.0",
     "del": "^3.0.0",
-    "gsap": "^2.0.2",
+    "expose-loader": "^0.7.5",
     "gulp": "^3.9.1",
     "gulp-babel": "^8.0.0",
     "gulp-cache": "^1.0.2",
@@ -45,7 +62,6 @@
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "gulp.spritesmith": "^6.5.1",
-    "lodash": "^4.17.10",
     "node-sass-glob-importer": "^5.3.1",
     "path": "^0.12.7",
     "postcss-animation": "^0.0.12",
@@ -53,20 +69,18 @@
     "postcss-flexbugs-fixes": "^3.0.0",
     "postcss-inline-svg": "^3.0.0",
     "postcss-pseudoelements": "^5.0.0",
-    "postcss-responsive-type": "^1.0.0",
     "postcss-short": "^4.1.0",
     "postcss-sorting": "^3.0.1",
+    "prettier": "^1.16.4",
     "require-dir": "^1.0.0",
     "require-yaml": "^0.0.1",
     "run-sequence": "^2.0.0",
-    "surge": "^0.20.1",
     "through2": "^2.0.3",
-    "vinyl-buffer": "^1.0.0"
+    "vinyl-buffer": "^1.0.0",
+    "webpack": "^4.29.6",
+    "webpack-stream": "^5.2.1"
   },
   "resolutions": {
     "natives": "1.1.3"
-  },
-  "devDependencies": {
-    "prettier": "^1.16.4"
   }
 }

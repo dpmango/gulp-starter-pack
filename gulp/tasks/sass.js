@@ -11,7 +11,6 @@ var sorting = require('postcss-sorting');
 var pseudoel = require('postcss-pseudoelements');
 var flexbugs = require('postcss-flexbugs-fixes');
 var animations = require('postcss-animation');
-var respType = require('postcss-responsive-type');
 var easings = require('postcss-easings');
 var cssnano = require('cssnano');
 var plumber = require('gulp-plumber');
@@ -24,14 +23,12 @@ var config = require('../config');
 // sorting - keeps rules in order -- https://github.com/hudochenkov/postcss-sorting
 // pseudoel - adds semicollumns -- https://github.com/axa-ch/postcss-pseudoelements
 // flexbugs - fix flex issues -- https://github.com/luisrudge/postcss-flexbugs-fixes
-// respType - responsive type -- https://github.com/seaneking/postcss-responsive-type
 // easings - gets easings.net -- https://github.com/postcss/postcss-easings
 
 var processors = [
   short(),
   svginline(),
   animations(),
-  respType(),
   easings(),
   autoprefixer({
     browsers: ['last 5 versions'],

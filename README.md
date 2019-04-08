@@ -3,7 +3,6 @@ This package intended to solve common front-end development tasks. Works best fo
 
 ## How to start
 * `yarn` or `npm i` - install npm dependencies
-* `bower i` - install bower packages
 * `gulp` - run dev-server
 * `gulp build` - build project from sources
 * `yarn deploy` or `npm run deploy` - run build and deploy to surge
