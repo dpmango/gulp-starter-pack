@@ -34,7 +34,7 @@
 
           // $('body, html').animate({scrollTop: topTarget}, 1000);
           TweenLite.to(window, 1, {
-            scrollTo: { y: $(el).offset().top, autoKill: false },
+            scrollTo: { y: topTarget, autoKill: false },
             ease: easingSwing,
           });
 

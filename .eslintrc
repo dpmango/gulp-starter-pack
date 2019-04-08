@@ -1,0 +1,40 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "max-len": 0,
+    "comma-dangle": 0,
+    "no-console": 1,
+    "no-undef": 0,
+    "no-unused-vars": 0,
+    "eqeqeq": [2, "smart"],
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "no-multi-spaces": [
+      2,
+      { "exceptions": { "ImportDeclaration": true, "VariableDeclarator": true } }
+    ],
+    "no-multi-str": 2,
+    "camelcase": 1,
+    "object-shorthand": ["error", "never"],
+    "indent": ["error", 2],
+    "quotes": [2, "single", "avoid-escape"],
+    "semi": 2,
+    "space-before-blocks": 2,
+    "space-before-function-paren": [2, "never"],
+    "constructor-super": 2,
+    "arrow-spacing": 2
+  }
+}

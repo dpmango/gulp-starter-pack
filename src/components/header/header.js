@@ -88,7 +88,7 @@
         if (
           $(val)
             .find('a')
-            .attr('href') == window.location.pathname.split('/').pop()
+            .attr('href') === window.location.pathname.split('/').pop()
         ) {
           $(val).addClass('is-active');
         } else {

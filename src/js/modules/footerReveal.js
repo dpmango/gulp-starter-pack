@@ -1,13 +1,13 @@
-////////////////////
+// //////////////////
 // FOOTER REVEAL
-////////////////////
+// //////////////////
 (function($, APP) {
   APP.Modules.FooterReveal = {
     init: function() {
       this.revealFooter();
       this.listenResize();
     },
-    listenResize() {
+    listenResize: function() {
       _window.on('resize', throttle(this.revealFooter.bind(this), 100));
     },
     revealFooter: function() {

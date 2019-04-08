@@ -26,7 +26,7 @@
           success: function(response) {
             $(form).removeClass('loading');
             var data = $.parseJSON(response);
-            if (data.status == 'success') {
+            if (data.status === 'success') {
               // do something I can't test
             } else {
               $(form)
@@ -61,8 +61,8 @@
         unhighlight: validateUnhighlight,
         submitHandler: validateSubmitHandler,
         rules: {
-          last_name: 'required',
-          first_name: 'required',
+          lastName: 'required',
+          firstName: 'required',
           email: {
             required: true,
             email: true,
@@ -74,8 +74,8 @@
           // phone: validatePhone
         },
         messages: {
-          last_name: 'Заполните это поле',
-          first_name: 'Заполните это поле',
+          lastName: 'Заполните это поле',
+          firstName: 'Заполните это поле',
           email: {
             required: 'Заполните это поле',
             email: 'Email содержит неправильный формат',

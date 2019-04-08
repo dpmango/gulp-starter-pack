@@ -99,7 +99,7 @@
         currentStatus,
         oldStatus,
         container,
-        newPageRawHTML,
+        newPageRawHTML
       ) {
         APP.Initilizer().newPageReady();
       });

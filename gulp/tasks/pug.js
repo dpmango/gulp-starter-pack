@@ -15,7 +15,7 @@ function renderHtml(onlyChanged) {
     .pipe(
       pug({
         pretty: true,
-      }),
+      })
     )
     .pipe(gulp.dest(config.dest.html));
 }

@@ -66,7 +66,7 @@ gulp.task('javascript:app', function() {
     .pipe(
       babel({
         presets: ['@babel/preset-env'],
-      }),
+      })
     )
     .pipe(config.production ? uglifyJs() : util.noop())
     .pipe(gulp.dest(config.dest.js));
@@ -82,6 +82,6 @@ gulp.task('javascript:watch', function() {
       config.src.js + '/modules/**/*.js',
       config.src.components + '/**/*.js',
     ],
-    ['javascript:app'],
+    ['javascript:app']
   );
 });

@@ -58,7 +58,7 @@ gulp.task('sass', function() {
     .pipe(
       plumber({
         errorHandler: config.errorHandler,
-      }),
+      })
     )
     .pipe(
       sass({
@@ -66,7 +66,7 @@ gulp.task('sass', function() {
         outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
         precision: 5,
         includePaths: [config.src.sass],
-      }),
+      })
     )
     .on('error', config.errorHandler)
     .pipe(postcss(processors))
@@ -78,6 +78,6 @@ gulp.task('sass', function() {
 gulp.task('sass:watch', function() {
   gulp.watch(
     [config.src.sass + '/**/*.{sass,scss}', config.src.components + '/**/*.{sass,scss}'],
-    ['sass'],
+    ['sass']
   );
 });
