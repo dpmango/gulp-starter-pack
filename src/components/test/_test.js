@@ -1,5 +1,5 @@
 (function($, APP) {
-  APP.Componenets.Test = {
+  APP.Components.Test = {
     init: function() {
       $(document).on('click', function() {
         console.log('click');

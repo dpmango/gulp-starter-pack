@@ -2,7 +2,7 @@
 // HEADER
 //////////
 (function($, APP) {
-  APP.Componenets.Header = {
+  APP.Components.Header = {
     data: {
       header: {
         container: undefined,

@@ -3,7 +3,7 @@ var APP = window.APP || {};
 APP.Dev = APP.Dev || {};
 APP.Browser = APP.Browser || {};
 APP.Modules = APP.Modules || {};
-APP.Componenets = APP.Componenets || {};
+APP.Components = APP.Components || {};
 
 // force scroll to top on initial load
 window.onbeforeunload = function() {
@@ -22,7 +22,7 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
     app.init = function() {
       app.initGlobalPlugins();
       app.initPlugins();
-      app.initComponenets();
+      app.initComponents();
     };
 
     app.onLoadTrigger = function() {
@@ -32,7 +32,7 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
 
     app.refresh = function() {
       app.initPlugins();
-      app.initComponenets();
+      app.initComponents();
     };
 
     app.destroy = function() {};
@@ -72,9 +72,9 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
       // APP.Modules.FooterReveal.init();
     };
 
-    app.initComponenets = function() {
-      APP.Componenets.Header.init();
-      APP.Componenets.Test.init();
+    app.initComponents = function() {
+      APP.Components.Header.init();
+      APP.Components.Test.init();
     };
 
     return app;
