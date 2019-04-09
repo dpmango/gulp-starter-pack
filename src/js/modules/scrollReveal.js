@@ -2,7 +2,7 @@
 // SCROLLREVEAL
 //////////
 (function($, APP) {
-  APP.Modules.ScrollReveal = {
+  APP.Plugins.ScrollReveal = {
     init: function(fromPjax) {
       // REVEAL animations
       var $reveals = $('[js-reveal]');

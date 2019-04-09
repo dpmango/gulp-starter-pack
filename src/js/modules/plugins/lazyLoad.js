@@ -2,7 +2,7 @@
 // LAZY LOAD
 ////////////////////
 (function($, APP) {
-  APP.Modules.LazyLoadImages = {
+  APP.Plugins.LazyLoadImages = {
     init: function() {
       _document.find('[js-lazy]').Lazy({
         threshold: 500,

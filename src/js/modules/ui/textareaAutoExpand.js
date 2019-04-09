@@ -1,5 +1,5 @@
 (function($, APP) {
-  APP.Modules.TextareaAutoExpand = {
+  APP.Plugins.TextareaAutoExpand = {
     init: function() {
       // textarea autoExpand
       _document

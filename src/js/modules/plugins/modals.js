@@ -2,7 +2,7 @@
 // MODALS
 //////////
 (function($, APP) {
-  APP.Modules.Modals = {
+  APP.Plugins.Modals = {
     init: function() {
       var startWindowScroll = 0;
       $('[js-popup]').magnificPopup({

@@ -2,7 +2,7 @@
 // LEGACY
 //////////
 (function($, APP) {
-  APP.Modules.LegacySupport = {
+  APP.Plugins.LegacySupport = {
     init: function() {
       // svg support for laggy browsers
       svg4everybody();

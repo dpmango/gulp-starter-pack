@@ -2,7 +2,7 @@
 // BARBA PJAX
 //////////
 (function($, APP) {
-  APP.Modules.Barba = {
+  APP.Plugins.Barba = {
     getData: function() {
       return this.data;
     },

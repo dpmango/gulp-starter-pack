@@ -2,7 +2,7 @@
 // CICKS
 //////////
 (function($, APP) {
-  APP.Modules.Clicks = {
+  APP.Plugins.Clicks = {
     init: function() {
       $(document)
         .on('click', '[href="#"]', function(e) {

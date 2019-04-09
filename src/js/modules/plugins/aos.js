@@ -2,7 +2,7 @@
 // AOS
 //////////
 (function($, APP) {
-  APP.Modules.AOS = {
+  APP.Plugins.AOS = {
     init: function() {
       AOS.init({
         // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:

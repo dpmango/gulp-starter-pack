@@ -1,7 +1,7 @@
 // Object style
-// APP.Modules.ObjectModuleDemo.init();
+// APP.Plugins.ObjectModuleDemo.init();
 (function($, APP) {
-  APP.Modules.DemoObjectModule = {
+  APP.Plugins.DemoObjectModule = {
     init: function() {
       // ... code ...
     },
@@ -12,10 +12,10 @@
 })(jQuery, window.APP);
 
 // Constructor style
-// var module = new APP.Modules.ContrcutorModuleDemo('.header', params)
+// var module = new APP.Plugins.ContrcutorModuleDemo('.header', params)
 // module.init()
 (function($, APP) {
-  APP.Modules.DemoContrcutorModule = function(el, data) {
+  APP.Plugins.DemoContrcutorModule = function(el, data) {
     var $el = $(el);
 
     this.init = function() {
@@ -30,9 +30,9 @@
 })(jQuery, window.APP);
 
 // Constructor style returnable methods
-// new APP.Modules.ContrcutorModuleDemo('foo').getData()
+// new APP.Plugins.ContrcutorModuleDemo('foo').getData()
 (function($, APP) {
-  APP.Modules.DemoContrcutorModule2 = function(foo, bar) {
+  APP.Plugins.DemoContrcutorModule2 = function(foo, bar) {
     var methods = {};
 
     methods.init = function() {

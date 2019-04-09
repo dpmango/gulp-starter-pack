@@ -2,7 +2,7 @@
 // SELECTRIC PLUGIN
 ////////////////////
 (function($, APP) {
-  APP.Modules.Selectric = {
+  APP.Plugins.Selectric = {
     init: function() {
       var $select = $('[js-select]');
       if ($select.length === 0) return;

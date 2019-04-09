@@ -6,7 +6,7 @@
 // this methods helps to prevent page-jumping on setting body height to 100%
 
 (function($, APP) {
-  APP.Modules.ScrollBlock = {
+  APP.Plugins.ScrollBlock = {
     data: {
       y: _window.scrollTop(),
       blocked: false,

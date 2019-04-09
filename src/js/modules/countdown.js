@@ -1,5 +1,5 @@
 (function($, APP) {
-  APP.Modules.Countdown = {
+  APP.Plugins.Countdown = {
     init: function() {
       if ($('[js-countdown]').length > 0) {
         var $this = $('[js-countdown]');

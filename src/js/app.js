@@ -2,7 +2,7 @@
 var APP = window.APP || {};
 APP.Dev = APP.Dev || {};
 APP.Browser = APP.Browser || {};
-APP.Modules = APP.Modules || {};
+APP.Plugins = APP.Plugins || {};
 APP.Components = APP.Components || {};
 
 // force scroll to top on initial load
@@ -26,8 +26,8 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
     };
 
     app.onLoadTrigger = function() {
-      // APP.Modules.Preloader.loaded();
-      // APP.Modules.LazyLoadImages.init();
+      // APP.Plugins.Preloader.loaded();
+      // APP.Plugins.LazyLoadImages.init();
     };
 
     app.refresh = function() {
@@ -43,7 +43,7 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
     };
 
     app.transitionCompleted = function() {
-      APP.Modules.AOS.refresh();
+      APP.Plugins.AOS.refresh();
       app.onLoadTrigger();
     };
 
@@ -52,24 +52,24 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
       APP.Dev.Credentials.logCredentials();
       APP.Dev.Breakpoint.listenResize();
       APP.Browser().methods.setBodyTags();
-      APP.Modules.LegacySupport.init();
-      APP.Modules.ScrollBlock.listenScroll();
-      APP.Modules.Clicks.init();
-      APP.Modules.AOS.init();
-      APP.Modules.Barba.init();
+      APP.Plugins.LegacySupport.init();
+      APP.Plugins.ScrollBlock.listenScroll();
+      APP.Plugins.Clicks.init();
+      APP.Plugins.AOS.init();
+      APP.Plugins.Barba.init();
     };
 
     app.initPlugins = function() {
-      APP.Modules.Sliders.init();
-      APP.Modules.Modals.init();
-      APP.Modules.Masks.init();
-      APP.Modules.Selectric.init();
-      APP.Modules.ScrollReveal.init();
-      APP.Modules.TextareaAutoExpand.init();
-      APP.Modules.Validations.init();
+      APP.Plugins.Sliders.init();
+      APP.Plugins.Modals.init();
+      APP.Plugins.Masks.init();
+      APP.Plugins.Selectric.init();
+      APP.Plugins.ScrollReveal.init();
+      APP.Plugins.TextareaAutoExpand.init();
+      APP.Plugins.Validations.init();
 
-      // APP.Modules.Countdown.init();
-      // APP.Modules.FooterReveal.init();
+      // APP.Plugins.Countdown.init();
+      // APP.Plugins.FooterReveal.init();
     };
 
     app.initComponents = function() {

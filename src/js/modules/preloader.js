@@ -2,7 +2,7 @@
 // LEGACY
 //////////
 (function($, APP) {
-  APP.Modules.Preloader = {
+  APP.Plugins.Preloader = {
     loaded: function() {
       $('#barba-wrapper').addClass('is-preloaded');
     },

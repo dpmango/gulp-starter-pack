@@ -30,14 +30,14 @@
       $('[js-hamburger]').removeClass('is-active');
       $('.mobile-navi').removeClass('is-active');
 
-      APP.Modules.ScrollBlock.blockScroll(isOnload);
+      APP.Plugins.ScrollBlock.blockScroll(isOnload);
     },
     hamburgerClickListener: function() {
       _document.on('click', '[js-hamburger]', function() {
         $(this).toggleClass('is-active');
         $('.mobile-navi').toggleClass('is-active');
 
-        APP.Modules.ScrollBlock.blockScroll();
+        APP.Plugins.ScrollBlock.blockScroll();
       });
     },
     listenScroll: function() {
@@ -52,7 +52,7 @@
         var visibleClass = 'is-fixed-visible';
 
         // get scroll params from blocker function
-        var scroll = APP.Modules.ScrollBlock.getData();
+        var scroll = APP.Plugins.ScrollBlock.getData();
 
         if (scroll.blocked) return;
 

@@ -2,7 +2,7 @@
 // SLIDERS
 //////////
 (function($, APP) {
-  APP.Modules.Sliders = {
+  APP.Plugins.Sliders = {
     init: function() {
       // EXAMPLE SWIPER
       new Swiper('[js-slider]', {

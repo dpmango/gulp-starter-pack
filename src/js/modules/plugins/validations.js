@@ -4,7 +4,7 @@
 ////////////////
 
 (function($, APP) {
-  APP.Modules.Validations = {
+  APP.Plugins.Validations = {
     init: function() {
       // GENERIC FUNCTIONS
       var validateErrorPlacement = function(error, element) {

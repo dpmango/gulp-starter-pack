@@ -2,7 +2,7 @@
 // FOOTER REVEAL
 // //////////////////
 (function($, APP) {
-  APP.Modules.FooterReveal = {
+  APP.Plugins.FooterReveal = {
     init: function() {
       this.revealFooter();
       this.listenResize();
