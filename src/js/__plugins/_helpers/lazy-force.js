@@ -9,6 +9,6 @@ var targetImageLazyInstance = targetImage.Lazy({
       callbackFunction();
     };
     img.src = element.attr('src');
-  }
-})
+  },
+});
 targetImageLazyInstance.force(targetImage);

@@ -1,9 +1,9 @@
 //////////
 // MASONRY
 //////////
-function initMasonry(){
-  if ( $('[js-masonry]').length > 0 ){
-    $('[js-masonry]').each(function(i, masonry){
+function initMasonry() {
+  if ($('[js-masonry]').length > 0) {
+    $('[js-masonry]').each(function(i, masonry) {
       var $masonry = $(masonry);
       var $grid;
       var masonryOption = {
@@ -20,31 +20,36 @@ function initMasonry(){
           columnWidth: '[js-masonry-grid-sizer]',
           originLeft: true,
           originTop: true,
-          gutter: 0
-        }
-      }
+          gutter: 0,
+        },
+      };
       $grid = $masonry.isotope(masonryOption);
-    })
+    });
   }
 }
 
 // masonry click handlers
-_document
-  .on('click', '[js-masonry-filter] a', function(){
-    var $this = $(this);
-    var gridTarget = $this.closest('[js-masonry-filter]').data('target');
-    var $masonryGrid = $('[js-masonry][data-for="'+gridTarget+'"]');
-    var dataFilter = $this.data('filter');
+_document.on('click', '[js-masonry-filter] a', function() {
+  var $this = $(this);
+  var gridTarget = $this.closest('[js-masonry-filter]').data('target');
+  var $masonryGrid = $('[js-masonry][data-for="' + gridTarget + '"]');
+  var dataFilter = $this.data('filter');
 
-    $masonryGrid.isotope({
-      filter: function() {
-        if ( !dataFilter ) return true // if filter is blank - show all
+  $masonryGrid.isotope({
+    filter: function() {
+      if (!dataFilter) return true; // if filter is blank - show all
 
-        var cardFilters = $(this).data('filter').split(" ")
-        return cardFilters.indexOf(dataFilter) !== -1
-      }
-    });
+      var cardFilters = $(this)
+        .data('filter')
+        .split(' ');
+      return cardFilters.indexOf(dataFilter) !== -1;
+    },
+  });
 
-    $this.parent().siblings().find('a').removeClass('is-active');
-    $this.addClass('is-active');
-  })
+  $this
+    .parent()
+    .siblings()
+    .find('a')
+    .removeClass('is-active');
+  $this.addClass('is-active');
+});

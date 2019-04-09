@@ -6,11 +6,11 @@
 @import generated/sprite-svg-color
 
 @import vendor/normalize
-// @import vendor/slick
-@import bower_components/swiper/dist/css/swiper
-@import bower_components/magnific-popup/dist/magnific-popup
+@import swiper/src/swiper
+@import magnific-popup/src/css/main
 @import vendor/scrollbar
 @import vendor/selectric
+@import vendor/aos/aos
 @import vendor/hamburgers
 
 @import layout/font
@@ -21,12 +21,9 @@
 @import elements/icons
 @import elements/ui
 @import elements/modal
-@import elements/wow
+@import elements/media
 
-@import components/header
-@import components/mobile-navi
-@import components/footer
-@import components/index
-
-// test file
-@import components/test
+// components are included from /src/components
+@import ../components/**/*.{sass,scss}
+// or use regular imports
+// @import ../components/header/_header

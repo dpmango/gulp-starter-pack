@@ -1,6 +1,6 @@
-var gulp   = require('gulp');
+var gulp = require('gulp');
 var server = require('browser-sync').create();
-var util   = require('gulp-util');
+var util = require('gulp-util');
 var config = require('../config');
 
 // in CL 'gulp server --open' to open current project in browser
@@ -12,14 +12,14 @@ gulp.task('server', function() {
       baseDir: !config.production ? [config.dest.root, config.src.root] : config.dest.root,
       directory: false,
       serveStaticOptions: {
-        extensions: ['html']
-      }
+        extensions: ['html'],
+      },
     },
     files: [
       config.dest.html + '/*.html',
       config.dest.css + '/*.css',
       config.dest.js + '/*.js',
-      config.dest.img + '/**/*'
+      config.dest.img + '/**/*',
     ],
     port: util.env.port || 3000,
     logLevel: 'info', // 'debug', 'info', 'silent', 'warn'
@@ -29,7 +29,7 @@ gulp.task('server', function() {
     notify: false,
     ghostMode: false,
     online: true,
-    tunnel: util.env.tunnel || null
+    tunnel: util.env.tunnel || null,
   });
 });
 

@@ -3,7 +3,6 @@ This package intended to solve common front-end development tasks. Works best fo
 
 ## How to start
 * `yarn` or `npm i` - install npm dependencies
-* `bower i` - install bower packages
 * `gulp` - run dev-server
 * `gulp build` - build project from sources
 * `yarn deploy` or `npm run deploy` - run build and deploy to surge
@@ -35,12 +34,15 @@ Task name          | Description
 
 All available tasks are placed in a folder `./gulp/tasks` as separate **.js** files.
 
+### General instructions
+- Layout is based on components. `./src/components` include folders named by blocks. Each block have `_name.pug` file and `_name.{sass,scss}` stylesheet
+
+
 ## Flags
 
 * `gulp --open` or `gulp server --open` - run dev server and then open preview in browser
 * `gulp --tunnel=[name]` or `gulp server --tunnel [name]` - runs dev server and allows you to easily share a web service on your local development machine (powered by [localtunnel.me](https://localtunnel.me/)). Your local site will be available at `[name].localtunnel.me`.
 * `gulp [task_name] --prod` or `gulp [task_name] --production` - run task in production mode. Some of the tasks (like, sass or js compilation) have additional settings for production mode (such as code minification), so with this flag you can force production mode. `gulp build` uses this mode by default.
-
 
 ## Deploy
 There are git hooks for [surge](https://surhe.sh) deploy. Every push will execute deploy to specific surge domain of **./dist** folder

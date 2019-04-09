@@ -10,7 +10,7 @@ var config = {
   src: {
     root         : 'src',
     templates    : 'src/pug',
-    templatesData: 'src/pug/data',
+    components   : 'src/components',
     pagelist     : 'src/index.yaml',
     sass         : 'src/sass',
     sassGen      : 'src/sass/generated',

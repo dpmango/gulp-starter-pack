@@ -1,10 +1,8 @@
-var gulp   = require('gulp');
+var gulp = require('gulp');
 var config = require('../config');
 
 gulp.task('copy:rootfiles', function() {
-  return gulp
-    .src(config.src.root + '/*.*')
-    .pipe(gulp.dest(config.dest.root));
+  return gulp.src(config.src.root + '/*.*').pipe(gulp.dest(config.dest.root));
 });
 
 gulp.task('copy:fonts', function() {
