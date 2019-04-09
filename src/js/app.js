@@ -47,7 +47,7 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
       app.onLoadTrigger();
     };
 
-    // combine types
+    // Global plugins which must be initialized once
     app.initGlobalPlugins = function() {
       APP.Dev.Credentials.logCredentials();
       APP.Dev.Breakpoint.listenResize();
@@ -59,6 +59,7 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
       APP.Plugins.Barba.init();
     };
 
+    // Plugins which depends on DOM and page content
     app.initPlugins = function() {
       APP.Plugins.Sliders.init();
       APP.Plugins.Modals.init();
@@ -72,6 +73,7 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
       // APP.Plugins.FooterReveal.init();
     };
 
+    // All components from `src/componenets`
     app.initComponents = function() {
       APP.Components.Header.init();
       APP.Components.Test.init();
