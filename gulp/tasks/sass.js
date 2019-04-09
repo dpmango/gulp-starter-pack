@@ -65,7 +65,7 @@ gulp.task('sass', function() {
         importer: globImporter(),
         outputStyle: config.production ? 'compact' : 'expanded', // nested, expanded, compact, compressed
         precision: 5,
-        includePaths: [config.src.sass],
+        includePaths: ['node_modules', config.src.sass],
       })
     )
     .on('error', config.errorHandler)
