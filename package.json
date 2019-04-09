@@ -5,6 +5,9 @@
   "license": "ISC",
   "author": "Sergey Khmelevskoy <sergey@khmelevskoy.co>",
   "main": "index.js",
+  "engines": { 
+    "node" : ">=10.0.0" 
+  },
   "scripts": {
     "start": "gulp",
     "build": "gulp build --production",
