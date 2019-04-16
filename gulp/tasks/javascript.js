@@ -49,7 +49,11 @@ gulp.task('javascript:vendor', function() {
       .pipe(plumber({ errorHandler: config.errorHandler }))
       .pipe(webpackStream(webpackConfig))
       .pipe(concat('vendor.js'))
-      // .pipe(config.production ? uglifyJs() : util.noop())
+      .pipe(
+        babel({
+          presets: ['@babel/preset-env'],
+        })
+      )
       .pipe(gulp.dest(config.dest.js))
   );
 });
