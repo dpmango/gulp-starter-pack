@@ -61,6 +61,7 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
 
     // Plugins which depends on DOM and page content
     app.initPlugins = function() {
+      APP.Plugins.Teleport.init();
       APP.Plugins.Sliders.init();
       APP.Plugins.Modals.init();
       APP.Plugins.Masks.init();
