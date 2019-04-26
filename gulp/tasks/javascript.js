@@ -54,6 +54,7 @@ gulp.task('javascript:vendor', function() {
           presets: ['@babel/preset-env'],
         })
       )
+      // .pipe(config.production ? uglifyJs() : util.noop())
       .pipe(gulp.dest(config.dest.js))
   );
 });
@@ -61,6 +62,7 @@ gulp.task('javascript:vendor', function() {
 gulp.task('javascript:app', function() {
   return gulp
     .src([
+      config.src.js + '/vendor/**/*.js',
       config.src.js + '/app.js',
       config.src.js + '/modules/**/*.js',
       config.src.components + '/**/*.js',
@@ -82,6 +84,7 @@ gulp.task('javascript:watch', function() {
   gulp.watch([config.src.js + '/vendor.js'], ['javascript:vendor']);
   gulp.watch(
     [
+      config.src.js + '/vendor/**/*.js',
       config.src.js + '/app.js',
       config.src.js + '/modules/**/*.js',
       config.src.components + '/**/*.js',
