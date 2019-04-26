@@ -20,8 +20,12 @@
     },
     getTransition: function() {
       // set barba transition
+      var _this = this;
       Barba.Pjax.getTransition = function() {
-        return this.transitions.FadeTransition;
+        return _this.transitions.FadeTransition;
+        // return _this.transitions.HideShowTransition;
+
+        // when there are multiple transitions on project
         // if ( transitionInitElement ){
         //   if ( transitionInitElement.attr('data-transition') ){
         //     var transition = transitionInitElement.data('transition');
@@ -38,7 +42,17 @@
       };
     },
     transitions: {
-      fadeTransition: Barba.BaseTransition.extend({
+      HideShowTransition: Barba.BaseTransition.extend({
+        start: function() {
+          this.newContainerLoading.then(this.finish.bind(this));
+        },
+
+        finish: function() {
+          document.body.scrollTop = 0;
+          this.done();
+        },
+      }),
+      FadeTransition: Barba.BaseTransition.extend({
         start: function() {
           Promise.all([this.newContainerLoading, this.fadeOut()]).then(this.fadeIn.bind(this));
         },
@@ -81,7 +95,6 @@
             opacity: 1,
             ease: Power1.easeOut,
             onComplete: function() {
-              triggerBody();
               _this.done();
             },
           });
@@ -90,8 +103,9 @@
     },
     listenEvents: function() {
       // initialized transition
+      var _this = this;
       Barba.Dispatcher.on('linkClicked', function(el) {
-        this.data.transitionInitElement = el instanceof jQuery ? el : $(el);
+        _this.data.transitionInitElement = el instanceof jQuery ? el : $(el);
       });
 
       // The new container has been loaded and injected in the wrapper.
