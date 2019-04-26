@@ -9,12 +9,17 @@
         bottomPoint: undefined,
       },
     },
-    init: function() {
-      this.getHeaderParams();
-      this.updateHeaderActiveClass();
-      this.hamburgerClickListener();
-      this.listenScroll();
-      this.listenResize();
+    init: function(fromPjax) {
+      if (!fromPjax) {
+        this.getHeaderParams();
+        this.hamburgerClickListener();
+        this.mobileNaviClickListener();
+        this.listenScroll();
+        this.listenResize();
+      }
+
+      this.setMenuClass();
+      this.controlHeaderClass();
     },
     getHeaderParams: function() {
       var $header = $('.header');
@@ -78,9 +83,8 @@
         }
       }
     },
-    updateHeaderActiveClass: function() {
+    setMenuClass: function() {
       // SET ACTIVE CLASS IN HEADER
-      // * could be removed in production and server side rendering when header is inside barba-container
       var headerMenuList = $('.header__menu li');
       if (headerMenuList.length === 0) return;
 
@@ -95,6 +99,17 @@
           $(val).removeClass('is-active');
         }
       });
+    },
+    controlHeaderClass: function() {
+      this.data.header.container.attr('data-modifier', false);
+
+      var $modifierElement = $('.page')
+        .last()
+        .find('[js-header-class]');
+
+      if ($modifierElement.length > 0) {
+        this.data.header.container.attr('data-modifier', $modifierElement.data('class'));
+      }
     },
   };
 })(jQuery, window.APP);
