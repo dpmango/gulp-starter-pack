@@ -13,7 +13,6 @@
       if (!fromPjax) {
         this.getHeaderParams();
         this.hamburgerClickListener();
-        this.mobileNaviClickListener();
         this.listenScroll();
         this.listenResize();
       }
