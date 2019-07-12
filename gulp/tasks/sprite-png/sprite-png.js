@@ -1,12 +1,13 @@
-var gulp = require('gulp');
-var plumber = require('gulp-plumber');
-var spritesmith = require('gulp.spritesmith');
-var buffer = require('vinyl-buffer');
-var imagemin = require('gulp-imagemin');
-var config = require('../../config');
+import gulp from 'gulp';
+import plumber from 'gulp-plumber';
+import spritesmith from 'gulp.spritesmith';
+import buffer from 'vinyl-buffer';
+import imagemin from 'gulp-imagemin';
+import merge from 'merge-stream';
+import config from '../../config';
 
-gulp.task('sprite:png', function() {
-  var spriteData = gulp
+const task = () => {
+  const spriteData = gulp
     .src(config.src.iconsPng + '/*.png')
     .pipe(
       plumber({
@@ -26,7 +27,7 @@ gulp.task('sprite:png', function() {
         cssTemplate: __dirname + '/sprite.template.mustache',
       })
     );
-  spriteData.img
+  const imgStream = spriteData.img
     .pipe(buffer())
     .pipe(
       imagemin({
@@ -34,9 +35,15 @@ gulp.task('sprite:png', function() {
       })
     )
     .pipe(gulp.dest(config.dest.img));
-  spriteData.css.pipe(gulp.dest(config.src.sassGen));
-});
+  const styleStream = spriteData.css.pipe(gulp.dest(config.src.sassGen));
 
-gulp.task('sprite:png:watch', function() {
-  gulp.watch(config.src.iconsPng + '/*.png', ['sprite:png']);
-});
+  return merge(imgStream, styleStream);
+};
+
+const buildPngSprite = () => task();
+const watch = () => () => {
+  gulp.watch([config.src.iconsPng + '/*.png'], buildPngSprite);
+};
+
+module.exports.build = buildPngSprite;
+module.exports.watch = watch;

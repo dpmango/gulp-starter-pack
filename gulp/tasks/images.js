@@ -1,16 +1,19 @@
-var gulp = require('gulp');
-var cache = require('gulp-cache');
-var util = require('gulp-util');
-var imagemin = require('gulp-imagemin');
-var config = require('../config.js');
+import gulp from 'gulp';
+import cache from 'gulp-cache';
+import util from 'gulp-util';
+import imagemin from 'gulp-imagemin';
+import config from '../config.js';
 
-gulp.task('images', function() {
-  return gulp
-    .src([config.src.img + '/**/*.{jpg,png,jpeg,svg,gif}', '!' + config.src.img + '/svgo/**/*.*'])
+const task = () =>
+  gulp
+    .src([config.src.img + '/**/*.{jpg,png,jpeg,svg,gif}'])
     .pipe(config.production ? cache(imagemin({ interlaced: true })) : util.noop())
     .pipe(gulp.dest(config.dest.img));
-});
 
-gulp.task('images:watch', function() {
-  gulp.watch(config.src.img + '/**/*.{jpg,png,jpeg,svg,gif}', ['images']);
-});
+const buildImages = () => task();
+const watch = () => () => {
+  gulp.watch([config.src.img + '/**/*.{jpg,png,jpeg,svg,gif}'], buildImages);
+};
+
+module.exports.build = buildImages;
+module.exports.watch = watch;

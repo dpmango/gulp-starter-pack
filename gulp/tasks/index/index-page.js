@@ -1,11 +1,11 @@
-var gulp = require('gulp');
-var consolidate = require('gulp-consolidate');
-var config = require('../../config');
-var yaml = require('require-yaml');
+import gulp from 'gulp';
+import consolidate from 'gulp-consolidate';
+import config from '../../config';
+import 'require-yaml';
 
-gulp.task('list-pages', function() {
+const task = () => {
   delete require.cache[require.resolve('../../../' + config.src.pagelist)];
-  var pages = require('../../../' + config.src.pagelist);
+  const pages = require('../../../' + config.src.pagelist);
   return gulp
     .src(__dirname + '/index.html')
     .pipe(
@@ -14,8 +14,12 @@ gulp.task('list-pages', function() {
       })
     )
     .pipe(gulp.dest(config.dest.html));
-});
+};
 
-gulp.task('list-pages:watch', function() {
-  gulp.watch(config.src.pagelist, ['list-pages']);
-});
+const buildIndexPage = () => task();
+const watch = () => () => {
+  gulp.watch(config.src.pagelist, buildIndexPage);
+};
+
+module.exports.build = buildIndexPage;
+module.exports.watch = watch;
