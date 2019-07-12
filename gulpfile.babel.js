@@ -42,7 +42,8 @@ const makeBuild = mode => {
     setMode,
     'clear',
     gulp.parallel('sprite:svg', 'sprite:png'),
-    gulp.parallel('sass', 'pug', 'javascript'),
+    gulp.parallel('sass', 'javascript'),
+    'pug',
     gulp.parallel('images', 'copy', 'index-page')
   );
 };

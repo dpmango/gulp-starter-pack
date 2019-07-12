@@ -12,10 +12,6 @@ import config from '../config';
 // TODO - move to webpack.config.js
 const webpackConfig = {
   mode: config.production ? 'production' : 'development',
-  // output: {
-  //   // libraryTarget: 'umd',
-  //   // umdNamedDefine: true,
-  // },
   module: {
     rules: [
       {
@@ -33,6 +29,8 @@ const webpackConfig = {
       },
     ],
   },
+  // some jquery plugins doesnt work with expose-loader
+  // Try uncommenting below if nothing else helps
   // plugins: [
   //   new webpack.ProvidePlugin({
   //     $: 'jquery',
@@ -53,7 +51,6 @@ const javascriptVendor = () =>
         presets: ['@babel/preset-env'],
       })
     )
-    // .pipe(config.production ? uglifyJs() : util.noop())
     .pipe(gulp.dest(config.dest.js));
 
 const javascriptApp = () =>

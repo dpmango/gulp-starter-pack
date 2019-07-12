@@ -4,7 +4,6 @@ import plumber from 'gulp-plumber';
 import changed from 'gulp-changed';
 import gulpif from 'gulp-if';
 import frontMatter from 'gulp-front-matter';
-// var staticHash from 'gulp-static-hash';
 import config from '../config';
 
 const renderHtml = onlyChanged =>
@@ -13,20 +12,7 @@ const renderHtml = onlyChanged =>
     .pipe(plumber({ errorHandler: config.errorHandler }))
     .pipe(gulpif(onlyChanged, changed(config.dest.html, { extension: '.html' })))
     .pipe(frontMatter({ property: 'data' }))
-    .pipe(
-      pug({
-        pretty: true,
-      })
-    )
-    // .pipe(
-    //   gulpIf(
-    //     process.env.NODE_ENV === 'production',
-    //     staticHash({
-    //       asset: 'dist',
-    //       exts: ['js', 'css'],
-    //     })
-    //   )
-    // )
+    .pipe(pug({ pretty: true }))
     .pipe(gulp.dest(config.dest.html));
 
 const buildPug = () => renderHtml();
