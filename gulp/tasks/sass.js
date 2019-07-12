@@ -31,7 +31,6 @@ const processors = [
   animations(),
   easings(),
   autoprefixer({
-    browsers: ['last 5 versions'],
     remove: true, // remove outdated prefixes?
     // cascade: false
   }),

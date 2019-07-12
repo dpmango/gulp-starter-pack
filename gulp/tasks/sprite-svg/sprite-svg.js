@@ -31,6 +31,9 @@ const spriteSvgMono = () =>
             cleanupIDs: true,
           },
           {
+            removeViewBox: false,
+          },
+          {
             mergePaths: false,
           },
         ],
@@ -107,6 +110,9 @@ const spriteSvgColor = () =>
           },
           {
             cleanupIDs: true,
+          },
+          {
+            removeViewBox: false,
           },
           {
             mergePaths: false,
