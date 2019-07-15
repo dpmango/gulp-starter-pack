@@ -1,20 +1,20 @@
-var gulp = require('gulp');
-var util = require('gulp-util');
-var sass = require('gulp-sass');
-var globImporter = require('node-sass-glob-importer');
-var sourcemaps = require('gulp-sourcemaps');
-var postcss = require('gulp-postcss');
-var autoprefixer = require('autoprefixer');
-var short = require('postcss-short');
-var svginline = require('postcss-inline-svg');
-var sorting = require('postcss-sorting');
-var pseudoel = require('postcss-pseudoelements');
-var flexbugs = require('postcss-flexbugs-fixes');
-var animations = require('postcss-animation');
-var easings = require('postcss-easings');
-var cssnano = require('cssnano');
-var plumber = require('gulp-plumber');
-var config = require('../config');
+import gulp from 'gulp';
+import util from 'gulp-util';
+import sass from 'gulp-sass';
+import globImporter from 'node-sass-glob-importer';
+import sourcemaps from 'gulp-sourcemaps';
+import postcss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
+import short from 'postcss-short';
+import svginline from 'postcss-inline-svg';
+import sorting from 'postcss-sorting';
+import pseudoel from 'postcss-pseudoelements';
+import flexbugs from 'postcss-flexbugs-fixes';
+import animations from 'postcss-animation';
+import easings from 'postcss-easings';
+import cssnano from 'cssnano';
+import plumber from 'gulp-plumber';
+import config from '../config';
 
 // PostCSS Processors
 // short - shorthands -- https://github.com/jonathantneal/postcss-short
@@ -25,13 +25,12 @@ var config = require('../config');
 // flexbugs - fix flex issues -- https://github.com/luisrudge/postcss-flexbugs-fixes
 // easings - gets easings.net -- https://github.com/postcss/postcss-easings
 
-var processors = [
+const processors = [
   short(),
   svginline(),
   animations(),
   easings(),
   autoprefixer({
-    browsers: ['last 5 versions'],
     remove: true, // remove outdated prefixes?
     // cascade: false
   }),
@@ -40,7 +39,7 @@ var processors = [
   flexbugs(),
 ];
 
-var cssNanoParams = {
+const cssNanoParams = {
   autoprefixer: false,
   reduceIdents: {
     keyframes: false,
@@ -51,8 +50,8 @@ var cssNanoParams = {
 };
 
 // Sass task
-gulp.task('sass', function() {
-  return gulp
+const task = () =>
+  gulp
     .src(config.src.sass + '/*.{sass,scss}')
     .pipe(config.production ? util.noop() : sourcemaps.init())
     .pipe(
@@ -73,11 +72,14 @@ gulp.task('sass', function() {
     .pipe(config.production ? util.noop() : sourcemaps.write('.'))
     .pipe(config.production ? postcss([cssnano(cssNanoParams)]) : util.noop())
     .pipe(gulp.dest(config.dest.css));
-});
 
-gulp.task('sass:watch', function() {
+const buildSass = () => task();
+const watch = () => () => {
   gulp.watch(
     [config.src.sass + '/**/*.{sass,scss}', config.src.components + '/**/*.{sass,scss}'],
-    ['sass']
+    buildSass
   );
-});
+};
+
+module.exports.build = buildSass;
+module.exports.watch = watch;

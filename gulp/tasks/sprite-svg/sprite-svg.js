@@ -1,17 +1,17 @@
-var gulp = require('gulp');
-var plumber = require('gulp-plumber');
-var svgmin = require('gulp-svgmin');
-var svgStore = require('gulp-svgstore');
-var rename = require('gulp-rename');
-var cheerio = require('cheerio');
-var gCheerio = require('gulp-cheerio');
-var through2 = require('through2');
-var consolidate = require('gulp-consolidate');
-var config = require('../../config');
+import gulp from 'gulp';
+import plumber from 'gulp-plumber';
+import svgmin from 'gulp-svgmin';
+import svgStore from 'gulp-svgstore';
+import rename from 'gulp-rename';
+import cheerio from 'cheerio';
+import gCheerio from 'gulp-cheerio';
+import through2 from 'through2';
+import consolidate from 'gulp-consolidate';
+import config from '../../config';
 
 // monocolor icons controlled with color/fill in css
-gulp.task('sprite:svg:mono', function() {
-  return gulp
+const spriteSvgMono = () =>
+  gulp
     .src(config.src.iconsSvgMono + '/**/*.svg')
     .pipe(
       plumber({
@@ -29,6 +29,9 @@ gulp.task('sprite:svg:mono', function() {
           },
           {
             cleanupIDs: true,
+          },
+          {
+            removeViewBox: false,
           },
           {
             mergePaths: false,
@@ -86,11 +89,10 @@ gulp.task('sprite:svg:mono', function() {
     )
     .pipe(rename({ basename: 'sprite-mono' }))
     .pipe(gulp.dest(config.dest.img));
-});
 
 // preserve colors on icons
-gulp.task('sprite:svg:color', function() {
-  return gulp
+const spriteSvgColor = () =>
+  gulp
     .src(config.src.iconsSvgColor + '/**/*.svg')
     .pipe(
       plumber({
@@ -108,6 +110,9 @@ gulp.task('sprite:svg:color', function() {
           },
           {
             cleanupIDs: true,
+          },
+          {
+            removeViewBox: false,
           },
           {
             mergePaths: false,
@@ -155,11 +160,13 @@ gulp.task('sprite:svg:color', function() {
     )
     .pipe(rename({ basename: 'sprite-color' }))
     .pipe(gulp.dest(config.dest.img));
-});
 
-gulp.task('sprite:svg', ['sprite:svg:mono', 'sprite:svg:color']);
+const buildSprites = () => gulp.parallel(spriteSvgMono, spriteSvgColor);
 
-gulp.task('sprite:svg:watch', function() {
-  gulp.watch(config.src.iconsSvgMono + '/**/*.svg', ['sprite:svg:mono']);
-  gulp.watch(config.src.iconsSvgColor + '/**/*.svg', ['sprite:svg:color']);
-});
+const watch = () => () => {
+  gulp.watch(config.src.iconsSvgMono + '/**/*.svg', spriteSvgMono);
+  gulp.watch(config.src.iconsSvgColor + '/**/*.svg', spriteSvgColor);
+};
+
+module.exports.build = buildSprites;
+module.exports.watch = watch;

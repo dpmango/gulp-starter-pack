@@ -1,21 +1,17 @@
-var gulp = require('gulp');
-var path = require('path');
-var util = require('gulp-util');
-var plumber = require('gulp-plumber');
-var concat = require('gulp-concat');
-var uglifyJs = require('gulp-uglify');
-var babel = require('gulp-babel');
-var webpack = require('webpack');
-var webpackStream = require('webpack-stream');
-var config = require('../config');
+import gulp from 'gulp';
+import path from 'path';
+import util from 'gulp-util';
+import plumber from 'gulp-plumber';
+import concat from 'gulp-concat';
+import uglifyJs from 'gulp-uglify';
+import babel from 'gulp-babel';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
+import config from '../config';
 
 // TODO - move to webpack.config.js
-var webpackConfig = {
+const webpackConfig = {
   mode: config.production ? 'production' : 'development',
-  // output: {
-  //   // libraryTarget: 'umd',
-  //   // umdNamedDefine: true,
-  // },
   module: {
     rules: [
       {
@@ -33,6 +29,8 @@ var webpackConfig = {
       },
     ],
   },
+  // some jquery plugins doesnt work with expose-loader
+  // Try uncommenting below if nothing else helps
   // plugins: [
   //   new webpack.ProvidePlugin({
   //     $: 'jquery',
@@ -42,25 +40,21 @@ var webpackConfig = {
   // ],
 };
 
-gulp.task('javascript:vendor', function() {
-  return (
-    gulp
-      .src([config.src.js + '/vendor.js'])
-      .pipe(plumber({ errorHandler: config.errorHandler }))
-      .pipe(webpackStream(webpackConfig))
-      .pipe(concat('vendor.js'))
-      .pipe(
-        babel({
-          presets: ['@babel/preset-env'],
-        })
-      )
-      // .pipe(config.production ? uglifyJs() : util.noop())
-      .pipe(gulp.dest(config.dest.js))
-  );
-});
+const javascriptVendor = () =>
+  gulp
+    .src([config.src.js + '/vendor.js'])
+    .pipe(plumber({ errorHandler: config.errorHandler }))
+    .pipe(webpackStream(webpackConfig))
+    .pipe(concat('vendor.js'))
+    .pipe(
+      babel({
+        presets: ['@babel/preset-env'],
+      })
+    )
+    .pipe(gulp.dest(config.dest.js));
 
-gulp.task('javascript:app', function() {
-  return gulp
+const javascriptApp = () =>
+  gulp
     .src([
       config.src.js + '/vendor/**/*.js',
       config.src.js + '/app.js',
@@ -76,12 +70,11 @@ gulp.task('javascript:app', function() {
     )
     .pipe(config.production ? uglifyJs() : util.noop())
     .pipe(gulp.dest(config.dest.js));
-});
 
-gulp.task('javascript', ['javascript:vendor', 'javascript:app']);
+const buildJavascript = () => gulp.parallel(javascriptVendor, javascriptApp);
 
-gulp.task('javascript:watch', function() {
-  gulp.watch([config.src.js + '/vendor.js'], ['javascript:vendor']);
+const watch = () => () => {
+  gulp.watch([config.src.js + '/vendor.js'], javascriptVendor);
   gulp.watch(
     [
       config.src.js + '/vendor/**/*.js',
@@ -89,6 +82,9 @@ gulp.task('javascript:watch', function() {
       config.src.js + '/modules/**/*.js',
       config.src.components + '/**/*.js',
     ],
-    ['javascript:app']
+    javascriptApp
   );
-});
+};
+
+module.exports.build = buildJavascript;
+module.exports.watch = watch;
