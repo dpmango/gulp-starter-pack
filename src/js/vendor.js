@@ -2,6 +2,7 @@
 import svg4everybody from 'svg4everybody';
 import picturefill from 'picturefill';
 import viewportUnitsBuggyfill from 'viewport-units-buggyfill';
+import objectFitImages from 'object-fit-images/dist/ofi.es-modules.js';
 import Swiper from 'swiper';
 import magnificPopup from 'magnific-popup';
 import AOS from 'aos';
@@ -23,6 +24,7 @@ import sharer from 'sharer.js';
 // window.$ = $;
 window.svg4everybody = svg4everybody;
 window.picturefill = picturefill;
+window.objectFitImages = objectFitImages;
 window.viewportUnitsBuggyfill = viewportUnitsBuggyfill;
 window.Swiper = Swiper;
 window.magnificPopup = magnificPopup;

@@ -5,6 +5,7 @@ import globImporter from 'node-sass-glob-importer';
 import sourcemaps from 'gulp-sourcemaps';
 import postcss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
+import objfit from 'postcss-object-fit-images';
 import short from 'postcss-short';
 import svginline from 'postcss-inline-svg';
 import sorting from 'postcss-sorting';
@@ -35,6 +36,7 @@ const processors = [
     // cascade: false
   }),
   sorting(),
+  objfit(),
   pseudoel(),
   flexbugs(),
 ];
