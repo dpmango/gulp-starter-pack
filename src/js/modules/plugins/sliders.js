@@ -17,6 +17,11 @@
       this.initResponsiveSwipers();
       this.listenResize();
     },
+    reinit: function() {
+      // without resize listeners double check
+      this.initSwipers();
+      this.initResponsiveSwipers(true);
+    },
     listenResize: function() {
       _window.on('resize', debounce(this.initResponsiveSwipers.bind(this), 200));
     },
@@ -52,7 +57,7 @@
       });
     },
 
-    initResponsiveSwipers: function() {
+    initResponsiveSwipers: function(isHardReset) {
       var featuredProducts = '[js-featured-products-swiper]';
       if ($(featuredProducts).length > 0) {
         this.initFeaturedProductsSwiper(featuredProducts);
