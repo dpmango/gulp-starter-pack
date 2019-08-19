@@ -1,101 +1,66 @@
 // keep space for preloading images via AR set
-.scaler {
-  background-color: $colorbg;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: block;
-  font-size: 0;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-
-  &[data-ar='16:9'] {
-    padding-bottom: 56.25%;
-  }
-
-  &[data-ar='1:1'] {
-    padding-bottom: 100%;
-  }
-
-  &[data-ar='4:3'] {
-    padding-bottom: 75%;
-  }
-
-  &[data-ar='21:9'] {
-    padding-bottom: 42.85%;
-  }
-
-  img {
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
-
-  [js-lazy] {
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    will-change: opacity;
-  }
-
-  &.is-bg-hidden {
-    background-color: transparent;
-
-    &.no-bg-onload {
-      background-image: none !important;
-    }
-  }
-
-  &.is-loaded {
+.scaler
+  background-color: $colorbg
+  background-position: center center
+  background-repeat: no-repeat
+  background-size: cover
+  display: block
+  font-size: 0
+  overflow: hidden
+  position: relative
+  z-index: 1
+  &[data-ar='16:9']
+    padding-bottom: 56.25%
+  &[data-ar='1:1']
+    padding-bottom: 100%
+  &[data-ar='4:3']
+    padding-bottom: 75%
+  &[data-ar='21:9']
+    padding-bottom: 42.85%
+  img
+    left: 0
+    position: absolute
+    top: 0
+    width: 100%
+  [js-lazy]
+    backface-visibility: hidden
+    transform-style: preserve-3d
+    will-change: opacity
+  &.is-bg-hidden
+    background-color: transparent
+    &.no-bg-onload
+      background-image: none !important
+  &.is-loaded
     img,
-    picture {
-      opacity: 1;
-    }
-  }
-}
+    picture
+      opacity: 1
 
 // when no scaler parent found
-[js-lazy] {
-  opacity: 0;
-  transition: opacity 0.25s $ease, transform 0.4s $ease;
-
-  &.is-loaded {
-    opacity: 1;
-  }
-}
+[js-lazy]
+  opacity: 0
+  transition: opacity 0.25s $ease, transform 0.4s $ease
+  &.is-loaded
+    opacity: 1
 
 // reveal
-.reveal {
-  overflow: hidden;
-  position: relative;
-
-  &::after {
-    background: $colorbgdark;
-    content: ' ';
-    display: inline-block;
-    pointer-events: none;
-    position: absolute 0;
-    transition: transform 0.8s cubic-bezier(0.9, 0, 0.1, 1);
-    z-index: 2;
-  }
-
-  &.is-animated {
+.reveal
+  overflow: hidden
+  position: relative
+  &::after
+    background: $colorbgdark
+    content: ' '
+    display: inline-block
+    pointer-events: none
+    position: absolute 0
+    transition: transform 0.8s cubic-bezier(0.9, 0, 0.1, 1)
+    z-index: 2
+  &.is-animated
     // default is rtl
-    &::after {
-      transform: translate(-100%, 0);
-    }
-
-    &[data-direction='ltr'] {
-      &::after {
-        transform: translate(100%, 0);
-      }
-    }
-
-    &[data-direction='rtl'] {
-      &::after {
-        transform: translate(-100%, 0);
-      }
-    }
-  }
-}
+    &::after
+      transform: translate(-100%, 0)
+    &[data-direction='ltr']
+      &::after
+        transform: translate(100%, 0)
+    &[data-direction='rtl']
+      &::after
+        transform: translate(-100%, 0)
