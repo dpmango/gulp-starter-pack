@@ -2,16 +2,15 @@
 // LAZY LOAD
 ////////////////////
 (function($, APP) {
-  var $lazy = _document.find('[js-lazy]');
-  if ($lazy.length === 0) {
-    APP.Plugins.LegacySupport.fixImages();
-    AOS.refresh();
-    return;
-  }
-
   APP.Plugins.LazyLoadImages = {
     init: function() {
       var _this = this;
+      var $lazy = _document.find('[js-lazy]');
+      if ($lazy.length === 0) {
+        APP.Plugins.LegacySupport.fixImages();
+        AOS.refresh();
+        return;
+      }
 
       $lazy.Lazy({
         threshold: 300,
