@@ -1,16 +1,13 @@
 (function($, APP) {
-  APP.Dev.Breakpoint = {
-    setBreakpoint: function() {
+  APP.Dev.LogOnScreen = {
+    showLog: function(message) {
       var wHost = window.location.host.toLowerCase();
       var displayCondition =
         wHost.indexOf('localhost') >= 0 ||
         wHost.indexOf('surge') >= 0 ||
         wHost.indexOf('netlify') >= 0;
       if (displayCondition) {
-        var wWidth = window.innerWidth;
-        var wHeight = _window.height();
-
-        var content = "<div class='dev-bp-debug'>" + wWidth + ' x ' + wHeight + '</div>';
+        var content = "<div class='dev-bp-debug'>" + message + '</div>';
 
         $('.page').append(content);
         setTimeout(function() {
@@ -20,9 +17,6 @@
           $('.dev-bp-debug').remove();
         }, 1500);
       }
-    },
-    listenResize: function() {
-      $(window).on('resize', debounce(this.setBreakpoint, 200));
     },
   };
 })(jQuery, window.APP);
