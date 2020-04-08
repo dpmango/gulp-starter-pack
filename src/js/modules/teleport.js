@@ -15,7 +15,7 @@
       var _this = this;
       var $teleports = $('.page')
         .last()
-        .find('[js-teleport]');
+        .find('.js-teleport');
       _this.data.teleports = [];
 
       if ($teleports.length === 0) {
@@ -51,9 +51,9 @@
           var condition;
 
           if (obj.conditionPosition === '<') {
-            condition = window.innerWidth < obj.conditionMedia;
+            condition = window.innerWidth <= obj.conditionMedia;
           } else if (obj.conditionPosition === '>') {
-            condition = window.innerWidth > obj.conditionMedia;
+            condition = window.innerWidth >= obj.conditionMedia;
           }
 
           if (condition) {
@@ -67,7 +67,7 @@
       });
 
       // re-init sliders and other components
-      APP.Plugins.Sliders.reinit();
+      // APP.Plugins.Sliders.reinit();
     },
   };
 })(jQuery, window.APP);

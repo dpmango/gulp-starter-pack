@@ -18,8 +18,11 @@
     "deploy": "gulp build --production && surge --project ./dist --domain khmelevskoy.surge.sh"
   },
   "dependencies": {
+    "air-datepicker": "^2.2.3",
     "aos": "^2.3.4",
+    "autofill-event": "^0.0.1",
     "barba.js": "^1.0.0",
+    "clipboard": "^2.0.6",
     "gsap": "^2.0.2",
     "jquery": "^3.4.1",
     "jquery-lazy": "^1.7.10",
@@ -29,6 +32,7 @@
     "lodash": "^4.17.14",
     "magnific-popup": "^1.1.0",
     "object-fit-images": "^3.2.4",
+    "photoswipe": "^4.1.3",
     "picturefill": "^3.0.3",
     "scroll-lock": "^2.1.3",
     "scrollmonitor": "^1.2.4",
