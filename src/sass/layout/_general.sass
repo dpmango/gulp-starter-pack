@@ -2,6 +2,11 @@
   box-sizing: border-box
   outline: none
 
+// FOUC like fix (prevent transition from default browser values)
+body:not(.is-ready)
+  *
+    transition: none !important
+
 a
   color: inherit
   text-decoration: none
@@ -30,6 +35,11 @@ body, html
   color: white
   background: $colorPrimary
 
+.is-ios
+  cursor: pointer
+  *
+    cursor: pointer
+
 .body-lock
   height: 100%
   overflow: hidden
@@ -39,6 +49,8 @@ body, html
   bottom: 0
   left: 0
   width: 100%
+  &.is-mobile
+    overflow: visible
 
 .page
   display: flex

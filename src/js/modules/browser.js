@@ -24,6 +24,14 @@
       }
     };
 
+    methods.isIosDevice = function() {
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
     methods.msieversion = function() {
       var ua = window.navigator.userAgent;
       var msie = ua.indexOf('MSIE ');
@@ -36,6 +44,8 @@
     };
 
     methods.setBodyTags = function() {
+      $('body').addClass('is-ready');
+
       if (methods.msieversion()) {
         $('body').addClass('is-ie');
       }
@@ -43,11 +53,16 @@
       if (methods.isMobile()) {
         $('body').addClass('is-mobile');
       }
+
+      if (methods.isIosDevice()) {
+        $('html').addClass('is-ios');
+      }
     };
 
     var data = {
       isIe: methods.msieversion(),
       isMobile: methods.isMobile(),
+      isIosDevice: methods.isIosDevice(),
       isRetinaDisplay: methods.isRetinaDisplay(),
     };
 

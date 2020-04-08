@@ -17,6 +17,7 @@
         this.listenResize();
       }
 
+      this.closeMobileMenu();
       this.setMenuClass();
       this.controlHeaderClass();
     },
@@ -30,18 +31,22 @@
         bottomPoint: headerHeight,
       };
     },
-    closeMobileMenu: function(isOnload) {
+    closeMobileMenu: function() {
       $('[js-hamburger]').removeClass('is-active');
       $('.mobile-navi').removeClass('is-active');
 
-      APP.Plugins.ScrollBlock.blockScroll(isOnload);
+      APP.Plugins.ScrollBlock.enableScroll();
     },
     hamburgerClickListener: function() {
       _document.on('click', '[js-hamburger]', function() {
         $(this).toggleClass('is-active');
         $('.mobile-navi').toggleClass('is-active');
 
-        APP.Plugins.ScrollBlock.blockScroll();
+        if ($(this).is('.is-active')) {
+          APP.Plugins.ScrollBlock.disableScroll();
+        } else {
+          APP.Plugins.ScrollBlock.enableScroll();
+        }
       });
     },
     listenScroll: function() {
