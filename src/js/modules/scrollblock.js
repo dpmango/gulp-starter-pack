@@ -16,6 +16,9 @@
       fillGapMethod: 'padding',
       scrolllDisabled: false,
     },
+    getData: function() {
+      return this.data;
+    },
     fillScrollbarGap: function() {
       this.fillGapTarget($('.header').get(0));
       this.fillGapTarget(document.body);
