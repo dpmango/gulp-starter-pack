@@ -4,16 +4,23 @@
 (function($, APP) {
   APP.Plugins.LazyLoadImages = {
     init: function() {
-      var _this = this;
-      var $lazy = _document.find('[js-lazy]');
+      var $lazy = _document.find('[js-lazy]:not(.is-loaded)');
       if ($lazy.length === 0) {
         APP.Plugins.LegacySupport.fixImages();
-        AOS.refresh();
         return;
       }
 
+      this.initLazy($lazy);
+    },
+    load: function(DOMelement) {
+      var $lazy = $(DOMelement);
+
+      this.initLazy($lazy);
+    },
+    initLazy: function($lazy) {
+      var _this = this;
       $lazy.Lazy({
-        threshold: 300,
+        threshold: APP.Browser().data.isMobile ? 500 : 800,
         enableThrottle: true,
         throttle: 100,
         scrollDirection: 'vertical',
@@ -35,13 +42,12 @@
           // element.attr('style', '')
         },
         afterLoad: function(element) {
+          APP.Plugins.LegacySupport.fixImages();
           _this.animateLazy(element);
         },
-        onFinishedAll: function() {
-          APP.Plugins.LegacySupport.fixImages();
-          AOS.refresh();
-        },
       });
+
+      triggerBody();
     },
     animateLazy: function(element) {
       var fadeTimeout = 250;
