@@ -3,7 +3,7 @@ import svg4everybody from 'svg4everybody';
 import picturefill from 'picturefill';
 import viewportUnitsBuggyfill from 'viewport-units-buggyfill';
 import objectFitImages from 'object-fit-images/dist/ofi.es-modules.js';
-import Swiper from 'swiper';
+import Swiper from 'swiper/js/swiper.esm.bundle';
 import magnificPopup from 'magnific-popup';
 import AOS from 'aos';
 import scrollMonitor from 'scrollmonitor';
