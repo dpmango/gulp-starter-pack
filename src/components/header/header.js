@@ -4,6 +4,11 @@
 (function($, APP) {
   APP.Components.Header = {
     data: {
+      classes: {
+        fixedClass: 'is-fixed',
+        visibleClass: 'is-fixed-visible',
+        bodyFixedVisible: 'is-header-fixed-visible',
+      },
       header: {
         container: undefined,
         bottomPoint: undefined,
@@ -51,9 +56,26 @@
     },
     listenScroll: function() {
       _window.on('scroll', this.scrollHeader.bind(this));
+      _window.on('scroll', debounce(this.scrollHeaderDebouce.bind(this), 1250, { trailing: true }));
     },
     listenResize: function() {
       _window.on('resize', debounce(this.getHeaderParams.bind(this), 100));
+    },
+    makeHeaderVisible: function() {
+      this.data.header.container.addClass(this.data.classes.visibleClass);
+      $('body').addClass(this.data.classes.bodyFixedVisible);
+      this.data.header.isFixedVisible = true;
+    },
+    makeHeaderHidden: function() {
+      this.data.header.container.removeClass(this.data.classes.visibleClass);
+      $('body').removeClass(this.data.classes.bodyFixedVisible);
+      this.data.header.isFixedVisible = false;
+    },
+    scrollHeaderDebouce: function() {
+      // always show header after user stop scrolling
+      if (this.data.header.container !== undefined) {
+        this.makeHeaderVisible();
+      }
     },
     scrollHeader: function() {
       if (this.data.header.container !== undefined) {
@@ -69,9 +91,9 @@
           this.data.header.container.addClass(fixedClass);
 
           if (scroll.y > this.data.header.bottomPoint * 2 && scroll.direction === 'up') {
-            this.data.header.container.addClass(visibleClass);
+            this.makeHeaderVisible();
           } else {
-            this.data.header.container.removeClass(visibleClass);
+            this.makeHeaderHidden();
           }
         } else {
           // emulate position absolute by giving negative transform on initial scroll
