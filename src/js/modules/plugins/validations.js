@@ -7,6 +7,7 @@
   APP.Plugins.Validations = {
     init: function() {
       this.localize();
+      this.customMethods();
       this.validateFormsConstructor();
       this.validateFormsCustom();
     },
@@ -42,23 +43,14 @@
       },
       validateSubmitHandler: function(form) {
         $(form).addClass('loading');
-        $.ajax({
-          type: 'POST',
-          url: $(form).attr('action'),
-          data: $(form).serialize(),
-          success: function(response) {
-            $(form).removeClass('loading');
-            var data = $.parseJSON(response);
-            if (data.status === 'success') {
-              // do something I can't test
-            } else {
-              $(form)
-                .find('[data-error]')
-                .html(data.message)
-                .show();
-            }
-          },
-        });
+        var formData = $(form).serialize();
+        var sucessFunction = $(form).data('success-function');
+        if (sucessFunction !== undefined) {
+          var x = eval(sucessFunction);
+          if (typeof x == 'function') {
+            x(formData);
+          }
+        }
       },
       masks: {
         phone: {
@@ -75,6 +67,21 @@
           digits: true,
         },
       },
+    },
+    customMethods: function() {
+      $.validator.addMethod(
+        'laxEmail',
+        function(value, element) {
+          // allow any non-whitespace characters as the host part
+          return (
+            this.optional(element) ||
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+              value
+            )
+          );
+        },
+        'Email format must be like name@site.com'
+      );
     },
     localize: function() {
       /*
@@ -106,7 +113,7 @@
     validateFormsConstructor: function() {
       var _this = this;
 
-      var $forms = $('[js-validate-form]:not(.is-validation-attached)');
+      var $forms = $('.js-validate-form:not(.is-validation-attached)');
       if ($forms.length === 0) return;
       // CONSTRUCTOR LIKE FIRST
       $forms.each(function(i, form) {
@@ -122,17 +129,17 @@
             email: {
               required: true,
               email: true,
+              laxEmail: true,
             },
             phone: _this.data.masks.phone,
           },
           messages: {
             email: {
-              required: 'Заполните это поле',
-              email: 'Формат email неверен',
+              required: 'Please enter email',
+              email: 'Email format must be like name@site.com',
             },
             phone: {
-              required: 'Заполните это поле',
-              minlength: 'Введите корректный телефон',
+              minlength: 'Phome form is invalid',
             },
           },
         };
