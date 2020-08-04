@@ -17,6 +17,7 @@
     "surge": "surge --project ./dist --domain khmelevskoy.surge.sh",
     "deploy": "gulp build --production && surge --project ./dist --domain khmelevskoy.surge.sh"
   },
+  "preinstall": "npm i -g gulp-cli",
   "dependencies": {
     "air-datepicker": "^2.2.3",
     "aos": "^2.3.4",
