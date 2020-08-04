@@ -8,9 +8,6 @@ bower_components
 # Ignore dist folder
 dist
 
-# Package manager files
-package-lock.json
-
 # Numerous always-ignore extensions
 *.diff
 *.err

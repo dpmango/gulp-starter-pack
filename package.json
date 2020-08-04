@@ -43,6 +43,7 @@
     "viewport-units-buggyfill": "^0.6.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
     "@babel/core": "^7.5.4",
     "@babel/preset-env": "^7.5.4",
     "@babel/register": "^7.4.4",
