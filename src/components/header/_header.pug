@@ -3,33 +3,44 @@ header.header
   .container
     .header__wrapper
       a(href="homepage.html").header__logo
-        +svgMono('email')
+        +svgMono('logo')
       ul.header__menu
         li
-          a(href="homepage.html") Homepage
+          a(href="#") Home
         li
-          a(href="page.html") Shop
+          a(href="#") About
         li
-          a(href="page.html") Lorem
-      
+          a(href="#") Team
+        li
+          a(href="#") Orca Blog
+        li
+          a(href="#") Giveaway
+        li
+          a(href="#") Leaderboard
+
       .header__cta
-        .header__cart
-          +svgMono('email')
-      
+        a(href="#").btn.btn-primary Join Orca Beta
+
       .header__hamburger
         .hamburger.hamburger--squeeze(js-hamburger)
           .hamburger-box
             .hamburger-inner
-    
+
 // MOBILE NAVI
 .mobile-navi
   .mobile-navi__wrapper
     ul.mobile-navi__menu
       li
-        a(href="homepage.html") Homepage
+        a(href="#") Home
       li
-        a(href="page.html") Shop
+        a(href="#") About
       li
-        a(href="page.html") Lorem
+        a(href="#") Team
+      li
+        a(href="#") Orca Blog
+      li
+        a(href="#") Giveaway
+      li
+        a(href="#") Leaderboard
     .mobile-navi__cta
       a(href="mailto:sergey@khmelevskoy.co") sergey@khmelevskoy.co

@@ -1,7 +1,7 @@
-ProjectTitle: Project-name
+ProjectTitle: Orca
 
 PageList:
   - file: homepage.html
-    ready: 100
+    ready: 30
   - file: page.html
     ready: 0

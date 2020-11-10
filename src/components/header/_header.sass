@@ -5,31 +5,35 @@
   right: 0
   left: 0
   z-index: 9
-  background: #f5f5f5
   will-change: transform
   backface-visibility: hidden
   transform-style: preserve-3d
   &__wrapper
     display: flex
     align-items: center
-    height: 70px
+    padding: 40px 0 20px
 
   &__logo
     flex: 0 0 auto
-    font-size: 35px
-    padding-right: 30px
+    font-size: 0px
+    padding-right: 40px
+    .ico
+      font-size: 32px
 
   &__menu
     flex: 0 1 auto
     display: flex
     align-items: center
-    font-size: 18px
-    margin: 0 auto
+    margin: 0 auto 0 0
     padding: 0
     li
       display: inline-block
-      margin-right: 30px
+      font-size: 14px
+      font-weight: 600
+      margin-right: 20px
     a
+      display: inline-block
+      padding: 5px
       transition: color .25s $ease
       &:hover
         color: tomato
@@ -49,8 +53,7 @@
     transform: translate3d(0,-100%,0) !important
     transition: transform .25s $ease
     .header__wrapper
-      padding-top: 10px
-      padding-bottom: 10px
+      padding-top: 20px
 
   &.is-fixed-visible
     // visibility: visible
