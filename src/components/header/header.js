@@ -31,6 +31,8 @@
       var headerOffsetTop = 0;
       var headerHeight = $header.outerHeight() + headerOffsetTop;
 
+      $header.addClass('is-shown');
+
       this.data.header = {
         container: $header,
         bottomPoint: headerHeight,

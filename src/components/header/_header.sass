@@ -5,10 +5,11 @@
   right: 0
   left: 0
   z-index: 9
-  will-change: transform
+  will-change: transform, opacity
   backface-visibility: hidden
   transform-style: preserve-3d
-  transition: transform .25s $ease
+  opacity: 0
+  transition: transform .25s $ease, opacity .5s 1.5s $ease
   &__wrapper
     display: flex
     align-items: center
@@ -46,6 +47,9 @@
   &__hamburger
     display: none
     padding-left: 20px
+
+  &.is-shown
+    opacity: 1
 
   &.is-fixed
     // should be normalized to -100% scroll at this point
