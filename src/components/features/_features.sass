@@ -6,11 +6,13 @@
   &__head
     text-align: center
   &__content
+    margin-top: 70px
 
 
 .feature-card
   position: sticky
-  top: calc(50vh + 52px - 265px - 80px)
+  // centrify - header - card H - bottom margin
+  top: calc(50vh + 80px - 280px - 70px)
   height: 800px
   transform: translateZ(0)
   will-change: transform, opacity
@@ -18,7 +20,40 @@
     position: relative
     z-index: 1
     overflow: hidden
-    margin-top: 70px
+    display: flex
+    // margin-top: 70px
     background: #111216
     height: 560px
     border-radius: 8px
+    padding-left: 64px
+    padding-right: 64px
+  &__content
+    flex: 1 1 auto
+    display: flex
+    flex-direction: column
+    justify-content: center
+    padding-right: 30px
+  &__content-wrapper
+    max-width: 405px
+    padding: 24px 0px
+    text-align: left
+    .p-label
+      margin-bottom: 16px
+    .p-regular
+      margin-top: 10px
+    .btn
+      margin-top: 34px
+  &__image
+    flex: 0 1 auto
+    margin-left: auto
+    display: flex
+    font-size: 0
+    align-items: flex-end
+    &--top
+      align-items: flex-start
+    img, picture
+      max-width: 100%
+
+  &.is-past
+    opacity: 0 !important
+    transform: translate3d(0,-40px,0) scale(0.9, 0.9) !important

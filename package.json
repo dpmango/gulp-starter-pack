@@ -14,8 +14,8 @@
   "scripts": {
     "start": "gulp",
     "build": "gulp build --production",
-    "surge": "surge --project ./dist --domain orca.surge.sh",
-    "deploy": "gulp build --production && surge --project ./dist --domain orca.surge.sh"
+    "surge": "surge --project ./dist --domain orca-app.surge.sh",
+    "deploy": "gulp build --production && surge --project ./dist --domain orca-app.surge.sh"
   },
   "preinstall": "npm i -g gulp-cli",
   "dependencies": {

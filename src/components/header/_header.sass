@@ -8,6 +8,7 @@
   will-change: transform
   backface-visibility: hidden
   transform-style: preserve-3d
+  transition: transform .25s $ease
   &__wrapper
     display: flex
     align-items: center
@@ -43,21 +44,21 @@
     padding-left: 30px
 
   &__hamburger
-    // display: none
+    display: none
     padding-left: 20px
 
   &.is-fixed
     // should be normalized to -100% scroll at this point
     position: fixed
     // visibility: hidden
-    transform: translate3d(0,-100%,0) !important
-    transition: transform .25s $ease
-    .header__wrapper
-      padding-top: 20px
+    transform: translate3d(0,-20px,0) !important
+    // transition: transform .25s $ease
+    // .header__wrapper
+    //   padding-top: 20px
 
-  &.is-fixed-visible
-    // visibility: visible
-    transform: translate3d(0,0,0) !important
+  // &.is-fixed-visible
+  //   // visibility: visible
+  //   transform: translate3d(0,0,0) !important
 
   &.is-transitioning
     transition: transform .25s $ease
@@ -66,16 +67,14 @@
 
 +r($lg)
   .header
-    &__cta
+    &__hamburger
+      display: block
+
+    &__menu
       display: none
 
 +r($md)
   .header
-    &__menu
-      display: none
-    &__hamburger
-      margin-left: auto
-      display: block
 
 +r($sm)
   .header

@@ -90,20 +90,20 @@
         if (scroll.y > this.data.header.bottomPoint) {
           this.data.header.container.addClass(fixedClass);
 
-          if (scroll.y > this.data.header.bottomPoint * 2 && scroll.direction === 'up') {
-            this.makeHeaderVisible();
-          } else {
-            this.makeHeaderHidden();
-          }
+          // if (scroll.y > this.data.header.bottomPoint * 2 && scroll.direction === 'up') {
+          //   this.makeHeaderVisible();
+          // } else {
+          //   this.makeHeaderHidden();
+          // }
         } else {
           // emulate position absolute by giving negative transform on initial scroll
-          var normalized = Math.floor(normalize(scroll.y, this.data.header.bottomPoint, 0, 0, 100));
-          var reverseNormalized = (100 - normalized) * -1;
-          reverseNormalized = reverseNormalized * 1.2; // a bit faster transition
+          // var normalized = Math.floor(normalize(scroll.y, this.data.header.bottomPoint, 0, 0, 100));
+          // var reverseNormalized = (100 - normalized) * -1;
+          // reverseNormalized = reverseNormalized * 1.2; // a bit faster transition
 
-          this.data.header.container.css({
-            transform: 'translate3d(0,' + reverseNormalized + '%,0)',
-          });
+          // this.data.header.container.css({
+          //   transform: 'translate3d(0,' + reverseNormalized + '%,0)',
+          // });
 
           this.data.header.container.removeClass(fixedClass);
         }
