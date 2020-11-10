@@ -2,6 +2,6 @@ ProjectTitle: Orca
 
 PageList:
   - file: homepage.html
-    ready: 30
+    ready: 50
   - file: page.html
     ready: 0

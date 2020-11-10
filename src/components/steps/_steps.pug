@@ -1,0 +1,48 @@
+// STEPS
+.steps
+  .steps__head
+    .container
+      p.p-label FIRST COLLECTION
+      .h1-title Easy step into <br/>the investing world
+
+  .steps__content
+    .container.container--960
+      // section
+      .steps__wrapper
+        .steps__sections.js-steps-sections
+          // section
+          .steps__section(data-step="1")
+            .steps__text
+              p.p-regular For those who are only starting out in investment or just want an easy way to build their portfolio from scratch, we’ve created the “First Portfolio” flow.
+
+          // section
+          .steps__section(data-step="2")
+            .steps__text
+              p.p-regular For those who are only starting out in investment or just want an easy way to build their portfolio from scratch, we’ve created the “First Portfolio” flow.
+
+          // section
+          .steps__section(data-step="3")
+            .steps__text
+              p.p-regular For those who are only starting out in investment or just want an easy way to build their portfolio from scratch, we’ve created the “First Portfolio” flow.
+
+          // section
+          .steps__section(data-step="4")
+            .steps__text
+              p.p-regular Orca lowers the entry threshold for users, helping them to get their first portfolio on the spot. Once they’ve set their risk level and their range of interests, they can choose from various stock collections, available to buy with one tap. These are diversified bundles of stocks from different markets, so that users can hedge risks and get started with a well-balanced portfolio of assets.
+              .steps__cta
+                a(href="#").btn.btn-primary Join Orca Beta
+
+        // sticky
+        .steps__sticky
+          .steps__sticky-wrapper
+            .steps__phone.js-steps-phone
+              .steps__phone-frame
+                img(src='img/iphone-frame.png' srcset='img/iphone-frame@2x.png 2x')
+              .steps__phone-image(data-step="1").is-active
+                img(src='img/step-1.png' srcset='img/step-1@2x.png 2x')
+              .steps__phone-image(data-step="2")
+                img(src='img/step-2.png' srcset='img/step-2@2x.png 2x')
+              .steps__phone-image(data-step="3")
+                img(src='img/step-3.png' srcset='img/step-3@2x.png 2x')
+              .steps__phone-image(data-step="4")
+                img(src='img/step-4.png' srcset='img/step-4@2x.png 2x')

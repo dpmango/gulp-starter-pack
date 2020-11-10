@@ -1,0 +1,64 @@
+// STEPS
+.steps
+  margin: 190px 0
+  &__head
+    text-align: center
+  &__content
+    margin-top: 70px
+  &__wrapper
+    display: flex
+    margin: -15px
+  &__sections, &__sticky
+    width: 100%
+    min-width: 1px
+    min-height: 0
+    flex: 0 0 50%
+    max-width: 50%
+    padding: 15px
+
+  &__section
+    height: 780px
+    padding-top: 180px
+    display: flex
+    flex-direction: column
+    // justify-content: center
+  &__text
+    flex: 1 0 auto
+    display: flex
+    flex-direction: column
+    padding-left: 48px
+    p
+      max-width: 404px
+  &__cta
+    margin-top: auto
+    padding-bottom: 120px
+  &__sticky
+    display: flex
+    justify-content: center
+    align-items: flex-start
+  &__sticky-wrapper
+    position: sticky
+    top: calc(50vh - 380px)
+  &__phone
+    position: relative
+    z-index: 2
+    font-size: 0
+  &__phone-frame
+    position: relative
+    z-index: 2
+    img, picture
+      max-width: 100%
+  &__phone-image
+    position: absolute
+    z-index: 1
+    top: 4.6%
+    bottom: 4.6%
+    left: 9.5%
+    right: 9.5%
+    will-change: opacity
+    opacity: 0
+    transition: opacity .3s $ease
+    img, picture
+      max-width: 100%
+    &.is-active
+      opacity: 1

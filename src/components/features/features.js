@@ -49,7 +49,7 @@
 
         var pastScrolled = _data.cards.filter(x => scrollBottom > x.bottom);
 
-        console.log({ pastScrolled: pastScrolled });
+        // console.log({ pastScrolled: pastScrolled });
 
         // do noting whith last card
         if (pastScrolled.length && pastScrolled.length < _data.cards.length) {
