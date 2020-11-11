@@ -1,0 +1,91 @@
+// assets
+.assets
+  margin: 160px 0
+  &__head
+    text-align: center
+    .p-regular
+      margin-left: auto
+      margin-right: auto
+      max-width: 700px
+  &__content
+    margin-top: 70px
+
+  &__swiper
+    .swiper-slide
+      flex: 0 0 320px
+      max-width: 320px
+    .swiper-pagination
+      margin-top: 56px
+
+
+// asset
+.asset
+  position: relative
+  z-index: 1
+  overflow: hidden
+  background: #222222
+  border-radius: 6px
+  &__image
+    font-size: 0
+    img, picture
+      width: 100%
+  &__content
+    position: relative
+    z-index: 1
+    padding: 50px 24px 42px 24px
+  &__logo
+    position: absolute
+    z-index: 2
+    overflow: hidden
+    size: 84px
+    display: flex
+    justify-content: center
+    align-items: center
+    top: -42px
+    left: 24px
+    border-radius: 50%
+    background: black
+    img, picture
+      max-width: 100%
+  &__row
+    display: flex
+    & + &
+      margin-top: -4px
+  &__name, &__price
+    font-size: 18px
+    font-weight: 600
+    line-height: (35 / 18)
+  &__price, &__change
+    flex: 0 0 auto
+    margin-left: auto
+    padding-left: 10px
+  &__ticker, &__change, &__change-n
+    font-size: 14px
+    font-weight: 400
+    line-height: (35 / 14)
+    letter-spacing: (0.4, 14)
+  &__change-n
+    position: relative
+    padding-left: 8px
+    &::before
+      display: inline-block
+      content: ' '
+      width: 0;
+      height: 0;
+      margin-right: 2px
+      vertical-align: middle
+      border-style: solid
+      transform: translateY(-1px)
+    &.up
+      color: #15FBA0
+      &::before
+        border-width: 0 3px 6px 3px
+        border-color: transparent transparent #15FBA0 transparent
+
+    &.down
+      color: #FF715B
+      &::before
+        border-width: 6px 3px 0 3px
+        border-color: #FF715B transparent transparent transparent
+  &__chart
+    height: 110px

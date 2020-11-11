@@ -1,0 +1,99 @@
+// ASSETS
+.assets
+  .assets__head
+    .container
+      p.p-label 500+ ASSETS AVAILABLE
+      .h1-title Invest in what you beleve
+      p.p-regular As an experienced investor, you can switch to Orca and significantly simplify your investing routines, and always stay up to date with analytics, news and trends.
+
+  .assets__content
+    .assets__swiper.swiper-container.js-swiper-assets
+      .swiper-wrapper.js-container-align(data-type="slider")
+        each group in [1,2]
+          .swiper-slide
+            // asset
+            .asset
+              .asset__image
+                img(src='img/asset-1.jpg' srcset='img/asset-1@2x.jpg 2x')
+              .asset__content
+                .asset__logo
+                  img(src='img/logo-burberry.png' srcset='img/logo-burberry@2x.png 2x')
+                .asset__row
+                  .asset__name Burberry
+                  .asset__price £123.41
+                .asset__row
+                  .asset__ticker BRBY
+                  .asset__change 24h change
+                  .asset__change-n.up £1.14
+              .asset__chart
+                canvas.js-chart-scroll.js-chart(
+                  data-labels="seed"
+                  data-values="seed"
+                )
+
+          .swiper-slide
+            // asset
+            .asset
+              .asset__image
+                img(src='img/asset-2.jpg' srcset='img/asset-2@2x.jpg 2x')
+              .asset__content
+                .asset__logo(style="background-color: #00AEEA")
+                  img(src='img/logo-barclays.png' srcset='img/logo-barclays@2x.png 2x')
+                .asset__row
+                  .asset__name Barclays
+                  .asset__price £123.41
+                .asset__row
+                  .asset__ticker BARC
+                  .asset__change 24h change
+                  .asset__change-n.up £1.14
+              .asset__chart
+                canvas.js-chart-scroll.js-chart(
+                  data-labels="seed"
+                  data-values="seed"
+                )
+
+          .swiper-slide
+            // asset
+            .asset
+              .asset__image
+                img(src='img/asset-3.jpg' srcset='img/asset-3@2x.jpg 2x')
+              .asset__content
+                .asset__logo(style="background-color: #377DFF")
+                  img(src='img/logo-nasdaq.png' srcset='img/logo-nasdaq@2x.png 2x')
+                .asset__row
+                  .asset__name NASDAQ
+                  .asset__price £123.41
+                .asset__row
+                  .asset__ticker NSD^Q
+                  .asset__change 24h change
+                  .asset__change-n.up £1.14
+              .asset__chart
+                canvas.js-chart-scroll.js-chart(
+                  data-labels="seed"
+                  data-values="seed"
+                )
+
+          .swiper-slide
+            // asset
+            .asset
+              .asset__image
+                img(src='img/asset-4.jpg' srcset='img/asset-4@2x.jpg 2x')
+              .asset__content
+                .asset__logo
+                  img(src='img/logo-astonmartin.png' srcset='img/logo-astonmartin@2x.png 2x')
+                .asset__row
+                  .asset__name Aston Martin
+                  .asset__price £123.41
+                .asset__row
+                  .asset__ticker AML
+                  .asset__change 24h change
+                  .asset__change-n.down £1.14
+              .asset__chart
+                canvas.js-chart-scroll.js-chart(
+                  data-labels="seed"
+                  data-values="seed"
+                  data-negative="true"
+                )
+
+      .swiper-pagination.swiper-assets-pagination
+
