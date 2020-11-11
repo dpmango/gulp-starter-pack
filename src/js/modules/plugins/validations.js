@@ -6,10 +6,9 @@
 (function($, APP) {
   APP.Plugins.Validations = {
     init: function() {
-      this.localize();
+      // this.localize();
       this.customMethods();
       this.validateFormsConstructor();
-      this.validateFormsCustom();
     },
     data: {
       // GENERIC FUNCTIONS
@@ -20,7 +19,7 @@
         } else if (element.is('input[type="radio"]') || element.is('input[type="checkbox"]')) {
           error.appendTo(element.closest('.ui-group'));
         } else {
-          error.appendTo(element.parent('div'));
+          error.appendTo(element.parent());
         }
       },
       validateHighlight: function(element) {
@@ -56,14 +55,14 @@
         phone: {
           required: true,
           normalizer: function(value) {
-            var PHONE_MASK = '+X (XXX) XXX-XXXX';
+            var PHONE_MASK = '+44 XXXX XXXXXX';
             if (!value || value === PHONE_MASK) {
               return value;
             } else {
               return value.replace(/[^\d]/g, '');
             }
           },
-          minlength: 11,
+          minlength: 12,
           digits: true,
         },
       },
@@ -139,7 +138,8 @@
               email: 'Email format must be like name@site.com',
             },
             phone: {
-              minlength: 'Phome form is invalid',
+              required: 'Phone is required',
+              minlength: 'Phone is not invalid',
             },
           },
         };
@@ -148,29 +148,6 @@
 
         $form.addClass('is-validation-attached');
       });
-    },
-    validateFormsCustom: function() {
-      var _this = this;
-      var requestValidationObject = {
-        errorPlacement: _this.data.validateErrorPlacement,
-        highlight: _this.data.validateHighlight,
-        unhighlight: _this.data.validateUnhighlight,
-        submitHandler: _this.data.validateSubmitHandler,
-        rules: {
-          phone: _this.data.masks.phone,
-        },
-        messages: {
-          phone: {
-            required: 'Заполните это поле',
-            minlength: 'Введите корректный телефон',
-          },
-        },
-      };
-
-      // call/init
-      $('[js-validate-request]').validate(requestValidationObject);
-      // $("[js-subscription-validation-footer]").validate(subscriptionValidationObject);
-      // $("[js-subscription-validation-menu]").validate(subscriptionValidationObject);
     },
   };
 })(jQuery, window.APP);

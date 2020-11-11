@@ -1,0 +1,15 @@
+// subscribe
+.subscribe
+  .container
+    .subscribe__box(data-aos="fade-up")
+      .subscribe__wrapper
+        .subscribe__col
+          .subscribe__text
+            .h4-title Join the Orca Beta
+            p.p-regular Currently we are holding the public beta testing. To join please leave your phone number and we will text you the link to download our Beta app
+        .subscribe__col
+          .subscribe__form
+            .subscribe__form-label Enter your phone number and get sent a link to download the app
+            form(action="#").subscribe__form-box.js-validate-form
+              input(type="tel" placeholder="+44" name="phone")
+              button(type="subscribe").btn.btn-primary Text Me a Link

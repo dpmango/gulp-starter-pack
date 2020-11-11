@@ -68,7 +68,7 @@
         elData.labels = _this.seedValues();
       }
 
-      console.log(elData);
+      // console.log(elData);
 
       var gradientFill = chartCtx.createLinearGradient(0, 0, 0, 150);
       if (!elData.negative) {
