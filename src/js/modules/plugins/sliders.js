@@ -8,9 +8,13 @@
         assets: undefined,
       },
       responsiveSwipers: {
-        productsSwiper: {
+        showcaseSwiper: {
           instances: [],
-          enableOn: 991,
+          enableOn: 768,
+        },
+        stepsSwiper: {
+          instances: [],
+          enableOn: 768,
         },
       },
     },
@@ -96,26 +100,59 @@
 
       // ASSETS
       this.data.swipers.assets = buildSwiper('assets', {
-        spaceBetween: 40,
+        spaceBetween: 20,
+        breakpoints: {
+          568: {
+            spaceBetween: 40,
+          },
+        },
         // freeModeSticky: true,
       });
     },
     initSwiperDataTree: function() {
-      var productsSwiper = '.js-products-swiper';
-      if ($(productsSwiper).length > 0) {
-        this.initSwiperTree(productsSwiper, 'productsSwiper');
+      var showcaseSwiper = '.js-swiper-showcase';
+      if ($(showcaseSwiper).length > 0) {
+        this.initSwiperTree(showcaseSwiper, 'showcaseSwiper');
+      }
+
+      var stepsSwiper = '.js-swiper-steps';
+      if ($(stepsSwiper).length > 0) {
+        this.initSwiperTree(stepsSwiper, 'stepsSwiper');
       }
     },
     initResponsiveSwipers: function() {
-      var productsSwiper = '.js-products-swiper';
-      if ($(productsSwiper).length > 0) {
-        this.responsiveSwiperConstructor(productsSwiper, 'productsSwiper', {
+      var showcaseSwiper = '.js-swiper-showcase';
+      if ($(showcaseSwiper).length > 0) {
+        this.responsiveSwiperConstructor(showcaseSwiper, 'showcaseSwiper', {
           watchOverflow: true,
           setWrapperSize: false,
           spaceBetween: 0,
           slidesPerView: 'auto',
-          freeMode: true,
-          freeModeSticky: true,
+          spaceBetween: 0,
+          freeMode: false,
+          pagination: {
+            el: '.swiper-showcase-pagination',
+            type: 'bullets',
+            clickable: true,
+          },
+        });
+      }
+
+      var stepsSwiper = '.js-swiper-steps';
+      if ($(stepsSwiper).length > 0) {
+        this.responsiveSwiperConstructor(stepsSwiper, 'stepsSwiper', {
+          watchOverflow: true,
+          setWrapperSize: false,
+          spaceBetween: 0,
+          slidesPerView: 'auto',
+          spaceBetween: 0,
+          freeMode: false,
+          autoHeight: true,
+          pagination: {
+            el: '.swiper-steps-pagination',
+            type: 'bullets',
+            clickable: true,
+          },
         });
       }
     },

@@ -14,7 +14,7 @@ h1, h2, h3, h4, h5, h6
   font-style: normal
   font-weight: 700
   line-height: (55 / 42)
-  letter-spacing: (-2, 42)
+  letter-spacing: em(-2, 42)
 
 .h4-title
   font-size: 24px
@@ -54,12 +54,19 @@ p
 
 +r($lg)
   .h1-title
-    font-size: 46px
+    font-size: 52px
+
+  .p-huge
+    font-size: 18px
 
 +r($sm)
   .h1-title
-    font-size: 36px
-
+    font-size: 42px
+    line-height: (66 / 42)
+    letter-spacing: em(-3, 42)
+  .h2-title
+    font-size: 32px
+    letter-spacing: em(-1.5, 32)
 
 // little inline helpers
 .f-400

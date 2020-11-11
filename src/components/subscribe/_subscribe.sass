@@ -9,6 +9,7 @@
 
   &__wrapper
     display: flex
+    flex-wrap: wrap
     align-items: center
     margin: -15px
 
@@ -65,3 +66,17 @@
     font-weight: 400
     line-height: (24 / 14)
     color: #8B8B8B
+
++r($lg)
+  .subscribe
+    &__col
+      flex-basis: 100%
+      max-width: 100%
+    &__form
+      margin-left: 0
+
++r($sm)
+  .subscribe
+    margin: 120px 0 80px
+    &__box
+      padding: 42px 20px 50px 20px

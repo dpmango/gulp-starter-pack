@@ -1,6 +1,6 @@
 // intro
 .intro
-  margin: 185px 0
+  margin: 185px 0 160px
   &__content
     text-align: center
     margin: 0 auto
@@ -16,3 +16,17 @@
     box-shadow: 0px 2px 16px 1px rgba(0,0,0,0.25);
     img
       max-width: 100%
+
++r($lg)
+  .intro
+    &__content
+      max-width: 680px
+
++r($sm)
+  .intro
+    margin: 130px 0 120px
+    &__content
+      .h1-title
+        margin-top: 1.2em
+      .p-huge
+        display: none

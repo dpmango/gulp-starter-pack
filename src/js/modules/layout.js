@@ -6,6 +6,7 @@
     data: {
       stickToWindow: undefined,
       containerAlign: undefined,
+      heights: undefined,
     },
     init: function() {
       this.getData();
@@ -15,6 +16,7 @@
     getData: function() {
       this.data.stickToWindow = $('.js-stick-to-window');
       this.data.containerAlign = $('.js-container-align');
+      this.data.heights = $('.js-set-height');
     },
     listenResize: function() {
       window.addEventListener('resize', debounce(this.applyLayout.bind(this), 100));
@@ -117,6 +119,26 @@
             }
           } else {
             el.setAttribute('style', '');
+          }
+        });
+      }
+
+      // heights
+      if (_this.data.heights) {
+        [].forEach.call(_this.data.heights, el => {
+          var $el = $(el);
+          var stopWatching = $el.data('stop') ? mediaCondition($el.data('stop')) : null;
+
+          if (stopWatching === null || !stopWatching) {
+            var childrenHeight = $(el)
+              .children()
+              .height();
+
+            var marginBottom = window.innerWidth < 568 ? 30 : 70;
+
+            el.style.height = `${childrenHeight + marginBottom}px`;
+          } else {
+            el.style.height = '';
           }
         });
       }

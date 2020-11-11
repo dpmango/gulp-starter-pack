@@ -7,6 +7,7 @@
       margin-left: auto
       margin-right: auto
       max-width: 700px
+      color: #D9D9D9
   &__content
     margin-top: 70px
 
@@ -17,6 +18,17 @@
     .swiper-pagination
       margin-top: 56px
 
++r($sm)
+  .assets
+    margin: 90px 0
+    &__content
+      margin-top: 42px
+    &__swiper
+      .swiper-slide
+        flex: 0 0 260px
+        max-width: 260px
+      .swiper-pagination
+        margin-top: 32px
 
 // asset
 .asset
@@ -89,3 +101,13 @@
         border-color: #FF715B transparent transparent transparent
   &__chart
     height: 110px
+
++r($sm)
+  .asset
+    &__content
+      padding: 42px 20px 32px 20px
+    &__logo
+      top: -36px
+      size: 72px
+    &__chart
+      height: 94px

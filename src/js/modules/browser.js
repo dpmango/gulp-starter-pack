@@ -32,6 +32,14 @@
       }
     };
 
+    methods.isAndroidDevice = function() {
+      if (/android/.test(navigator.userAgent.toLowerCase()) && !window.MSStream) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
     methods.msieversion = function() {
       var ua = window.navigator.userAgent;
       var msie = ua.indexOf('MSIE ');
@@ -63,6 +71,7 @@
       isIe: methods.msieversion(),
       isMobile: methods.isMobile(),
       isIosDevice: methods.isIosDevice(),
+      isAndroidDevice: methods.isAndroidDevice(),
       isRetinaDisplay: methods.isRetinaDisplay(),
     };
 

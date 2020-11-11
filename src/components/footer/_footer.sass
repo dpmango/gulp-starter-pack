@@ -3,6 +3,7 @@
   padding-bottom: 130px
   &__wrapper
     display: flex
+    flex-wrap: wrap
     margin: -15px
   &__col
     width: 100%
@@ -96,3 +97,23 @@
       &.i-linkedin
         &:hover
           color: $linkedin
+
++r($lg)
+  .footer
+    padding-bottom: 90px
+    &__col
+      &--5
+        flex-basis: 100%
+        max-width: 100%
+      &--7
+        flex-basis: 100%
+        max-width: 100%
+
++r(480)
+  .footer
+    &__menu
+      margin: -10px
+    &__menu-col
+      flex-basis: 50%
+      max-width: 50%
+      padding: 10px

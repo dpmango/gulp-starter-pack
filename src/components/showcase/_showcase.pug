@@ -1,16 +1,19 @@
 // showcase
 .showcase
   .container
-    .showcase__grid
-      .showcase__col
-        .showcase__card(data-aos="fade-up")
-          img(src='img/showcase-1.png' srcset='img/showcase-1@2x.png 2x')
-          p.p-small Stay aware of the market updates and check the stock / ETF prices in real-time
-      .showcase__col
-        .showcase__card(data-aos="fade-up")
-          img(src='img/showcase-2.png' srcset='img/showcase-2@2x.png 2x')
-          p.p-small Get access to 250+ stocks and ETFs on the London Stock Exchange in a tap.
-      .showcase__col
-        .showcase__card(data-aos="fade-up")
-          img(src='img/showcase-3.png' srcset='img/showcase-3@2x.png 2x')
-          p.p-small Invest your money effortlessly, even if you have never done that before
+    .swiper-container.js-swiper-showcase
+      .showcase__grid.swiper-wrapper
+        .showcase__col.swiper-slide
+          .showcase__card(data-aos="fade-up")
+            img(src='img/showcase-1.png' srcset='img/showcase-1@2x.png 2x')
+            p.p-small Stay aware of the market updates and check the stock / ETF prices in real-time
+        .showcase__col.swiper-slide
+          .showcase__card(data-aos="fade-up")
+            img(src='img/showcase-2.png' srcset='img/showcase-2@2x.png 2x')
+            p.p-small Get access to 250+ stocks and ETFs on the London Stock Exchange in a tap.
+        .showcase__col.swiper-slide
+          .showcase__card(data-aos="fade-up")
+            img(src='img/showcase-3.png' srcset='img/showcase-3@2x.png 2x')
+            p.p-small Invest your money effortlessly, even if you have never done that before
+
+      .swiper-pagination.swiper-showcase-pagination

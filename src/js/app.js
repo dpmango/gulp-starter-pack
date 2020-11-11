@@ -66,7 +66,6 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
       APP.Plugins.Sliders.init(fromPjax);
       APP.Plugins.Masks.init();
       APP.Plugins.LazyLoadImages.init();
-      APP.Plugins.TextareaAutoExpand.init();
       APP.Plugins.Validations.init();
       APP.Plugins.LegacySupport.fixImages();
       APP.Plugins.Chart.init();
@@ -75,8 +74,9 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
     // All components from `src/componenets`
     app.initComponents = function(fromPjax) {
       APP.Components.Header.init(fromPjax);
-      APP.Components.Features.init();
-      APP.Components.Steps.init();
+      APP.Components.Features.init(fromPjax);
+      APP.Components.Steps.init(fromPjax);
+      APP.Components.GetApp.init(fromPjax);
     };
 
     return app;

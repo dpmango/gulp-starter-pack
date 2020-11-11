@@ -8,6 +8,12 @@
   &__content
     margin-top: 70px
 
++r($sm)
+  .features
+    margin: 160px 0 90px
+    &__content
+      margin-top: 30px
+
 
 .feature-card
   position: sticky
@@ -59,3 +65,56 @@
   &.is-past
     opacity: 0 !important
     transform: translate3d(0,-40px,0) scale(0.9, 0.9) !important
+
++r($lg)
+  .feature-card
+    top: 100px
+    // height to be set in js
+    height: 100%
+    &__wrapper
+      display: flex
+      flex-direction: column
+      height: auto
+    &__content
+      flex: 0 0 auto
+      padding-right: 0
+      align-items: center
+    &__content-wrapper
+      padding-top: 32px
+      padding-bottom: 34px
+      text-align: center
+      .btn
+        margin-top: 8px
+    &__image
+      flex: 0 0 auto
+      position: relative
+      display: block
+      width: 100%
+      overflow: hidden
+      height: 230px
+      margin-top: -10px
+      text-align: center
+      img, picture
+        position: absolute
+        top: 0
+        left: 50%
+        transform: translateX(-50%)
+      &--top
+        order: -1
+        margin-top: 0
+        margin-bottom: -20px
+        img, picture
+          top: auto
+          bottom: 0
+
++r($sm)
+  .feature-card
+    &__wrapper
+      padding-left: 30px
+      padding-right: 30px
+    &__content-wrapper
+      .p-label
+        font-size: 10px
+        margin-bottom: 12px
+      .p-regular
+        font-size: 14px

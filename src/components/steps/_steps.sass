@@ -8,6 +8,8 @@
   &__wrapper
     display: flex
     margin: -15px
+  &__slider
+    display: none
   &__sections, &__sticky
     width: 100%
     min-width: 1px
@@ -39,26 +41,58 @@
   &__sticky-wrapper
     position: sticky
     top: calc(50vh - 380px)
-  &__phone
-    position: relative
-    z-index: 2
-    font-size: 0
-  &__phone-frame
-    position: relative
-    z-index: 2
-    img, picture
-      max-width: 100%
-  &__phone-image
-    position: absolute
-    z-index: 1
-    top: 4.6%
-    bottom: 4.6%
-    left: 9.5%
-    right: 9.5%
+  &__p-image
+    // phone__image instance
     will-change: opacity
     opacity: 0
     transition: opacity .3s $ease
-    img, picture
-      max-width: 100%
     &.is-active
       opacity: 1
+
++r($lg)
+  .steps
+    &__text
+      padding-left: 0
+
++r($md)
+  .steps
+    &__wrapper
+      display: none
+    &__slider
+      margin-left: -40px
+      margin-right: -40px
+      padding-left: 40px
+      padding-right: 40px
+      display: block
+      .swiper-slide
+        width: 50%
+        flex: 0 0 50%
+        max-width: 50%
+      .swiper-pagination
+        margin-top: 36px
+    &__slide
+      padding-right: 30px
+
++r($sm)
+  .steps
+    margin: 145px 0
+    &__content
+      margin-top: 30px
+    &__slider
+      margin-left: -16px
+      margin-right: -16px
+      padding-left: 16px
+      padding-right: 16px
+      .swiper-slide
+        width: 100%
+        flex: 0 0 100%
+        max-width: 100%
+    &__slide
+      padding-right: 0
+      text-align: center
+      .phone
+        max-width: 260px
+      .p-regular
+        max-width: 330px
+        margin-left: auto
+        margin-right: auto

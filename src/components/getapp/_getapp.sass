@@ -1,0 +1,39 @@
+// getapp
+.getapp
+  &__btn
+    position: fixed
+    z-index: 7
+    bottom: 26px
+    left: 30px
+    right: 30px
+    height: 54px
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 6px
+    font-size: 14px
+    font-weight: 500
+    line-height: (17 / 14)
+    padding: 10px 15px
+    will-change: transform, opacity
+    pointer-events: none
+    transform: translate3d(0,26px,0)
+    opacity: 0
+    transition: .25s $ease
+    .ico
+      font-size: 19px
+    span
+      display: inline-block
+      margin-left: 15px
+    &.is-visible
+      pointer-events: all
+      opacity: 1
+      transform: translate3d(0,0,0)
+  &__apple
+    background: $colorPrimary
+    &:hover
+      background: darken($colorPrimary, 8%)
+  &__android
+    background: black
+    &:hover
+      background: lighten(black, 10%)
