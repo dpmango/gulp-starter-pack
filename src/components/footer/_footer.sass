@@ -1,6 +1,98 @@
 // FOOTER
 .footer
+  padding-bottom: 130px
   &__wrapper
     display: flex
-    align-items: center
-    height: 100px
+    margin: -15px
+  &__col
+    width: 100%
+    min-width: 1px
+    min-height: 0
+    padding: 15px
+    &--5
+      flex: 0 0 $col5
+    &--7
+      flex: 0 0 $col7
+
+  &__logo
+    font-size: 0
+    .ico
+      font-size: 32px
+
+  &__text
+    max-width: 335px
+    p
+      margin-top: 30px
+      font-size: 14px
+      font-weight: 400
+      line-height: (24 / 14)
+      color: rgba(white, .6)
+
+  &__menu
+    display: flex
+    flex-wrap: wrap
+    margin: -8px -15px -15px
+  &__menu-col
+    width: 100%
+    min-width: 1px
+    min-height: 0
+    flex: 0 0 $col4
+    max-width: $col4
+    padding: 15px
+  &__menu-title
+    font-size: 16px
+    font-weight: 700
+    line-height: (24 / 16)
+    color: rgba(white, .6)
+  &__menu-list
+    list-style: none
+    margin: 22px 0 0
+    padding: 0
+    li
+      display: block
+      font-size: 14px
+      font-weight: 400
+      line-height: 1.42
+      margin: 14px -5px
+    a
+      display: inline-block
+      padding: 5px
+      transition: color .25s $ease
+      &:hover
+        color: rgba(white, .6)
+  &__copy
+    font-size: 14px
+    font-weight: 400
+    line-height: (24 / 14)
+    color: rgba(white, .6)
+
+  &__socials
+    list-style: none
+    margin: 0
+    padding: 0
+    li
+      display: inline-block
+      margin-right: 32px
+    a
+      display: inline-block
+      font-size: 0
+      color: rgba(white, .4)
+      transition: color .25s $ease
+      .ico
+        font-size: 28px
+
+      &.i-insta
+        &:hover
+          color: $instagram
+      &.i-facebook
+        &:hover
+          color: $facebook
+      &.i-twitter
+        &:hover
+          color: $twitter
+      &.i-reddit
+        &:hover
+          color: $reddit
+      &.i-linkedin
+        &:hover
+          color: $linkedin

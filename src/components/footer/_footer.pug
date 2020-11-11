@@ -1,6 +1,72 @@
 // FOOTER :: START
 footer.footer
-  .container
+  .container.container--1120
     .footer__wrapper
+      .footer__col.footer__col--5
+        .footer__logo
+          +svgMono('logo')
+        .footer__text
+          p Orca App Limited ( t/a “Orca”) is a company registered in England and Wales (company number 12376651), with its registered office at Wework Labs Office 01-104 70 Wilson Street, Finsbury, London, England, EC2A 2DB
+          p Orca App Ltd is an appointed representative of RiskSave Technologies Ltd which is authorised and regulated by the Financial Conduct Authority (FRN: 775330).
+
+      .footer__col.footer__col--7
+        // menu
+        .footer__menu
+          .footer__menu-col
+            .footer__menu-title Orca
+            ul.footer__menu-list
+              li
+                a(href="#") Orca Digest
+              li
+                a(href="#") Education
+              li
+                a(href="#") Blog
+              li
+                a(href="#") Newsroom
+              li
+                a(href="#") Press Kit
+          .footer__menu-col
+            .footer__menu-title Company
+            ul.footer__menu-list
+              li
+                a(href="#") About
+              li
+                a(href="#") Team
+              li
+                a(href="#") Blog
+              li
+                a(href="#") Newsroom
+              li
+                a(href="#") Press Kit
+          .footer__menu-col
+            .footer__menu-title Legal
+            ul.footer__menu-list
+              li
+                a(href="#") Privacy Policy
+              li
+                a(href="#") Waitlist & Giveaway Terms
+              li
+                a(href="#") Cookie Policy
+
+    .footer__wrapper
+      .footer__col.footer__col--5
+        .footer__copy © Orca App Limited 2020. All rights reserved.
+      .footer__col.footer__col--7
+        .footer__socials
+          li
+            a(href="#").i-insta
+              +svgMono('social-insta')
+          li
+            a(href="#").i-facebook
+              +svgMono('social-facebook')
+          li
+            a(href="#").i-twitter
+              +svgMono('social-twitter')
+          li
+            a(href="#").i-reddit
+              +svgMono('social-reddit')
+          li
+            a(href="#").i-linkedin
+              +svgMono('social-linkedin')
 
 // FOOTER :: END
