@@ -6,6 +6,7 @@
     data: {
       swipers: {
         assets: undefined,
+        collection: undefined,
       },
       responsiveSwipers: {
         showcaseSwiper: {
@@ -60,6 +61,7 @@
           slidesPerView: 'auto',
           normalizeSlideIndex: false,
           freeMode: true,
+          slideToClickedSlide: true,
           pagination: {
             el: `.swiper-${name}-pagination`,
             type: 'bullets',
@@ -107,6 +109,25 @@
           },
         },
         // freeModeSticky: true,
+      });
+
+      this.data.swipers.collection = buildSwiper('collection', {
+        spaceBetween: 26,
+        centeredSlides: true,
+        initialSlide: 2,
+        freeMode: false,
+        on: {
+          slideChange: function() {
+            var curSlide = $(this.slides[this.realIndex]);
+            var dataId = curSlide.data('image-id');
+
+            var $imgContainer = $('.js-collections-slide-image');
+            var $targetImage = $imgContainer.find('[data-image="' + dataId + '"]');
+
+            $('.js-collections-slide-image [data-image]').removeClass('is-active');
+            $targetImage.addClass('is-active');
+          },
+        },
       });
     },
     initSwiperDataTree: function() {

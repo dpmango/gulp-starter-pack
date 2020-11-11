@@ -1,0 +1,28 @@
+mixin collectionCard(c)
+  // collection-card
+  .collection-card
+    .collection-card__image
+      img(src='img/'+c.image+'.jpg' srcset='img/'+c.image+'@2x.jpg 2x')
+    .collection-card__content
+      .collection-card__head
+        .collection-card__head-left
+          .collection-card__name=c.name
+          .collection-card__companies
+            .collection-card__company
+              img(src='img/companyMiniAvatar-1.png' srcset='img/companyMiniAvatar-1@2x.png 2x')
+            .collection-card__company
+              img(src='img/companyMiniAvatar-1.png' srcset='img/companyMiniAvatar-1@2x.png 2x')
+            .collection-card__company
+              img(src='img/companyMiniAvatar-1.png' srcset='img/companyMiniAvatar-1@2x.png 2x')
+            .collection-card__company-label +6 companies
+        .collection-card__head-right
+          if c.tagged
+            .collection-card__tag You May Like
+
+      .collection-card__stats
+        .collection-card__stats-col
+          .collection-card__stats-label Current Collection price
+          .collection-card__stats-content £3,453.13
+        .collection-card__stats-col
+          .collection-card__stats-label All-time Gains
+          .collection-card__stats-content.c-green +£15.75 (+0.50%)

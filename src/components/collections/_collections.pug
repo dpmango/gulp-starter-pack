@@ -1,13 +1,55 @@
+include _collection-card
+
 // COLLECTIONS
 .collections
-  .collections__head
+  .collections__head(data-aos="fade-up")
     .container
       p.p-label COLLECTIONS
       .h1-title Try thematic collections of assets <br/>tailored to your preferences
 
   .collections__content
-    .collections__swiper.swiper-container
+    .collections__swiper.swiper-container.js-swiper-collection
       .swiper-wrapper
-        .swiper-slide
+        .swiper-slide(data-image-id="1")
+          +collectionCard({name: 'HALAL', image: 'collection-1'})
+        .swiper-slide(data-image-id="2")
+          +collectionCard({name: 'God Save the Queen', image: 'collection-2'})
+        .swiper-slide(data-image-id="3")
+          +collectionCard({name: 'God Save the Queen', image: 'collection-5'})
+        .swiper-slide(data-image-id="4")
+          +collectionCard({name: 'After COVID', image: 'collection-4', tagged: true})
+        .swiper-slide(data-image-id="5")
+          +collectionCard({name: 'God Save the Queen', image: 'collection-5'})
+        .swiper-slide(data-image-id="6")
+          +collectionCard({name: 'HALAL', image: 'collection-1', tagged: true})
+        .swiper-slide(data-image-id="7")
+          +collectionCard({name: 'God Save the Queen', image: 'collection-5'})
 
+    // active slide (center)
+    .collections__active-slide.js-collections-slide-image
+      .phone
+        .phone__frame
+          img(src='img/iphone-frame.png' srcset='img/iphone-frame@2x.png 2x')
+        .phone__image.collections__p-image(data-image="1")
+          img(src='img/step-1.png' srcset='img/step-1@2x.png 2x')
+        .phone__image.collections__p-image(data-image="2")
+          img(src='img/step-2.png' srcset='img/step-2@2x.png 2x')
+        .phone__image.collections__p-image(data-image="3").is-active
+          img(src='img/collectionSlide-1.jpg' srcset='img/collectionSlide-1@2x.jpg 2x')
+        .phone__image.collections__p-image(data-image="4")
+          img(src='img/step-3.png' srcset='img/step-3@2x.png 2x')
+        .phone__image.collections__p-image(data-image="5")
+          img(src='img/step-4.png' srcset='img/step-4@2x.png 2x')
+        .phone__image.collections__p-image(data-image="6")
+          img(src='img/step-1.png' srcset='img/step-1@2x.png 2x')
+        .phone__image.collections__p-image(data-image="7")
+          img(src='img/step-2.png' srcset='img/step-2@2x.png 2x')
 
+    // text
+    .collections__text(data-aos="fade-up")
+      .collections__text-left
+        p Whether you like the companies held by women, or stick with the Big Tech, or looking for somehting new, you can discover a lot of assets which may interest you.
+
+      .collections__text-right
+        p Use Orca’s Collections to discover stocks in a new manner by exploring the companies which are united with one industry, philisophy or motto.
+        a(href="#").btn.btn-primary Join Orca Beta

@@ -4,4 +4,131 @@
   &__head
     text-align: center
   &__content
-    margin-top: 70px
+    position: relative
+    margin-top: 100px
+    min-height: 620px
+  &__swiper
+    .swiper-slide
+      width: 292px
+      flex: 0 0 292px
+      &.swiper-slide-active
+        // 44px extra
+        // width: 336px
+        // flex-basis: 336px
+  &__active-slide
+    position: absolute
+    z-index: 2
+    left: 50%
+    top: -30px
+    transform: translateX(-50%)
+    .phone
+      max-width: 330px
+  &__p-image
+    // phone__image instance
+    will-change: opacity
+    opacity: 0
+    transition: opacity .3s $ease
+    &.is-active
+      opacity: 1
+
+  &__text
+    margin-top: 60px
+    display: flex
+    max-width: 880px
+    margin-left: auto
+    margin-right: auto
+    p
+      margin: 0
+      font-size: 16px
+      font-weight: 600
+      line-height: (26 / 16)
+      & + &
+        margin-top: 1em
+    p + .btn
+      margin-top: 40px
+  &__text-left
+    max-width: 250px
+  &__text-right
+    max-width: 250px
+    margin-left: auto
+
+// collection card
+.collection-card
+  position: relative
+  z-index: 1
+  overflow: hidden
+  border-radius: 8px
+  &__image
+    position: relative
+    z-index: 1
+    font-size: 0
+    &::after
+      display: inline-block
+      content: ' '
+      position: absolute 0
+      background: rgba(0, 0, 0, 0.6);
+    img
+      width: 100%
+  &__content
+    position: absolute 0
+    z-index: 2
+    display: flex
+    flex-direction: column
+    padding: 16px 16px 20px
+  &__head
+    display: flex
+  &__tag
+    background: #1C973B
+    border-radius: 4px
+    padding: 4px 12px
+    font-size: 12px
+    line-height: 15px
+  &__name
+    font-size: 16px
+    font-weight: 600
+    line-height: (19 / 16)
+  &__companies
+    display: flex
+    align-items: center
+    margin-top: 8px
+  &__company
+    position: relative
+    z-index: 1
+    overflow: hidden
+    border-radius: 50%
+    size: 16px
+    img
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      width: 100%
+      height: 100%
+      object-fit: cover
+    & + &
+      margin-left: -6px
+  &__company-label
+    margin-left: 4px
+    font-size: 10px
+    line-height: 12px
+    letter-spacing: (-0.1, 10)
+  &__stats
+    display: flex
+    margin: auto -10px 0
+  &__stats-col
+    width: 100%
+    min-width: 1px
+    min-height: 0
+    flex: 0 0 50%
+    max-width: 50%
+    padding: 0 10px
+    &:last-child
+      text-align: right
+  &__stats-label
+    font-size: 10px
+    line-height: 12px
+    letter-spacing: (-0.1, 10)
+  &__stats-content
+    font-size: 12px
+    line-height: 15px
+    margin-top: 4px
