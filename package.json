@@ -26,7 +26,7 @@
     "jquery-lazy": "^1.7.10",
     "jquery-mask-plugin": "^1.14.15",
     "jquery-validation": "^1.19.1",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.19",
     "object-fit-images": "^3.2.4",
     "picturefill": "^3.0.3",
     "progressbar.js": "^1.1.0",
