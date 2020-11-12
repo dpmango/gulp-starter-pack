@@ -116,6 +116,7 @@
         centeredSlides: true,
         initialSlide: 2,
         freeMode: false,
+        loop: true,
         on: {
           slideChange: function() {
             var curSlide = $(this.slides[this.realIndex]);
@@ -126,7 +127,14 @@
 
             $('.js-collections-slide-image [data-image]').removeClass('is-active');
             $targetImage.addClass('is-active');
+
+            // update progress
+            APP.Plugins.Progressbar.animateReset('collectionSwiper');
           },
+        },
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false,
         },
       });
     },
