@@ -1,7 +1,7 @@
-ProjectTitle: Project-name
+ProjectTitle: Title
 
 PageList:
   - file: homepage.html
-    ready: 100
+    ready: 20
   - file: page.html
     ready: 0
