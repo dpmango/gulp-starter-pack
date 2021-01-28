@@ -1,4 +1,6 @@
-// PRE-initialization
+/*********************
+ * Initialization file for vendor-free frontend app.js
+ *********************/
 var APP = window.APP || {};
 APP.Dev = APP.Dev || {};
 APP.Browser = APP.Browser || {};
