@@ -1,7 +1,4 @@
 /* UI
-
-
-// WORKS KIND OF bootstrap - group have label and input
 .ui-group
   position: relative
   margin-bottom: 20px
@@ -16,7 +13,7 @@
   width: 100%
   background: white
   font-family: $systemFont
-  color: $fontColor50
+  color: $fontColor
   border: 1px solid $borderColor
   border-radius: 4px
   padding: 12px 15px
@@ -28,6 +25,87 @@
 .ui-input textarea
   resize: vertical
 
+
+// ui-dynamic-input
+.ui-dynamic-input
+  position: relative
+  &__label
+    position: absolute
+    top: 19px
+    left: 0px
+    right: 10px
+    max-width: 100%
+    font-weight: 500
+    font-size: 20px
+    line-height: (32 / 20)
+    color: $fontColor
+    pointer-events: none
+    transform-origin: left top
+    // +text-overflow
+    transition: .25s $ease
+  &__input
+    -webkit-appearance: none
+    display: block
+    width: 100%
+    background: transparent
+    font-family: $baseFont
+    color: $fontColor
+    border: 0
+    border-bottom: 1px solid $borderColor
+    border-radius: 0px
+    font-size: 20px
+    line-height: (32 / 20)
+    padding: 25px 0px 11px
+    line-height: normal
+    transition: border .25s $ease, color .25s $ease
+    &::placeholder
+      color: fontColor
+    &:focus, &:active
+      border-color: $fontColor
+    &.has-error
+      color: $colorRed
+      border-color: $colorRed
+      &::placeholder
+        color: rgba($colorRed, .5)
+    &[disabled], &[readonly]
+      background: $colorBg
+      font-weight: 300
+      &:focus, &:active
+        border-color: $borderColor
+  &.is-focused
+    .ui-dynamic-input
+      &__label
+        // top: 9px
+        // font-size: 10px
+        // compensate scale
+        max-width: 135%
+        width: 135%
+        +text-overflow
+        transform: translate(0,-10px) scale(.65)
+  textarea.ui-dynamic-input__input
+    resize: vertical
+
+  &--white
+    .ui-dynamic-input
+      &__label
+        color: white
+      &__input
+        color: white
+        &::placeholder
+          color: rgba(white, .75)
+        &:focus, &:active
+          border-color: rgba(white, .75)
+
+
+// validation message
+.ui-input__validation
+  position: absolute
+  top: 100%
+  right: 0
+  background: $colorRed
+  font-size: 12px
+  color: white
+  padding: 3px 5px
 
 
 /* Checkbox
