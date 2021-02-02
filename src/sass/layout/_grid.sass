@@ -1,0 +1,116 @@
+.container
+  max-width: 1440px
+  width: 100%
+  margin-left: auto
+  margin-right: auto
+  padding-left: 60px
+  padding-right: 60px
+
++r($sm)
+  .container
+    padding-left: 20px
+    padding-right: 20px
+
+
+.row
+  display: flex
+  flex-wrap: wrap
+  margin: -$gutter
+
+.col
+  display: flex
+  flex-direction: column
+  min-width: 1px
+  min-height: 0
+  padding: $gutter
+
+.col-1
+  width: 100%
+  flex-basis: $col1
+  max-width: $col1
+.col-2
+  width: 100%
+  flex-basis: $col2
+  max-width: $col2
+.col-3
+  width: 100%
+  flex-basis: $col3
+  max-width: $col3
+.col-4
+  width: 100%
+  flex-basis: $col4
+  max-width: $col4
+.col-5
+  width: 100%
+  flex-basis: $col5
+  max-width: $col5
+.col-6
+  width: 100%
+  flex-basis: $col6
+  max-width: $col6
+.col-7
+  width: 100%
+  flex-basis: $col7
+  max-width: $col7
+.col-8
+  width: 100%
+  flex-basis: $col8
+  max-width: $col8
+.col-9
+  width: 100%
+  flex-basis: $col9
+  max-width: $col9
+.col-10
+  width: 100%
+  flex-basis: $col10
+  max-width: $col10
+.col-11
+  width: 100%
+  flex-basis: $col11
+  max-width: $col11
+.col-12
+  width: 100%
+  flex-basis: $col12
+  max-width: $col12
+
+// responsive (desktop first)
+$sizes: ("sm": $sm, "md": $md, "lg": $lg, "xl": $xl);
+
+@each $size, $px in $sizes
+  +r(#{$px})
+    .col-#{$size}-1
+      flex-basis: $col1
+      max-width: $col1
+    .col-#{$size}-2
+      flex-basis: $col2
+      max-width: $col2
+    .col-#{$size}-3
+      flex-basis: $col3
+      max-width: $col3
+    .col-#{$size}-4
+      flex-basis: $col4
+      max-width: $col4
+    .col-#{$size}-5
+      flex-basis: $col5
+      max-width: $col5
+    .col-#{$size}-6
+      flex-basis: $col6
+      max-width: $col6
+    .col-#{$size}-7
+      flex-basis: $col7
+      max-width: $col7
+    .col-#{$size}-8
+      flex-basis: $col8
+      max-width: $col8
+    .col-#{$size}-9
+      flex-basis: $col9
+      max-width: $col9
+    .col-#{$size}-10
+      flex-basis: $col10
+      max-width: $col10
+    .col-#{$size}-11
+      flex-basis: $col11
+      max-width: $col11
+    .col-#{$size}-12
+      flex-basis: $col12
+      max-width: $col12
