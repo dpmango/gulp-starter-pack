@@ -6,7 +6,7 @@
   z-index: 99;
   .row {
     display: flex;
-    margin: 0 -10px;
+    margin: 0 -$gutter;
   }
   .col {
     width: 100%;
@@ -14,14 +14,23 @@
     min-height: 0;
     flex: 0 0 $col1;
     max-width: $col1;
-    padding: 0 10px;
+    padding: 0 $gutter;
     div {
       background-color: rgba(255, 0, 0, 0.1);
       height: 100vh;
     }
   }
 }
-
+.dev-grid-sidebar {
+  .demo-grid {
+    left: 92px;
+  }
+  @include r($md) {
+    .demo-grid {
+      left: 0px;
+    }
+  }
+}
 @include r($md) {
   .demo-grid {
     .col {
@@ -35,7 +44,7 @@
   }
 }
 
-[js-show-grid] {
+.js-show-grid {
   align-items: center;
   background: $fontColor;
   border-radius: 50%;
@@ -45,7 +54,7 @@
   display: flex;
   font-size: 12px;
   justify-content: center;
-  left: 20px;
+  right: 20px;
   position: fixed;
   size: 50px;
   text-transform: uppercase;

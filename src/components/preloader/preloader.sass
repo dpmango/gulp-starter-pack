@@ -1,0 +1,26 @@
+// PRELOADER
+.preloader
+  position: fixed 0
+  z-index: 9
+  display: flex
+  align-items: center
+  justify-content: center
+  background: $colorBg
+  pointer-events: all
+  transition: opacity .1s .4s $ease
+  will-change: opacity
+  backface-visibility: hidden
+  &__image
+    transition: transform .25s ease-in
+    will-change: transform
+    backface-visibility: hidden
+    img, svg
+      max-width: 100%
+
+// barba wrapper
+.is-preloaded
+  .preloader
+    opacity: 0
+    pointer-events: none
+  .preloader__image
+    transform: scale(2)

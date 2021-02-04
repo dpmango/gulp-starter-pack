@@ -1,9 +1,9 @@
 //////////
 // LEGACY
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.LegacySupport = {
-    init: function() {
+    init: function () {
       // svg support for laggy browsers
       svg4everybody();
 
@@ -16,7 +16,7 @@
         });
       }
     },
-    fixImages: function() {
+    fixImages: function () {
       if (APP.Browser().data.isIe) {
         // if LAZY LOAD is used, move initialization to afterFinishAll
         picturefill();

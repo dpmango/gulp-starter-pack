@@ -1,26 +1,26 @@
 //////////
 // INPUT FOCUSES
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.InputFocuses = {
-    init: function() {
+    init: function () {
       this.focuses();
       // this.clearable();
     },
-    focuses: function() {
+    focuses: function () {
       var $elements = $('.js-input-focus');
       if ($elements.length === 0) return;
 
-      $elements.each(function(i, container) {
+      $elements.each(function (i, container) {
         var $container = $(container);
         var $input = $container.find('input, textarea');
         if ($input.length === 0) return true;
 
-        $input.on('focus', function() {
+        $input.on('focus', function () {
           $container.addClass('is-focused');
         });
 
-        $input.on('blur change', function() {
+        $input.on('blur change', function () {
           toggler();
         });
 

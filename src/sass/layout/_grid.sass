@@ -74,7 +74,7 @@
   max-width: $col12
 
 // responsive (desktop first)
-$sizes: ("sm": $sm, "md": $md, "lg": $lg, "xl": $xl);
+$sizes: ("xl": $xl, "lg": $lg, "md": $md, "sm": $sm);
 
 @each $size, $px in $sizes
   +r(#{$px})
@@ -114,3 +114,6 @@ $sizes: ("sm": $sm, "md": $md, "lg": $lg, "xl": $xl);
     .col-#{$size}-12
       flex-basis: $col12
       max-width: $col12
+    .col-#{$size}-auto
+      flex-basis: auto
+      max-width: min-content

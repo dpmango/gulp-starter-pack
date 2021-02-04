@@ -1,16 +1,16 @@
 // //////////////////
 // FOOTER REVEAL
 // //////////////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.FooterReveal = {
-    init: function() {
+    init: function () {
       this.revealFooter();
       this.listenResize();
     },
-    listenResize: function() {
+    listenResize: function () {
       _window.on('resize', throttle(this.revealFooter.bind(this), 100));
     },
-    revealFooter: function() {
+    revealFooter: function () {
       var footer = $('[js-reveal-footer]');
       if (footer.length > 0) {
         var footerHeight = footer.outerHeight();

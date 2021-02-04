@@ -1,0 +1,63 @@
+// UI upload
+.ui-upload
+  position: relative
+  min-height: 50px
+  input
+    position: absolute
+    width: 0.1em
+    height: 0.1em
+    left: 0
+    top: 0
+    opacity: 0
+    visibility: hidden
+    pointer-events: none
+
+  &__trigger
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    cursor: pointer
+    transition: opacity .25s $ease
+    .btn
+      +text-overflow
+  &__info
+    position: relative
+    min-height: 50px
+    padding: 8px 25px 8px 12px
+    background: #F9F9F9
+    border-radius: 2px
+    opacity: 0
+    pointer-events: none
+    transition: opacity .25s $ease
+  &__name
+    font-size: 14px
+    line-height: 16px
+    color: #6F6F6F
+
+  &__close
+    position: absolute
+    z-index: 2
+    right: 5px
+    top: 5px
+    padding: 5px
+    font-size: 0
+    color: $colorPrimary
+    cursor: pointer
+    transition: color .25s $ease
+    .ico
+      font-size: 10px
+    &:hover
+      color: $fontColor
+
+  &.have-file, &.have-error
+    .ui-upload
+      &__info
+        opacity: 1
+        pointer-events: all
+  &.have-error
+    .ui-upload
+      &__name
+        color: $colorRed
+        font-weight: 500
+        font-size: 16px

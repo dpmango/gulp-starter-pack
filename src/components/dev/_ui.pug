@@ -1,0 +1,149 @@
+// .dev
+.dev
+  .container
+    // SECTION
+    section
+      .wysiwyg
+        h3 Based on <a href="https://github.com/dpmango/gulp-starter-pack" target="_blank">gulp starter pack</a>
+
+
+    // SECTION
+    section.dev__section
+      h1.h1-title JS and barba
+      .wysiwyg
+        p please use _document.on('click', 'el_selector', function ... ) for barba.js bindings
+
+
+    // SECTION
+    section.dev__section
+      h1.h1-title Typography
+
+      .wysiwyg
+        h1.h1-title (.h1-title) Lorem Ipsum is simply dummy text
+        h2.h2-title (.h2-title) Lorem Ipsum is simply dummy text
+        h3.h3-title (.h3-title) Lorem Ipsum is simply dummy text
+        h4.h4-title (.h4-title) Lorem Ipsum is simply dummy text
+        h5.h5-title (.h5-title) Lorem Ipsum is simply dummy text
+
+        p.p-regular (.p-regular) Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+        p.p-small (.p-small) Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+    // SECTION
+    section.dev__section
+      h1.h1-title svg icons
+      .wysiwyg
+        p For svg icons use pug mixin +svgMono(nameOfIcon) or +svgColor(nameOfIcon). You can customize it as it would be regular font. font-size property should be set as icon height
+        p Please keep in mind exoprting svg.
+          | Sketch is good in all cases.
+          | Photoshop + illustrator - use quick export function (CC2017+) with ctrl+c ctrl+v of layers
+          | You will need viewBox property and icon should be bounded to artboard. Otherwise it will be as small as artboard differance relative to icon size
+        p Folder: /src/icons
+
+      .dev-icons
+        +svgMono('email')
+        +svgMono('calendar')
+        +svgMono('close')
+        +svgMono('arrow-fat')
+
+      .dev-icons
+        +svgColor('example')
+
+    // SECTION
+    section.dev__section
+      h1.h1-title png icons
+      .wysiwyg
+        p For png icons use i.icon.icon-name . Png icons should be regular icon and @2x postfix
+        p Folder: /src/icons
+
+      .dev-icons
+        i.icon.icon-logo
+
+
+    // SECTION
+    section.dev__section
+      h1.h1-title Buttons
+
+      .dev-btns
+        a(href="#").btn.btn-primary Btn Primary
+        a(href='#').btn.btn-outline Btn outline
+
+    // SECTION
+    section.dev__section
+      h1.h1-title Typical components (moleculas)
+
+      h3.h3-title.mt-2 Tabs (js-tabs)
+
+      // tabs content
+      .dash__content.js-tabs
+        .dash__nav-scroller
+          ul.dash__nav.js-tabs-nav
+            i.dash__nav-highlighter.js-nav-highlighter
+            li.is-active
+              a(href="#tab-1") Tab 1
+            li
+              a(href="#tab-2") Tab 2
+
+        // NEXT TAB (TRACKING)
+        .js-tab.mt-2(data-tab="tab-1" style="display: block")
+          .h1-title Tab 1 content
+
+        // NEXT TAB (INFO)
+        .js-tab.mt-2(data-tab="tab-2")
+          .h1-title Tab 2 content
+
+
+    // SECTION (Interface)
+    section.dev__section
+      h1.h1-title Interface
+
+      .dev-interface
+        // ui upload
+        .ui-upload.mt-2.js-ui-upload(data-allowed-mime="image, application" data-max-size="5" data-upload-btn=".js-file-upload-btn")
+          input(type="file" id="file")
+          label.ui-upload__trigger(for="file")
+            span.btn.btn-outline.btn-outline--big.btn--block Choose file
+          .ui-upload__info
+            .ui-upload__name
+            .ui-upload__close.js-upload-close
+              +svgMono('close')
+
+          button.js-file-upload-btn(type="submit" disabled).btn.btn-primary.btn--block Загрузить
+
+        // Input
+        .ui-group.mt-2
+          label(for="ui_input_1") Input label
+          input.ui-input(type="text" id="ui_input_1")
+
+        .ui-group.mt-2
+          label(for="ui_input_2") Textarea Label
+          textarea.ui-input(placeholder="What's up?" id="ui_input_2" rows="5" data-min-rows="5")
+
+        // Dates
+        .ui-group.mt-2
+          label(for="ui_input_2") Dates (air datepicker)
+          .row
+            .col.col-6
+              .ui-input-iconed
+                input.ui-input.js-datepicker(type="date" id="ui_input_2")
+                +svgMono('calendar')
+            .col.col-6
+              .ui-input-iconed
+                input.ui-input.js-datepicker(type="date" id="ui_input_3")
+                +svgMono('calendar')
+
+        // Select
+        .ui-group.mt-2
+          label(for="dash_filter_2") Select (choices.js or selectirc.js)
+          select.js-choices.ui-input(id="dash_filter_2")
+            option() All
+            option() Current
+            option() Resolved
+            option() Another option 1
+            option() Another option 2
+
+    // SECTION (Interface)
+    section.dev__section
+      h1.h1-title Modals (micromodal or magnific popup)
+
+      .dev-btns
+        a(href="#" data-micromodal-trigger="exampleModal").btn.btn-primary Open example modal

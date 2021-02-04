@@ -1,28 +1,26 @@
 //////////
 // TELEPORT
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.Teleport = {
     data: {
       teleports: [],
     },
-    init: function() {
+    init: function () {
       this.getElements();
       this.teleport();
       this.listenResize();
     },
-    getElements: function() {
+    getElements: function () {
       var _this = this;
-      var $teleports = $('.page')
-        .last()
-        .find('.js-teleport');
+      var $teleports = $('.page').last().find('.js-teleport');
       _this.data.teleports = [];
 
       if ($teleports.length === 0) {
         return;
       }
 
-      $teleports.each(function(i, tp) {
+      $teleports.each(function (i, tp) {
         var $el = $(tp);
         var $target = $('[data-teleport-target=' + $el.data('teleport-to') + ']');
         var conditionMedia = $el.data('teleport-condition').substring(1);
@@ -38,15 +36,15 @@
       });
     },
 
-    listenResize: function() {
+    listenResize: function () {
       _window.on('resize', debounce(this.teleport.bind(this), 100));
     },
-    teleport: function() {
+    teleport: function () {
       if (this.data.teleports.length === 0) {
         return;
       }
 
-      $.each(this.data.teleports, function(i, obj) {
+      $.each(this.data.teleports, function (i, obj) {
         if (obj.target && obj.html && obj.conditionPosition) {
           var condition;
 

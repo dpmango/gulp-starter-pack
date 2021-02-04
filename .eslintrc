@@ -33,7 +33,14 @@
     "quotes": [2, "single", "avoid-escape"],
     "semi": 2,
     "space-before-blocks": 2,
-    "space-before-function-paren": [2, "never"],
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "always",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
     "constructor-super": 2,
     "arrow-spacing": 2
   }

@@ -34,7 +34,7 @@ function formatNumberWithSpaces(num) {
 
 // Add padding to numbers (a.k.a format by mask 00)
 // use (9).pad(2) // output - 09
-Number.prototype.pad = function(size) {
+Number.prototype.pad = function (size) {
   var s = String(this);
   while (s.length < (size || 2)) {
     s = '0' + s;

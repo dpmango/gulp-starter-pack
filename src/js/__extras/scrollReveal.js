@@ -1,9 +1,9 @@
 //////////
 // SCROLLREVEAL
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.ScrollReveal = {
-    init: function(fromPjax) {
+    init: function (fromPjax) {
       // REVEAL animations
       var $reveals = $('[js-reveal]');
 
@@ -12,16 +12,16 @@
       var animatedClass = 'is-animated';
       var pageTransitionTimeout = 500;
 
-      $('[js-reveal]').each(function(i, el) {
+      $('[js-reveal]').each(function (i, el) {
         var type = $(el).data('type') || 'enterViewport';
 
         // onload type
         if (type === 'onload') {
-          var interval = setInterval(function() {
+          var interval = setInterval(function () {
             // if (!preloaderActive){
             if (fromPjax) {
               // wait till transition overlay is fullyanimated
-              setTimeout(function() {
+              setTimeout(function () {
                 $(el).addClass(animatedClass);
                 clearInterval(interval);
               }, pageTransitionTimeout);
@@ -36,7 +36,7 @@
 
         // halfy enter
         if (type === 'halflyEnterViewport') {
-          var scrollListener = throttle(function() {
+          var scrollListener = throttle(function () {
             var vScrollBottom = _window.scrollTop() + _window.height();
             var elTop = $(el).offset().top;
             var triggerPoint = elTop + $(el).height() / 2;
@@ -55,7 +55,7 @@
         var elWatcher = scrollMonitor.create($(el));
         elWatcher.enterViewport(
           throttle(
-            function() {
+            function () {
               $(el).addClass(animatedClass);
             },
             100,

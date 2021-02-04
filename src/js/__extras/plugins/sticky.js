@@ -1,26 +1,24 @@
 //////////
 // STICKY KIT
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.Sticky = {
-    init: function(fromPjax) {
+    init: function (fromPjax) {
       this.initStickyKit();
       this.initCustomSticky();
       if (!fromPjax) {
         this.listenResize();
       }
     },
-    listenResize: function() {
+    listenResize: function () {
       _window.on('resize', debounce(this.initStickyKit.bind(this), 100));
     },
-    initStickyKit: function() {
-      var $elements = $('.page')
-        .last()
-        .find('.js-sticky');
+    initStickyKit: function () {
+      var $elements = $('.page').last().find('.js-sticky');
 
       if ($elements.length === 0) return;
 
-      $elements.each(function(i, sticky) {
+      $elements.each(function (i, sticky) {
         var $sticky = $(sticky);
         var dataOffsetTop = $sticky.data('offset-top')
           ? parseInt($sticky.data('offset-top'), 10)
@@ -48,13 +46,11 @@
         }
       });
     },
-    initCustomSticky: function() {
-      var $stickyNav = $('.page')
-        .last()
-        .find('.js-sticky-nav');
+    initCustomSticky: function () {
+      var $stickyNav = $('.page').last().find('.js-sticky-nav');
       if ($stickyNav.length === 0) return;
 
-      _window.on('scroll', function() {
+      _window.on('scroll', function () {
         // get scroll params from blocker function
         var scroll = APP.Plugins.ScrollBlock.getData();
         if (scroll.blocked) return;
@@ -68,12 +64,12 @@
         }
       });
     },
-    update: function() {
+    update: function () {
       var $sticky = $('.js-sticky.is-sticky-attached');
       if ($sticky.length === 0) return;
 
       $sticky.trigger('sticky_kit:recalc');
-      setTimeout(function() {
+      setTimeout(function () {
         $sticky.trigger('sticky_kit:recalc');
       }, 150);
     },

@@ -42,15 +42,12 @@ const spriteSvgMono = () =>
     .pipe(rename({ prefix: 'ico-mono-' }))
     .pipe(svgStore({ inlineSvg: false }))
     .pipe(
-      through2.obj(function(file, encoding, cb) {
+      through2.obj(function (file, encoding, cb) {
         var $ = cheerio.load(file.contents.toString(), { xmlMode: true });
         var data = $('svg > symbol')
-          .map(function() {
+          .map(function () {
             var $this = $(this);
-            var size = $this
-              .attr('viewBox')
-              .split(' ')
-              .splice(2);
+            var size = $this.attr('viewBox').split(' ').splice(2);
             var name = $this.attr('id');
             var ratio = size[0] / size[1]; // symbol width / symbol height
             var fill = $this.find('[fill]:not([fill="currentColor"])').attr('fill');
@@ -77,7 +74,7 @@ const spriteSvgMono = () =>
     )
     .pipe(
       gCheerio({
-        run: function($, file) {
+        run: function ($, file) {
           $('[fill]:not([fill="currentColor"])').removeAttr('fill');
           $('[stroke]').removeAttr('stroke');
           $('[style]').removeAttr('style');
@@ -129,15 +126,12 @@ const spriteSvgColor = () =>
     .pipe(rename({ prefix: 'ico-color-' }))
     .pipe(svgStore({ inlineSvg: false }))
     .pipe(
-      through2.obj(function(file, encoding, cb) {
+      through2.obj(function (file, encoding, cb) {
         var $ = cheerio.load(file.contents.toString(), { xmlMode: true });
         var data = $('svg > symbol')
-          .map(function() {
+          .map(function () {
             var $this = $(this);
-            var size = $this
-              .attr('viewBox')
-              .split(' ')
-              .splice(2);
+            var size = $this.attr('viewBox').split(' ').splice(2);
             var name = $this.attr('id');
             var ratio = size[0] / size[1]; // symbol width / symbol height
             return {

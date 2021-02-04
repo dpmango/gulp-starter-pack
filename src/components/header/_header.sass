@@ -34,10 +34,6 @@
       &:hover
         color: tomato
 
-  &__cta
-    margin-left: auto
-    padding-left: 30px
-
   &__hamburger
     // display: none
     padding-left: 20px
@@ -45,7 +41,6 @@
   &.is-fixed
     // should be normalized to -100% scroll at this point
     position: fixed
-    // visibility: hidden
     transform: translate3d(0,-100%,0) !important
     transition: transform .25s $ease
     .header__wrapper
@@ -53,7 +48,6 @@
       padding-bottom: 10px
 
   &.is-fixed-visible
-    // visibility: visible
     transform: translate3d(0,0,0) !important
 
   &.is-transitioning
@@ -63,18 +57,9 @@
 
 +r($lg)
   .header
-    &__cta
-      display: none
-
-+r($md)
-  .header
     &__menu
       display: none
     &__hamburger
       margin-left: auto
       display: block
 
-+r($sm)
-  .header
-    &__logo
-      font-size: 30px

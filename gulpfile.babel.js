@@ -2,9 +2,9 @@ import gulp from 'gulp';
 import config from './gulp/config';
 
 const tBuild = (task, cb) => require('./gulp/tasks/' + task).build(cb);
-const tWatch = task => require('./gulp/tasks/' + task).watch();
+const tWatch = (task) => require('./gulp/tasks/' + task).watch();
 
-gulp.task('server', cb => tBuild('server', cb));
+gulp.task('server', (cb) => tBuild('server', cb));
 gulp.task('clear', () => tBuild('clear'));
 gulp.task('sass', () => tBuild('sass'));
 gulp.task('pug', () => tBuild('pug'));
@@ -24,19 +24,19 @@ gulp.task('sprite:svg:watch', tWatch('sprite-svg/sprite-svg'));
 gulp.task('sprite:png:watch', tWatch('sprite-png/sprite-png'));
 gulp.task('index-page:watch', tWatch('index/index-page'));
 
-const setmodeProd = done => {
+const setmodeProd = (done) => {
   config.setEnv('production');
   config.logEnv();
   done();
 };
 
-const setmodeDev = done => {
+const setmodeDev = (done) => {
   config.setEnv('development');
   config.logEnv();
   done();
 };
 
-const makeBuild = mode => {
+const makeBuild = (mode) => {
   const setMode = mode === 'prodcution' ? setmodeProd : setmodeDev;
   return gulp.series(
     setMode,
