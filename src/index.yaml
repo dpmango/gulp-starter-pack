@@ -1,7 +1,11 @@
 ProjectTitle: Title
 
 PageList:
-  - file: homepage.html
-    ready: 20
+  - file: ui.html
+    ready: 100
   - file: page.html
+    ready: 0
+  - file: page-2.html
+    ready: 0
+  - file: page-3.html
     ready: 0

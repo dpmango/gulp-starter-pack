@@ -1,0 +1,95 @@
+/* REMOVE DEV STYLES FOR PRODUCTION
+.dev
+  margin-top: 100px
+  &__section
+    margin: 100px 0
+    .wysiwyg
+      margin-top: 2em
+
+.dev-btns
+  display: flex
+  align-items: center
+  flex-wrap: wrap
+  margin-top: 2em
+  .btn
+    margin-right: 10px
+    margin-bottom: 10px
+
+.dev-icons
+  display: flex
+  flex-wrap: wrap
+  font-size: 32px
+  margin-top: 2em
+  .ico
+    margin-right: 10px
+    margin-bottom: 10px
+
+.dev-interface
+  max-width: 400px
+
+
+.dev-bp-debug
+  background: black
+  position: fixed
+  top: 0
+  right: 0
+  z-index: 9999
+  color: white
+  padding: 5px
+  font-size: 12px
+  border-bottom-left-radius: 5px
+  + .dev-bp-debug
+    top: 25px
+    + .dev-bp-debug
+      top: 50px
+      + .dev-bp-debug
+        top: 75px
+        + .dev-bp-debug
+          top: 100px
+
+
+// TABS
+.dash
+  &__nav
+    position: relative
+    width: 100%
+    display: flex
+    align-items: center
+    margin: 20px 0 0
+    padding: 0 0 2px
+    &::after
+      display: inline-block
+      content: ' '
+      position: absolute
+      z-index: 1
+      bottom: 0px
+      left: 0
+      right: 0
+      background: #E4E4E4
+      height: 2px
+    li
+      flex: 0 0 auto
+      display: inline-block
+      margin-right: auto
+      &:last-child
+        margin-right: 0
+    a
+      position: relative
+      display: inline-block
+      padding: 5px
+    &--width-auto
+      width: auto
+      li
+        margin-right: 50px
+    li
+      &.is-active
+        // some active styles
+
+  &__nav-highlighter
+    position: absolute
+    z-index: 2
+    bottom: 0px
+    left: 0
+    height: 2px
+    background: $colorPrimary
+    transition: all .25s $ease

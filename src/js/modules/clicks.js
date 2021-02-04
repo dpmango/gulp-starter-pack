@@ -8,7 +8,7 @@
         .on('click', '[href="#"]', function (e) {
           e.preventDefault();
         })
-        .on('click', '[js-link]', function (e) {
+        .on('click', '.js-link', function (e) {
           var dataHref = $(this).data('href');
           if (dataHref && dataHref !== '#') {
             e.preventDefault();
@@ -17,7 +17,7 @@
           }
         })
         // prevent going the same link (if barba is connected)
-        .on('click', 'a, [js-link]', function (e) {
+        .on('click', 'a, .js-link', function (e) {
           var href = $(this).data('href') || $(this).attr('href');
           var path = window.location.pathname;
 
@@ -41,7 +41,7 @@
           return false;
         })
         // grid toggler
-        .on('click', '[js-show-grid]', function () {
+        .on('click', '.js-show-grid', function () {
           $(this).toggleClass('is-active');
           $('.demo-grid').fadeToggle();
         });

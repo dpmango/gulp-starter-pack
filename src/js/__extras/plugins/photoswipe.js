@@ -9,9 +9,9 @@
       curSlideIndex: 0,
     },
     init: function (fromPjax) {
-      this.clickListeners();
+      this.eventListeners();
     },
-    clickListeners: function () {
+    eventListeners: function () {
       _document.on('click', '.js-open-pswp', function (e) {
         e.preventDefault();
 

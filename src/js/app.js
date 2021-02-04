@@ -28,7 +28,7 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
     };
 
     app.onLoadTrigger = function () {
-      // APP.Plugins.Preloader.loaded();
+      APP.Components.Preloader.loaded();
     };
 
     app.refresh = function () {
@@ -58,20 +58,27 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
       APP.Plugins.LegacySupport.init();
       APP.Plugins.ScrollBlock.listenScroll();
       APP.Plugins.Clicks.init();
-      APP.Plugins.AOS.init();
       APP.Plugins.Barba.init();
+
+      if (!APP.Components.Preloader) {
+        APP.Plugins.AOS.init();
+      }
     };
 
     // Plugins which depends on DOM and page content
     app.initPlugins = function (fromPjax) {
       APP.Plugins.Teleport.init();
+      APP.Plugins.MicroModal.init(fromPjax);
       APP.Plugins.Sliders.init(fromPjax);
-      APP.Plugins.Modals.init();
       APP.Plugins.Masks.init();
-      APP.Plugins.Selectric.init();
+      APP.Plugins.Choises.init();
       APP.Plugins.LazyLoadImages.init();
       APP.Plugins.TextareaAutoExpand.init();
       APP.Plugins.Validations.init();
+      APP.Plugins.Tabs.init(fromPjax);
+      APP.Plugins.Table.init(fromPjax);
+      APP.Plugins.DatePicker.init(fromPjax);
+      APP.Plugins.Upload.init(fromPjax);
       APP.Plugins.LegacySupport.fixImages();
 
       // APP.Plugins.ScrollReveal.init();
@@ -88,12 +95,12 @@ var easingSwing = [0.02, 0.01, 0.47, 1]; // default jQuery easing
       // ui
       // APP.Plugins.Clipboard.init();
       // APP.Plugins.InputFocuses.init();
+      // APP.Plugins.Selectric.init();
     };
 
     // All components from `src/componenets`
     app.initComponents = function (fromPjax) {
       APP.Components.Header.init(fromPjax);
-      APP.Components.Test.init();
     };
 
     return app;

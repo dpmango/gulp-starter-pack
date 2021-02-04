@@ -1,0 +1,10 @@
+// shared modals if any
+// i.e. authorization menu from header section
+
+#exampleModal.modal.micromodal-slide(aria-hidden='true')
+  .modal__overlay(tabindex='-1' data-micromodal-close)
+    .modal__container(role='dialog' aria-modal='true')
+      .modal__close(aria-label='Close modal' data-micromodal-close)
+        +svgMono('close')
+      .modal__header.tac
+        .h3-title.h3-title.h3-title-lg.h3-title-sm.modal__title Загрузка документов

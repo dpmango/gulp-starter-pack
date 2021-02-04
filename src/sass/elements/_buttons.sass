@@ -12,24 +12,40 @@ button
   position: relative
   text-align: center
   cursor: pointer
+  box-shadow: none
   transition: all $transitionSpeed $ease
+  &.disabled, &[disabled]
+    background: #E5E5E5
+    color: white
+    cursor: not-allowed
+    pointer-events: none
   &:focus, &:active
     outline: none
   &--block
     display: block
     width: 100%
 
-  &-example
+  &-primary
     // please use paddings instead of line-height to control btn height
+    font-weight: bold
+    font-size: 16px
+    line-height: 16px
     background: $colorPrimary
-    font-size: 20px
-    padding: 15px 30px
     color: white
-    transition: .25s $ease
-    transform-origin: center bottom
-    box-shadow: none
-    will-change: box-shadow, transform
+    padding: 17px 25px
+    border-radius: 4px
     &:hover
-      transform: scale(1.05) translateY(-5px)
-      background: rgba($colorPrimary, .9)
-      box-shadow: 0 15px 10px -15px rgba($fontColor, .4)
+      background: $colorPrimary
+
+  &-outline
+    font-weight: 500
+    font-size: 14px
+    line-height: (16 / 14)
+    background: transparent
+    color: $fontColor
+    border: 1px solid $colorPrimary
+    padding: 10px 30px
+    border-radius: 4px
+    &:hover
+      background: $colorPrimary
+      color: white

@@ -18,7 +18,11 @@ html(lang="en")
         block footer
           include ../../components/footer/_footer
 
-      include ../../components/demoGrid/_demoGrid
+        block modals
+          include ../../components/modals/_shared
+
+      block dev
+        include ../../components/dev/demoGrid/_demoGrid
 
       block scripts
         include _scripts

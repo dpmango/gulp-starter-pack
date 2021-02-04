@@ -1,29 +1,87 @@
-/* UI
-.ui-group
-  position: relative
-  margin-bottom: 20px
-  label
-    display: block
-    margin-bottom: 10px
-
 // for input or textarea element
 .ui-input
   -webkit-appearance: none
   display: block
   width: 100%
-  background: white
+  background: transparent
   font-family: $systemFont
+  font-size: 16px
   color: $fontColor
   border: 1px solid $borderColor
-  border-radius: 4px
-  padding: 12px 15px
+  border-radius: 0px
+  padding: 15px 15px
+  transition: background
+  transition: border .25s $ease, color .25s $ease, background .25s $ease
+  &::placeholder
+    color: rgba($fontColor, 5)
+  &:focus, &:active
+    background: white
   &.has-error
-    color: $colorRed
+    border-color: $colorRed
     &::placeholder
       color: rgba($colorRed, .5)
+  &.js-datepicker
+    padding-right: 50px
 
-.ui-input textarea
++r($md)
+  .ui-input
+    &.has-error
+      margin-bottom: 16px
+      & + .ui-pass-eye
+        bottom: 30px
+
+
+.ui-input-iconed
+  position: relative
+  .ico
+    position: absolute
+    top: 50%
+    right: 12px
+    transform: translateY(-50%)
+    color: $colorPrimary
+    font-size: 24px
+  .ico-mono-calendar
+    font-size: 29px
+
+textarea.ui-input
   resize: vertical
+
+
+// eye
+.ui-pass-eye
+  position: absolute
+  z-index: 2
+  right: 15px
+  bottom: 14px
+  cursor: pointer
+  &__wrapper
+    position: relative
+    size: 26px 22px
+    font-size: 0
+    .ico
+      position: absolute
+      font-size: 22px
+      transition: color .25s $ease, opacity .25s $ease
+    .ico-mono-eye-closed
+      color: #ABABAB
+    .ico-mono-eye-opened
+      color: $fontColor
+      opacity: 0
+      font-size: 20px
+      transform: translateY(1px)
+  &:hover
+    .ui-pass-eye__wrapper
+      .ico-mono-eye-closed
+        color: $fontColor
+      .ico-mono
+        color: #ABABAB
+  &.is-active
+    .ui-pass-eye__wrapper
+      .ico-mono-eye-closed
+        opacity: 0
+      .ico-mono-eye-opened
+        opacity: 1
+
 
 
 // ui-dynamic-input
@@ -59,7 +117,7 @@
     line-height: normal
     transition: border .25s $ease, color .25s $ease
     &::placeholder
-      color: fontColor
+      color: $fontColor
     &:focus, &:active
       border-color: $fontColor
     &.has-error
@@ -101,67 +159,21 @@
 .ui-input__validation
   position: absolute
   top: 100%
-  right: 0
-  background: $colorRed
-  font-size: 12px
-  color: white
-  padding: 3px 5px
+  left: 0
+  padding-top: 6px
+  color: $colorRed
+  font-size: 14px
 
++r($md)
+  .ui-input__validation
+    top: calc(100% - 16px)
 
-/* Checkbox
-.ui-checkbox
-  input
+input[type="date"]
+  // padding-top: 14px
+  // padding-bottom: 14px
+  max-height: 50px
+  &::-webkit-inner-spin-button,
+  &::-webkit-calendar-picker-indicator
     display: none
-    width: 0.1px
-    height: 0.1px
-    opacity: 0
-    position: absolute
-    top: 0
-    left: 0
-    &:checked
-      + label
-        &::before
-          border-color: $colorGreen
-        &::after
-          transform: translateY(-50%) scale(1)
-  label
-    display: block
-    width: 100%
-    position: relative
-    cursor: pointer
-    &::before
-      position: absolute
-      left: 0
-      top: 50%
-      transform: translateY(-50%)
-      display: inline-block
-      content: ' '
-      size: 20px
-      background-color: white
-      border: 1px solid #AFB7C0
-      border-radius: 4px
-      cursor: pointer
-      vertical-align: middle
-      cursor: pointer
-      transition: all $transitionSpeed ease-in-out
-    &::after
-      position: absolute
-      left: 6px
-      top: 50%
-      transform: translateY(-50%) scale(0)
-      display: inline-block
-      content: ' '
-      size: 10px
-      background: $colorGreen
-      border-radius: 50%
-      // background-image: svg-load('../../images/svg/checkbox.svg')
-      // background-repeat: no-repeat
-      // background-position: center
-      transition: transform .2s ease
-    span
-      display: inline-block
-      padding-left: 35px
-      vertical-align: top
-      line-height: 1.3
-      font-size: 14px
-      cursor: pointer
+    -webkit-appearance: none
+
