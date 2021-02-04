@@ -1,7 +1,7 @@
-(function($, APP) {
+(function ($, APP) {
   APP.Components.Test = {
-    init: function() {
-      $(document).on('click', function() {
+    init: function () {
+      $(document).on('click', function () {
         console.log('click');
       });
     },

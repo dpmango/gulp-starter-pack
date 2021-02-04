@@ -6,7 +6,7 @@ const server = browserSync.create();
 
 // in CL 'gulp server --open' to open current project in browser
 // in CL 'gulp server --tunnel siteName' to make project available over http://siteName.localtunnel.me
-const build = cb => {
+const build = (cb) => {
   server.init({
     server: {
       baseDir: !config.production ? [config.dest.root, config.src.root] : config.dest.root,

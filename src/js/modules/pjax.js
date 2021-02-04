@@ -1,12 +1,12 @@
 //////////
 // BARBA PJAX
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.Barba = {
-    getData: function() {
+    getData: function () {
       return this.data;
     },
-    init: function() {
+    init: function () {
       // config
       Barba.Pjax.Dom.containerClass = 'page';
       this.data = this.data || {};
@@ -18,10 +18,10 @@
       Barba.Pjax.start();
       this.listenEvents();
     },
-    getTransition: function() {
+    getTransition: function () {
       // set barba transition
       var _this = this;
-      Barba.Pjax.getTransition = function() {
+      Barba.Pjax.getTransition = function () {
         return _this.transitions.FadeTransition;
         // return _this.transitions.HideShowTransition;
 
@@ -43,21 +43,21 @@
     },
     transitions: {
       HideShowTransition: Barba.BaseTransition.extend({
-        start: function() {
+        start: function () {
           this.newContainerLoading.then(this.finish.bind(this));
         },
 
-        finish: function() {
+        finish: function () {
           document.body.scrollTop = 0;
           this.done();
         },
       }),
       FadeTransition: Barba.BaseTransition.extend({
-        start: function() {
+        start: function () {
           Promise.all([this.newContainerLoading, this.fadeOut()]).then(this.fadeIn.bind(this));
         },
 
-        fadeOut: function() {
+        fadeOut: function () {
           var _this = this;
           var $oldPage = $(this.oldContainer);
           var $newPage = $(this.newContainer);
@@ -66,7 +66,7 @@
           TweenLite.to($oldPage, 0.5, {
             opacity: 0,
             ease: Power1.easeIn,
-            onComplete: function() {
+            onComplete: function () {
               deferred.resolve();
             },
           });
@@ -74,7 +74,7 @@
           return deferred.promise;
         },
 
-        fadeIn: function() {
+        fadeIn: function () {
           var _this = this;
           var $oldPage = $(this.oldContainer);
           var $newPage = $(this.newContainer);
@@ -94,32 +94,30 @@
           TweenLite.to($newPage, 0.5, {
             opacity: 1,
             ease: Power1.easeOut,
-            onComplete: function() {
+            onComplete: function () {
               _this.done();
             },
           });
         },
       }),
     },
-    listenEvents: function() {
+    listenEvents: function () {
       // initialized transition
       var _this = this;
-      Barba.Dispatcher.on('linkClicked', function(el) {
+      Barba.Dispatcher.on('linkClicked', function (el) {
         _this.data.transitionInitElement = el instanceof jQuery ? el : $(el);
       });
 
       // The new container has been loaded and injected in the wrapper.
-      Barba.Dispatcher.on('newPageReady', function(
-        currentStatus,
-        oldStatus,
-        container,
-        newPageRawHTML
-      ) {
-        APP.Initilizer().newPageReady();
-      });
+      Barba.Dispatcher.on(
+        'newPageReady',
+        function (currentStatus, oldStatus, container, newPageRawHTML) {
+          APP.Initilizer().newPageReady();
+        }
+      );
 
       // The transition has just finished and the old Container has been removed from the DOM.
-      Barba.Dispatcher.on('transitionCompleted', function(currentStatus, oldStatus) {
+      Barba.Dispatcher.on('transitionCompleted', function (currentStatus, oldStatus) {
         APP.Initilizer().transitionCompleted();
       });
     },

@@ -41,14 +41,14 @@ const config = {
     json: destPath + '/json',
   },
 
-  setEnv: function(env) {
+  setEnv: function (env) {
     if (typeof env !== 'string') return;
     this.env = env;
     this.production = env === 'production';
     process.env.NODE_ENV = env;
   },
 
-  logEnv: function() {
+  logEnv: function () {
     util.log('Environment:', util.colors.white.bgRed(' ' + process.env.NODE_ENV + ' '));
   },
 

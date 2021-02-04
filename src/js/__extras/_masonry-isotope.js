@@ -3,7 +3,7 @@
 //////////
 function initMasonry() {
   if ($('[js-masonry]').length > 0) {
-    $('[js-masonry]').each(function(i, masonry) {
+    $('[js-masonry]').each(function (i, masonry) {
       var $masonry = $(masonry);
       var $grid;
       var masonryOption = {
@@ -29,27 +29,21 @@ function initMasonry() {
 }
 
 // masonry click handlers
-_document.on('click', '[js-masonry-filter] a', function() {
+_document.on('click', '[js-masonry-filter] a', function () {
   var $this = $(this);
   var gridTarget = $this.closest('[js-masonry-filter]').data('target');
   var $masonryGrid = $('[js-masonry][data-for="' + gridTarget + '"]');
   var dataFilter = $this.data('filter');
 
   $masonryGrid.isotope({
-    filter: function() {
+    filter: function () {
       if (!dataFilter) return true; // if filter is blank - show all
 
-      var cardFilters = $(this)
-        .data('filter')
-        .split(' ');
+      var cardFilters = $(this).data('filter').split(' ');
       return cardFilters.indexOf(dataFilter) !== -1;
     },
   });
 
-  $this
-    .parent()
-    .siblings()
-    .find('a')
-    .removeClass('is-active');
+  $this.parent().siblings().find('a').removeClass('is-active');
   $this.addClass('is-active');
 });

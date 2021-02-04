@@ -1,9 +1,9 @@
 ////////////////////
 // LAZY LOAD
 ////////////////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.LazyLoadImages = {
-    init: function() {
+    init: function () {
       var $lazy = _document.find('[js-lazy]:not(.is-loaded)');
       if ($lazy.length === 0) {
         APP.Plugins.LegacySupport.fixImages();
@@ -12,12 +12,12 @@
 
       this.initLazy($lazy);
     },
-    load: function(DOMelement) {
+    load: function (DOMelement) {
       var $lazy = $(DOMelement);
 
       this.initLazy($lazy);
     },
-    initLazy: function($lazy) {
+    initLazy: function ($lazy) {
       var _this = this;
       $lazy.Lazy({
         threshold: APP.Browser().data.isMobile ? 500 : 800,
@@ -28,7 +28,7 @@
         // effectTime: 350,
         // visibleOnly: true,
         // placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7...",
-        onError: function(element) {
+        onError: function (element) {
           // eslint-disable-next-line no-console
           console.log('error loading ' + element.data('src'));
           try {
@@ -38,10 +38,10 @@
             console.log('eroor appending src', e);
           }
         },
-        beforeLoad: function(element) {
+        beforeLoad: function (element) {
           // element.attr('style', '')
         },
-        afterLoad: function(element) {
+        afterLoad: function (element) {
           APP.Plugins.LegacySupport.fixImages();
           _this.animateLazy(element);
         },
@@ -49,7 +49,7 @@
 
       triggerBody();
     },
-    animateLazy: function(element) {
+    animateLazy: function (element) {
       var fadeTimeout = 250;
       var $scaler = element.closest('.scaler');
       $scaler.addClass('is-loaded');
@@ -59,7 +59,7 @@
       }
 
       if ($scaler.is('.no-bg-onload')) {
-        setTimeout(function() {
+        setTimeout(function () {
           $scaler.addClass('is-bg-hidden');
         }, fadeTimeout);
       }

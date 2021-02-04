@@ -21,10 +21,7 @@ function centerTransformOrigin(targetEl, targetClass) {
   var bodyStyle =
     '<style>' +
     '.' +
-    $(target_el)
-      .parent()
-      .parent()
-      .attr('class') +
+    $(target_el).parent().parent().attr('class') +
     ' .' +
     targetClass +
     ' { transform-origin: ' +

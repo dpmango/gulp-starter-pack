@@ -1,11 +1,11 @@
 // Object style
 // APP.Plugins.ObjectModuleDemo.init();
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.DemoObjectModule = {
-    init: function() {
+    init: function () {
       // ... code ...
     },
-    destroy: function() {
+    destroy: function () {
       // ... code ...
     },
   };
@@ -14,11 +14,11 @@
 // Constructor style
 // var module = new APP.Plugins.ContrcutorModuleDemo('.header', params)
 // module.init()
-(function($, APP) {
-  APP.Plugins.DemoContrcutorModule = function(el, data) {
+(function ($, APP) {
+  APP.Plugins.DemoContrcutorModule = function (el, data) {
     var $el = $(el);
 
-    this.init = function() {
+    this.init = function () {
       // ... code ...
       // $el.plugin({data})
       // ... code ...
@@ -31,15 +31,15 @@
 
 // Constructor style returnable methods
 // new APP.Plugins.ContrcutorModuleDemo('foo').getData()
-(function($, APP) {
-  APP.Plugins.DemoContrcutorModule2 = function(foo, bar) {
+(function ($, APP) {
+  APP.Plugins.DemoContrcutorModule2 = function (foo, bar) {
     var methods = {};
 
-    methods.init = function() {
+    methods.init = function () {
       // ... code ...
     };
 
-    methods.getData = function() {
+    methods.getData = function () {
       return {
         foo: foo,
         bar: bar,

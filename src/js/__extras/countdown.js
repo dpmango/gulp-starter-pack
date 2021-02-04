@@ -1,6 +1,6 @@
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.Countdown = {
-    init: function() {
+    init: function () {
       if ($('[js-countdown]').length > 0) {
         var $this = $('[js-countdown]');
         var endDate = new Date($this.data('timestamp')).getTime();
@@ -10,7 +10,7 @@
         var $seconds = $this.find('[js-seconds]');
 
         // Update the count down every 1 second
-        var x = setInterval(function() {
+        var x = setInterval(function () {
           // Get todays date and time
           var now = new Date().getTime();
 

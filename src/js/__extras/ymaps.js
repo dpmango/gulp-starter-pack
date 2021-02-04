@@ -1,13 +1,13 @@
 //////////
 // YMAPS
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.Ymaps = {
     data: {
       scriptsCreated: false,
       ymapsLoaded: false,
     },
-    init: function() {
+    init: function () {
       if ($('.js-ymap').length > 0) {
         if (this.data.ymapsLoaded) {
           ymaps.ready(this.initMaps.bind(this));
@@ -16,7 +16,7 @@
         }
       }
     },
-    createScripts: function() {
+    createScripts: function () {
       var ymapsK = '9ba9a278-xxxxxxxxx';
       var ymapsScript = document.createElement('script');
       ymapsScript.type = 'text/javascript';
@@ -24,7 +24,7 @@
       $('head').append(ymapsScript);
       this.data.scriptsCreated = true;
     },
-    tryLoadScripts: function() {
+    tryLoadScripts: function () {
       var _this = this;
       if (!_this.data.scriptsCreated) {
         _this.createScripts();
@@ -45,13 +45,13 @@
         }
       }
     },
-    initMaps: function() {
+    initMaps: function () {
       var _this = this;
-      $('.js-ymap').each(function(i, domElement) {
+      $('.js-ymap').each(function (i, domElement) {
         _this.drawMap(domElement);
       });
     },
-    drawMap: function(domElement) {
+    drawMap: function (domElement) {
       var _this = this;
       var $domElement = $(domElement);
       if ($domElement.length === 0) return;
@@ -102,7 +102,7 @@
         myMap.geoObjects.add(placeholder);
       }
     },
-    geoStringToArr: function(str) {
+    geoStringToArr: function (str) {
       var split = str.split(',');
       if (split.length === 2) {
         return [parseFloat(split[0]), parseFloat(split[1])];

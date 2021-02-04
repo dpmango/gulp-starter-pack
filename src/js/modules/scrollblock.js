@@ -5,7 +5,7 @@
 // disable / enable scroll by setting negative margin to page-content eq. to prev. scroll
 // this methods helps to prevent page-jumping on setting body height to 100%
 
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.ScrollBlock = {
     data: {
       y: _window.scrollTop(),
@@ -16,18 +16,18 @@
       fillGapMethod: 'padding',
       scrolllDisabled: false,
     },
-    getData: function() {
+    getData: function () {
       return this.data;
     },
-    fillScrollbarGap: function() {
+    fillScrollbarGap: function () {
       this.fillGapTarget($('.header').get(0));
       this.fillGapTarget(document.body);
     },
-    unfillScrollbarGap: function() {
+    unfillScrollbarGap: function () {
       this.unfillGapTarget($('.header').get(0));
       this.unfillGapTarget(document.body);
     },
-    disableScroll: function() {
+    disableScroll: function () {
       // prevent double lock
       if ($('body').is('.body-lock') || $('body').is('.body-m-lock')) return;
       if (this.data.scrolllDisabled) return;
@@ -37,7 +37,7 @@
         var $blockers = $('.blocker, .mobile-menu__scroller');
 
         if ($blockers.length > 0) {
-          $blockers.each(function(i, el) {
+          $blockers.each(function (i, el) {
             // disableBodyScroll(el);
             // lock(el);
             disablePageScroll(el);
@@ -58,7 +58,7 @@
       }
     },
 
-    enableScroll: function(target) {
+    enableScroll: function (target) {
       // console.log('enable', this.data.lastForBodyLock);
       if ($('.blocker').length) return;
       var _this = this;
@@ -83,7 +83,7 @@
         _window.scrollTop(this.data.lastForBodyLock);
       }
     },
-    getWindowScroll: function() {
+    getWindowScroll: function () {
       if (this.data.blocked) return;
 
       var wScroll = _window.scrollTop();
@@ -93,10 +93,10 @@
       this.data.lastForScrollDir = wScroll <= 0 ? 0 : wScroll;
       this.data.lastForBodyLock = wScroll;
     },
-    listenScroll: function() {
+    listenScroll: function () {
       _window.on('scroll', this.getWindowScroll.bind(this));
     },
-    fillGapTarget: function($target) {
+    fillGapTarget: function ($target) {
       if ($target instanceof Node) {
         let scrollBarWidth;
         scrollBarWidth = this.getScrollBarWidth($target, true);
@@ -117,7 +117,7 @@
         }
       }
     },
-    unfillGapTarget: function($target) {
+    unfillGapTarget: function ($target) {
       if ($target instanceof Node) {
         var fillGapMethod = this.data.fillGapMethod;
 
@@ -132,7 +132,7 @@
         }
       }
     },
-    getScrollBarWidth: function($target) {
+    getScrollBarWidth: function ($target) {
       if ($target instanceof Node) {
         var documentWidth = document.documentElement.clientWidth;
         var windowWidth = window.innerWidth;

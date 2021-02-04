@@ -1,7 +1,7 @@
 //////////
 // HEADER
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Components.Header = {
     data: {
       classes: {
@@ -14,7 +14,7 @@
         bottomPoint: undefined,
       },
     },
-    init: function(fromPjax) {
+    init: function (fromPjax) {
       if (!fromPjax) {
         this.getHeaderParams();
         this.hamburgerClickListener();
@@ -26,7 +26,7 @@
       this.setMenuClass();
       this.controlHeaderClass();
     },
-    getHeaderParams: function() {
+    getHeaderParams: function () {
       var $header = $('.header');
       var headerOffsetTop = 0;
       var headerHeight = $header.outerHeight() + headerOffsetTop;
@@ -36,14 +36,14 @@
         bottomPoint: headerHeight,
       };
     },
-    closeMobileMenu: function() {
+    closeMobileMenu: function () {
       $('.js-hamburger').removeClass('is-active');
       $('.mobile-navi').removeClass('is-active');
 
       APP.Plugins.ScrollBlock.enableScroll();
     },
-    hamburgerClickListener: function() {
-      _document.on('click', '.js-hamburger', function() {
+    hamburgerClickListener: function () {
+      _document.on('click', '.js-hamburger', function () {
         $(this).toggleClass('is-active');
         $('.mobile-navi').toggleClass('is-active');
 
@@ -54,30 +54,30 @@
         }
       });
     },
-    listenScroll: function() {
+    listenScroll: function () {
       _window.on('scroll', this.scrollHeader.bind(this));
       _window.on('scroll', debounce(this.scrollHeaderDebouce.bind(this), 1250, { trailing: true }));
     },
-    listenResize: function() {
+    listenResize: function () {
       _window.on('resize', debounce(this.getHeaderParams.bind(this), 100));
     },
-    makeHeaderVisible: function() {
+    makeHeaderVisible: function () {
       this.data.header.container.addClass(this.data.classes.visibleClass);
       $('body').addClass(this.data.classes.bodyFixedVisible);
       this.data.header.isFixedVisible = true;
     },
-    makeHeaderHidden: function() {
+    makeHeaderHidden: function () {
       this.data.header.container.removeClass(this.data.classes.visibleClass);
       $('body').removeClass(this.data.classes.bodyFixedVisible);
       this.data.header.isFixedVisible = false;
     },
-    scrollHeaderDebouce: function() {
+    scrollHeaderDebouce: function () {
       // always show header after user stop scrolling
       if (this.data.header.container !== undefined) {
         this.makeHeaderVisible();
       }
     },
-    scrollHeader: function() {
+    scrollHeader: function () {
       if (this.data.header.container !== undefined) {
         var fixedClass = 'is-fixed';
         var visibleClass = 'is-fixed-visible';
@@ -109,29 +109,23 @@
         }
       }
     },
-    setMenuClass: function() {
+    setMenuClass: function () {
       // SET ACTIVE CLASS IN HEADER
       var headerMenuList = $('.header__menu li');
       if (headerMenuList.length === 0) return;
 
-      headerMenuList.each(function(i, val) {
-        if (
-          $(val)
-            .find('a')
-            .attr('href') === window.location.pathname.split('/').pop()
-        ) {
+      headerMenuList.each(function (i, val) {
+        if ($(val).find('a').attr('href') === window.location.pathname.split('/').pop()) {
           $(val).addClass('is-active');
         } else {
           $(val).removeClass('is-active');
         }
       });
     },
-    controlHeaderClass: function() {
+    controlHeaderClass: function () {
       this.data.header.container.attr('data-modifier', false);
 
-      var $modifierElement = $('.page')
-        .last()
-        .find('[js-header-class]');
+      var $modifierElement = $('.page').last().find('[js-header-class]');
 
       if ($modifierElement.length > 0) {
         this.data.header.container.attr('data-modifier', $modifierElement.data('class'));

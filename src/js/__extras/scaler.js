@@ -1,21 +1,19 @@
 //////////
 // Scaler Desktop
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.ScalerDesktop = {
-    init: function(fromPjax) {
+    init: function (fromPjax) {
       this.getScaler();
       this.setScaler();
       if (!fromPjax) {
         this.listenResize();
       }
     },
-    getScaler: function() {
-      var $images = $('.page')
-        .last()
-        .find('.js-scaler');
+    getScaler: function () {
+      var $images = $('.page').last().find('.js-scaler');
       if ($images.length > 0) {
-        $images.each(function(i, img) {
+        $images.each(function (i, img) {
           var $img = $(img);
           var mobileArPx = $img.css('padding-bottom');
           var imgWidth = $img.width();
@@ -30,17 +28,15 @@
         });
       }
     },
-    listenResize: function() {
+    listenResize: function () {
       _window.on('resize', debounce(this.setScaler.bind(this), 100));
     },
-    setScaler: function() {
-      var $images = $('.page')
-        .last()
-        .find('.js-scaler');
+    setScaler: function () {
+      var $images = $('.page').last().find('.js-scaler');
 
       if ($images.length > 0) {
         var wWidth = window.innerWidth;
-        $images.each(function(i, img) {
+        $images.each(function (i, img) {
           var $img = $(img);
           var mobileAr = $img.data('ar-576');
           var tabletAr = $img.data('ar-768');
@@ -73,7 +69,7 @@
         });
       }
     },
-    setAr: function(ar) {
+    setAr: function (ar) {
       // please also check _media.sass for possible values
       if (ar === '1:1') {
         return '100%';

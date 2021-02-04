@@ -1,9 +1,9 @@
 //////////
 // AOS
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.AOS = {
-    init: function() {
+    init: function () {
       AOS.init({
         // Settings that can be overridden on per-element basis, by `data-aos-*` attributes:
         offset: 120, // offset (in px) from the original trigger point
@@ -16,7 +16,7 @@
       });
     },
 
-    refresh: function() {
+    refresh: function () {
       AOS.refreshHard();
     },
   };

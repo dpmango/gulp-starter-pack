@@ -1,18 +1,18 @@
 //////////
 // Photoswipe
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.Photoswipe = {
     data: {
       pswpItems: [],
       curThumbnail: undefined,
       curSlideIndex: 0,
     },
-    init: function(fromPjax) {
+    init: function (fromPjax) {
       this.clickListeners();
     },
-    clickListeners: function() {
-      _document.on('click', '.js-open-pswp', function(e) {
+    clickListeners: function () {
+      _document.on('click', '.js-open-pswp', function (e) {
         e.preventDefault();
 
         var $curLink = $(this);
@@ -22,7 +22,7 @@
         APP.Plugins.Photoswipe.openPSWP($curLink);
       });
     },
-    getThumbData: function($originLink) {
+    getThumbData: function ($originLink) {
       // reset
       this.data.curSlideIndex = 0;
       this.data.curThumbnail = undefined;
@@ -43,13 +43,13 @@
       // get thumbnail for getThumbBoundsFn func
       this.data.curThumbnail = $originLink.find('img');
     },
-    buildItems: function($originLink) {
+    buildItems: function ($originLink) {
       var _this = this;
       var $elements = $originLink.closest('.swiper-container').find('.js-open-pswp');
       if ($elements.length === 0) return;
 
       this.data.pswpItems = [];
-      $elements.each(function(i, element) {
+      $elements.each(function (i, element) {
         var $element = $(element);
         var isSlideDuplicate = $element.closest('.swiper-slide-duplicate').length > 0;
         var targetImg = $element.find('img');
@@ -99,7 +99,7 @@
         }
       });
     },
-    openPSWP: function($originLink) {
+    openPSWP: function ($originLink) {
       var $pswpElement = $('.pswp');
       if ($pswpElement.length === 0) return;
 
@@ -110,7 +110,7 @@
         index: this.data.curSlideIndex,
         shareEl: false,
         history: false,
-        getThumbBoundsFn: function(index) {
+        getThumbBoundsFn: function (index) {
           var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
           var targetThumbnail = curThumbnail;
 
@@ -132,7 +132,7 @@
           var rect = targetThumbnail[0].getBoundingClientRect();
           return { x: rect.left, y: rect.top + pageYScroll, w: rect.width };
         },
-        addCaptionHTMLFn: function(item, captionEl) {
+        addCaptionHTMLFn: function (item, captionEl) {
           var captionHtml = '';
           if (item.title) {
             captionHtml = item.title;
@@ -156,7 +156,7 @@
       gallery.init();
 
       // Sync active slide in swiper
-      gallery.listen('beforeChange', function() {
+      gallery.listen('beforeChange', function () {
         var $swiper = $originLink.closest('.swiper-container');
         if ($swiper.length > 0) {
           var swiper = $swiper[0].swiper;

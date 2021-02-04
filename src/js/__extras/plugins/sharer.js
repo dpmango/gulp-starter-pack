@@ -1,9 +1,9 @@
 //////////
 // SHARER.js
 //////////
-(function($, APP) {
+(function ($, APP) {
   APP.Plugins.Sharer = {
-    refresh: function() {
+    refresh: function () {
       // it's automatically inits for initial load
       // not need to initialize
       // $('[data-sharer]').sharer();

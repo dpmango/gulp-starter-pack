@@ -1,11 +1,11 @@
 //////////
 // DETECTORS
 //////////
-(function($, APP) {
-  APP.Browser = function() {
+(function ($, APP) {
+  APP.Browser = function () {
     var methods = {};
 
-    methods.isRetinaDisplay = function() {
+    methods.isRetinaDisplay = function () {
       if (window.matchMedia) {
         var mq = window.matchMedia(
           'only screen and (min--moz-device-pixel-ratio: 1.3), only screen and (-o-min-device-pixel-ratio: 2.6/2), only screen and (-webkit-min-device-pixel-ratio: 1.3), only screen  and (min-device-pixel-ratio: 1.3), only screen and (min-resolution: 1.3dppx)'
@@ -14,7 +14,7 @@
       }
     };
 
-    methods.isMobile = function() {
+    methods.isMobile = function () {
       if (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
       ) {
@@ -24,7 +24,7 @@
       }
     };
 
-    methods.isIosDevice = function() {
+    methods.isIosDevice = function () {
       if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
         return true;
       } else {
@@ -32,7 +32,7 @@
       }
     };
 
-    methods.msieversion = function() {
+    methods.msieversion = function () {
       var ua = window.navigator.userAgent;
       var msie = ua.indexOf('MSIE ');
 
@@ -43,7 +43,7 @@
       }
     };
 
-    methods.setBodyTags = function() {
+    methods.setBodyTags = function () {
       $('body').addClass('is-ready');
 
       if (methods.msieversion()) {
