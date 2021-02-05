@@ -1,5 +1,4 @@
 import browserSync from 'browser-sync';
-import util from 'gulp-util';
 import config from '../config';
 
 const server = browserSync.create();
@@ -21,15 +20,15 @@ const build = (cb) => {
       config.dest.js + '/*.js',
       config.dest.img + '/**/*',
     ],
-    port: util.env.port || 3000,
+    port: config.argv.port || 3000,
     logLevel: 'info', // 'debug', 'info', 'silent', 'warn'
     logConnections: false,
     logFileChanges: true,
-    open: Boolean(util.env.open || true),
+    open: Boolean(config.argv.open || true),
     notify: false,
     ghostMode: false,
     online: true,
-    tunnel: util.env.tunnel || null,
+    tunnel: config.argv.tunnel || null,
   });
   cb();
 };

@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import util from 'gulp-util';
+import through2 from 'through2';
 import sass from 'gulp-sass';
 import globImporter from 'node-sass-glob-importer';
 import sourcemaps from 'gulp-sourcemaps';
@@ -55,7 +55,7 @@ const cssNanoParams = {
 const task = () =>
   gulp
     .src(config.src.sass + '/*.{sass,scss}')
-    .pipe(config.production ? util.noop() : sourcemaps.init())
+    .pipe(config.production ? through2.obj() : sourcemaps.init())
     .pipe(
       plumber({
         errorHandler: config.errorHandler,
@@ -71,8 +71,8 @@ const task = () =>
     )
     .on('error', config.errorHandler)
     .pipe(postcss(processors))
-    .pipe(config.production ? util.noop() : sourcemaps.write('.'))
-    .pipe(config.production ? postcss([cssnano(cssNanoParams)]) : util.noop())
+    .pipe(config.production ? through2.obj() : sourcemaps.write('.'))
+    .pipe(config.production ? postcss([cssnano(cssNanoParams)]) : through2.obj())
     .pipe(gulp.dest(config.dest.css));
 
 const buildSass = () => task();

@@ -1,13 +1,15 @@
-import util from 'gulp-util';
+var argv = require('minimist')(process.argv.slice(2));
+import log from 'fancy-log';
+import colors from 'ansi-colors';
 import errorHandler from './util/errors';
 
-const production =
-  util.env.production || util.env.prod || util.env._.indexOf('build') !== -1 || false;
+const production = argv.production || argv.prod || argv._.indexOf('build') !== -1 || false;
 const destPath = 'dist';
 
 const config = {
   env: 'development',
   production: production,
+  argv: argv,
 
   src: {
     root: 'src',
@@ -49,7 +51,7 @@ const config = {
   },
 
   logEnv: function () {
-    util.log('Environment:', util.colors.white.bgRed(' ' + process.env.NODE_ENV + ' '));
+    log('Environment:', colors.white.bgRed(' ' + process.env.NODE_ENV + ' '));
   },
 
   errorHandler: errorHandler,

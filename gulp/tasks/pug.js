@@ -7,7 +7,7 @@ import plumber from 'gulp-plumber';
 import changed from 'gulp-changed';
 import gulpif from 'gulp-if';
 import frontMatter from 'gulp-front-matter';
-import util from 'gulp-util';
+import through2 from 'through2';
 import config from '../config';
 
 const prettifyOptions = {
@@ -32,7 +32,7 @@ const renderHtml = (onlyChanged) =>
     .pipe(gulpif(onlyChanged, changed(config.dest.html, { extension: '.html' })))
     .pipe(frontMatter({ property: 'data' }))
     .pipe(pug({ pretty: true }))
-    .pipe(config.production ? prettify(prettifyOptions) : util.noop())
+    .pipe(config.production ? prettify(prettifyOptions) : through2.obj())
     .pipe(gulp.dest(config.dest.html));
 
 const buildPug = () => renderHtml();

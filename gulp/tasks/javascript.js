@@ -1,6 +1,5 @@
 import gulp from 'gulp';
-import path from 'path';
-import util from 'gulp-util';
+import through2 from 'through2';
 import plumber from 'gulp-plumber';
 import concat from 'gulp-concat';
 import uglifyJs from 'gulp-uglify';
@@ -62,7 +61,7 @@ const javascriptApp = () =>
         presets: ['@babel/preset-env'],
       })
     )
-    .pipe(config.production ? uglifyJs() : util.noop())
+    .pipe(config.production ? uglifyJs() : through2.obj())
     .pipe(gulp.dest(config.dest.js));
 
 const buildJavascript = () => gulp.parallel(javascriptVendor, javascriptApp);

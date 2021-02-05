@@ -27,12 +27,14 @@ gulp.task('index-page:watch', tWatch('index/index-page'));
 const setmodeProd = (done) => {
   config.setEnv('production');
   config.logEnv();
+
   done();
 };
 
 const setmodeDev = (done) => {
   config.setEnv('development');
   config.logEnv();
+
   done();
 };
 

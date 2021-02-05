@@ -1,5 +1,4 @@
 import del from 'del';
-import util from 'gulp-util';
 import config from '../config';
 
 // Clean dist folder
@@ -7,10 +6,9 @@ import config from '../config';
 const build = () => {
   return del([
     config.dest.root + '/**/*',
-    '!' + config.dest.root + '/images',
-    '!' + config.dest.root + '/images/**/*',
+    '!' + config.dest.root + '/img',
+    '!' + config.dest.root + '/img/**/*',
   ]);
-  // .then(paths => util.log('Deleted:', util.colors.magenta(paths.join('\n'))));
 };
 
 module.exports.build = build;
