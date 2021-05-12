@@ -9718,9 +9718,9 @@ swap-case@^1.1.0:
     lower-case "^1.1.1"
     upper-case "^1.1.1"
 
-swiper@^6.4.9:
-  version "6.4.10"
-  resolved "https://registry.yarnpkg.com/swiper/-/swiper-6.4.10.tgz#d2a8bce471717b770d005fcd5e8af42ac630cac6"
+swiper@^6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-6.5.1.tgz#795630e45bbebb3b3b2945d55c22ffdcf5536c1b"
   dependencies:
     dom7 "^3.0.0"
     ssr-window "^3.0.0"

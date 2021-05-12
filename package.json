@@ -52,7 +52,7 @@
     "sharer.js": "^0.4.1",
     "surge": "^0.21.7",
     "svg4everybody": "^2.1.9",
-    "swiper": "^6.4.9",
+    "swiper": "^6.5.1",
     "viewport-units-buggyfill": "^0.6.2"
   },
   "devDependencies": {
