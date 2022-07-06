@@ -40,7 +40,7 @@
     "jquery-lazy": "^1.7.11",
     "jquery-mask-plugin": "^1.14.16",
     "jquery-selectric": "^0.2.0",
-    "jquery-validation": "^1.19.3",
+    "jquery-validation": "^1.19.5",
     "lodash": "^4.17.20",
     "magnific-popup": "^1.1.0",
     "micromodal": "^0.4.6",
